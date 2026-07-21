@@ -16,6 +16,10 @@ import Attendance from './pages/student/Attendance';
 import Results from './pages/student/Results';
 import Assignments from './pages/student/Assignments';
 import Fees from './pages/student/Fees';
+import Classes from './pages/teacher/Classes';
+import MarkAttendance from './pages/teacher/MarkAttendance';
+import InputMarks from './pages/teacher/InputMarks';
+import StudyMaterial from './pages/teacher/StudyMaterial';
 
 // Components
 import Navigation from './components/Navigation';
@@ -276,10 +280,10 @@ export default function App() {
           <Route element={<ProtectedRoute user={user} allowedRoles={['teacher']} />}>
             <Route path="/teacher" element={<TeacherLayout user={user} handleLogout={handleLogout} />}>
               <Route path="dashboard" element={<Dashboard user={user} token={token} activeTab="profile" setActiveTab={() => {}} refreshNotices={refreshNotices} API_BASE={API_BASE} notices={notices} masterContent={masterContent} setMasterContent={setMasterContent} />} />
-              <Route path="attendance" element={<h2>Attendance Management (Coming Soon)</h2>} />
-              <Route path="assignments" element={<h2>Assignments (Coming Soon)</h2>} />
-              <Route path="marks" element={<h2>Marks Entry (Coming Soon)</h2>} />
-              <Route path="study-material" element={<h2>Study Material (Coming Soon)</h2>} />
+              <Route path="classes" element={<Classes />} />
+              <Route path="attendance" element={<MarkAttendance />} />
+              <Route path="marks" element={<InputMarks />} />
+              <Route path="materials" element={<StudyMaterial />} />
             </Route>
           </Route>
 

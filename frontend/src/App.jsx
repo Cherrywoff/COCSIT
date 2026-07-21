@@ -23,6 +23,8 @@ import StudyMaterial from './pages/teacher/StudyMaterial';
 import FacultyList from './pages/hod/FacultyList';
 import Subjects from './pages/hod/Subjects';
 import Reports from './pages/hod/Reports';
+import Analytics from './pages/principal/Analytics';
+import Staff from './pages/principal/Staff';
 
 // Components
 import Navigation from './components/Navigation';
@@ -304,9 +306,8 @@ export default function App() {
           <Route element={<ProtectedRoute user={user} allowedRoles={['principal']} />}>
             <Route path="/principal" element={<PrincipalLayout user={user} handleLogout={handleLogout} />}>
               <Route path="dashboard" element={<Dashboard user={user} token={token} activeTab="principal_overview" setActiveTab={() => {}} refreshNotices={refreshNotices} API_BASE={API_BASE} notices={notices} masterContent={masterContent} setMasterContent={setMasterContent} />} />
-              <Route path="analytics" element={<h2>Analytics (Coming Soon)</h2>} />
-              <Route path="reports" element={<h2>Reports (Coming Soon)</h2>} />
-              <Route path="directory" element={<h2>Directory (Coming Soon)</h2>} />
+              <Route path="analytics" element={<Analytics />} />
+              <Route path="staff" element={<Staff />} />
             </Route>
           </Route>
 

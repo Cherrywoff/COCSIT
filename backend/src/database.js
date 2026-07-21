@@ -54,6 +54,64 @@ function initDb() {
       FOREIGN KEY(student_id) REFERENCES users(id)
     )`);
 
+    // 5. Student Details Table
+    db.run(`CREATE TABLE IF NOT EXISTS student_details (
+      id TEXT PRIMARY KEY,
+      course TEXT NOT NULL,
+      roll_number TEXT NOT NULL,
+      prn_number TEXT NOT NULL UNIQUE,
+      semester TEXT NOT NULL,
+      division TEXT NOT NULL,
+      FOREIGN KEY(id) REFERENCES users(id)
+    )`);
+
+    // 6. Fees Ledger Table
+    db.run(`CREATE TABLE IF NOT EXISTS fees_ledger (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      student_id TEXT NOT NULL,
+      installment_name TEXT NOT NULL,
+      amount NUMERIC NOT NULL,
+      status TEXT NOT NULL,
+      FOREIGN KEY(student_id) REFERENCES users(id)
+    )`);
+
+    // 7. Assignments Table
+    db.run(`CREATE TABLE IF NOT EXISTS assignments (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      subject TEXT NOT NULL,
+      title TEXT NOT NULL,
+      due_date TEXT NOT NULL,
+      created_by TEXT NOT NULL,
+      FOREIGN KEY(created_by) REFERENCES users(id)
+    )`);
+
+    // 8. Study Materials Table
+    db.run(`CREATE TABLE IF NOT EXISTS study_materials (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      subject TEXT NOT NULL,
+      title TEXT NOT NULL,
+      file_url TEXT NOT NULL,
+      uploaded_by TEXT NOT NULL,
+      FOREIGN KEY(uploaded_by) REFERENCES users(id)
+    )`);
+
+    // 9. Website Settings (CMS)
+    db.run(`CREATE TABLE IF NOT EXISTS website_settings (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL
+    )`);
+
+    // 10. Notifications Table
+    db.run(`CREATE TABLE IF NOT EXISTS notifications (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id TEXT NOT NULL,
+      title TEXT NOT NULL,
+      message TEXT NOT NULL,
+      is_read INTEGER DEFAULT 0,
+      created_at TEXT NOT NULL,
+      FOREIGN KEY(user_id) REFERENCES users(id)
+    )`);
+
     // Seed initial users if table is empty
     db.get("SELECT COUNT(*) as count FROM users", (err, row) => {
       if (err) {
@@ -185,6 +243,41 @@ function initDb() {
         });
         stmt.finalize();
         console.log("Grades seeded successfully.");
+      }
+    });
+
+    // Seed Website Settings (CMS)
+    db.get("SELECT COUNT(*) as count FROM website_settings", (err, row) => {
+      if (err) return;
+      if (row.count === 0) {
+        console.log("Seeding initial CMS settings...");
+        const seedSettings = [
+          {
+            key: 'master_content',
+            value: JSON.stringify({
+              "girls_hostel": {
+                "title": "Girls Hostels Limits",
+                "details": ["Safe residential boarding inside secure campus perimeters for outstation students."],
+                "rules": ["Located inside campus limits.", "24/7 security wardens present."]
+              },
+              "scholarships": {
+                "title": "Welfare Scholarships Assistance",
+                "details": ["Rajarshi Chhatrapati Shahu Maharaj concessions.", "Government Post-Matric schemes."]
+              },
+              "infrastructure": {
+                "title": "Infrastructure assets",
+                "details": ["Modern computing centers and smart classrooms guidelines."]
+              }
+            })
+          }
+        ];
+
+        const stmt = db.prepare("INSERT INTO website_settings (key, value) VALUES (?, ?)");
+        seedSettings.forEach(s => {
+          stmt.run(s.key, s.value);
+        });
+        stmt.finalize();
+        console.log("CMS Settings seeded successfully.");
       }
     });
 

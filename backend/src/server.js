@@ -14,9 +14,16 @@ const authRouter = require('./routes/auth');
 const publicRouter = require('./routes/public');
 const studentRouter = require('./routes/student');
 const teacherRouter = require('./routes/teacher');
-const hodRouter = require('./routes/hod');
-const principalRouter = require('./routes/principal');
 const adminRouter = require('./routes/admin');
+const storageRouter = require('./routes/storage');
+const { router: notificationsRouter } = require('./routes/notifications');
+const { auditLog } = require('./middleware/audit.middleware');
+
+// Serve static files for uploads
+app.use('/uploads', express.static(path.join(__dirname, '..', '..', 'uploads')));
+
+// Apply audit logging to all API routes
+app.use('/api', auditLog('API_REQUEST'));
 
 app.use('/api/auth', authRouter);
 app.use('/api/public', publicRouter);
@@ -25,6 +32,8 @@ app.use('/api/teacher', teacherRouter);
 app.use('/api/hod', hodRouter);
 app.use('/api/principal', principalRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/storage', storageRouter);
+app.use('/api/notifications', notificationsRouter);
 
 // Global Error Handler
 app.use((err, req, res, next) => {

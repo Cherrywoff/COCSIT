@@ -20,6 +20,9 @@ import Classes from './pages/teacher/Classes';
 import MarkAttendance from './pages/teacher/MarkAttendance';
 import InputMarks from './pages/teacher/InputMarks';
 import StudyMaterial from './pages/teacher/StudyMaterial';
+import FacultyList from './pages/hod/FacultyList';
+import Subjects from './pages/hod/Subjects';
+import Reports from './pages/hod/Reports';
 
 // Components
 import Navigation from './components/Navigation';
@@ -290,10 +293,10 @@ export default function App() {
           {/* HOD Portal Routes */}
           <Route element={<ProtectedRoute user={user} allowedRoles={['hod']} />}>
             <Route path="/hod" element={<HODLayout user={user} handleLogout={handleLogout} />}>
-              <Route path="dashboard" element={<Dashboard user={user} token={token} activeTab="hod_dashboard" setActiveTab={() => {}} refreshNotices={refreshNotices} API_BASE={API_BASE} notices={notices} masterContent={masterContent} setMasterContent={setMasterContent} />} />
-              <Route path="faculty" element={<h2>Faculty Workload (Coming Soon)</h2>} />
-              <Route path="approvals" element={<h2>Approvals (Coming Soon)</h2>} />
-              <Route path="reports" element={<h2>Reports (Coming Soon)</h2>} />
+              <Route path="dashboard" element={<Dashboard user={user} token={token} activeTab="profile" setActiveTab={() => {}} refreshNotices={refreshNotices} API_BASE={API_BASE} notices={notices} masterContent={masterContent} setMasterContent={setMasterContent} />} />
+              <Route path="faculty" element={<FacultyList />} />
+              <Route path="subjects" element={<Subjects />} />
+              <Route path="reports" element={<Reports />} />
             </Route>
           </Route>
 

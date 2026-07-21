@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
-// Components imports
+// Layouts & Protected Route
+import ProtectedRoute from './components/ProtectedRoute';
+import StudentLayout from './layouts/StudentLayout';
+import TeacherLayout from './layouts/TeacherLayout';
+import HODLayout from './layouts/HODLayout';
+import PrincipalLayout from './layouts/PrincipalLayout';
+import AdminLayout from './layouts/AdminLayout';
+
+// Components
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 
-// Pages imports
+// Public Pages
 import Home from './pages/Home';
 import About from './pages/About';
 import AboutRes from './pages/AboutRes';
@@ -30,11 +39,12 @@ import Dashboard from './pages/Dashboard';
 const API_BASE = 'http://localhost:5000/api';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home');
+  const navigate = useNavigate();
+  const location = useLocation();
   const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [user, setUser] = useState(null);
   
-  // Theme state: default 'light' as requested ("Mostly white background")
+  // Theme state: default 'light'
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
   // Public data states
@@ -56,11 +66,15 @@ export default function App() {
   const [loginError, setLoginError] = useState('');
   const [loginLoading, setLoginLoading] = useState(false);
 
-  // Dashboard active tab
-  const [activeDashboardTab, setActiveDashboardTab] = useState('profile');
-
   // Welcome popup overlay
   const [showWelcomePopup, setShowWelcomePopup] = useState(true);
+
+  // Check if current path is a portal route
+  const isPortalRoute = location.pathname.startsWith('/student') ||
+                        location.pathname.startsWith('/teacher') ||
+                        location.pathname.startsWith('/hod') ||
+                        location.pathname.startsWith('/principal') ||
+                        location.pathname.startsWith('/admin');
 
   // Apply Theme on change
   useEffect(() => {
@@ -76,46 +90,14 @@ export default function App() {
 
   // Fetch Public Information
   useEffect(() => {
-    fetch(`${API_BASE}/public/branding`)
-      .then(res => res.json())
-      .then(data => setBranding(data))
-      .catch(err => console.error("Error loading branding:", err));
-
-    fetch(`${API_BASE}/public/notices`)
-      .then(res => res.json())
-      .then(data => setNotices(data))
-      .catch(err => console.error("Error loading notices:", err));
-
-    fetch(`${API_BASE}/public/courses`)
-      .then(res => res.json())
-      .then(data => setCourses(data))
-      .catch(err => console.error("Error loading courses:", err));
-
-    // Fetch Scraped detailed info
-    fetch(`${API_BASE}/public/about/res`)
-      .then(res => res.json())
-      .then(data => setResInfo(data))
-      .catch(err => console.error("Error loading RES info:", err));
-
-    fetch(`${API_BASE}/public/about/principal`)
-      .then(res => res.json())
-      .then(data => setPrincipalMessage(data))
-      .catch(err => console.error("Error loading Principal message:", err));
-
-    fetch(`${API_BASE}/public/about/chairman`)
-      .then(res => res.json())
-      .then(data => setChairmanMessage(data))
-      .catch(err => console.error("Error loading Chairman message:", err));
-
-    fetch(`${API_BASE}/public/about/vicechairman`)
-      .then(res => res.json())
-      .then(data => setViceChairmanMessage(data))
-      .catch(err => console.error("Error loading Vice Chairman message:", err));
-
-    fetch(`${API_BASE}/public/master`)
-      .then(res => res.json())
-      .then(data => setMasterContent(data))
-      .catch(err => console.error("Error loading master content:", err));
+    fetch(`${API_BASE}/public/branding`).then(res => res.json()).then(data => setBranding(data)).catch(err => console.error(err));
+    fetch(`${API_BASE}/public/notices`).then(res => res.json()).then(data => setNotices(data)).catch(err => console.error(err));
+    fetch(`${API_BASE}/public/courses`).then(res => res.json()).then(data => setCourses(data)).catch(err => console.error(err));
+    fetch(`${API_BASE}/public/about/res`).then(res => res.json()).then(data => setResInfo(data)).catch(err => console.error(err));
+    fetch(`${API_BASE}/public/about/principal`).then(res => res.json()).then(data => setPrincipalMessage(data)).catch(err => console.error(err));
+    fetch(`${API_BASE}/public/about/chairman`).then(res => res.json()).then(data => setChairmanMessage(data)).catch(err => console.error(err));
+    fetch(`${API_BASE}/public/about/vicechairman`).then(res => res.json()).then(data => setViceChairmanMessage(data)).catch(err => console.error(err));
+    fetch(`${API_BASE}/public/master`).then(res => res.json()).then(data => setMasterContent(data)).catch(err => console.error(err));
   }, []);
 
   // Validate Token on Mount
@@ -157,13 +139,12 @@ export default function App() {
         setUser(data.user);
         setUsernameInput('');
         setPasswordInput('');
-        setCurrentPage('dashboard');
-        if (data.user.role === 'principal') {
-          setActiveDashboardTab('principal_overview');
-        } else if (data.user.role === 'hod') {
-          setActiveDashboardTab('hod_dashboard');
+        
+        // Redirect to appropriate portal based on role
+        if (data.user.role) {
+           navigate(`/${data.user.role}/dashboard`);
         } else {
-          setActiveDashboardTab('profile');
+           navigate('/');
         }
       })
       .catch(err => {
@@ -178,12 +159,11 @@ export default function App() {
     localStorage.removeItem('token');
     setToken('');
     setUser(null);
-    setCurrentPage('home');
+    navigate('/');
   };
 
   const handleDeleteNotice = (id) => {
     if (!window.confirm("Are you sure you want to delete this notice?")) return;
-
     fetch(`${API_BASE}/portal/notice/${id}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}` }
@@ -192,51 +172,36 @@ export default function App() {
         if (!res.ok) throw new Error("Deletion failed");
         return res.json();
       })
-      .then(() => {
-        refreshNotices();
-      })
+      .then(() => refreshNotices())
       .catch(err => console.error(err));
   };
 
   const refreshNotices = () => {
-    fetch(`${API_BASE}/public/notices`)
-      .then(res => res.json())
-      .then(data => setNotices(data))
-      .catch(err => console.error("Error refreshing notices:", err));
+    fetch(`${API_BASE}/public/notices`).then(res => res.json()).then(data => setNotices(data)).catch(err => console.error(err));
   };
 
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+
+  // Dummy setCurrentPage function for backwards compatibility with child components that haven't been migrated yet
+  const dummySetCurrentPage = (page) => {
+     navigate(`/${page === 'home' ? '' : page}`);
   };
 
   return (
-    <div>
-      {/* Active Session Sticky Strip */}
-      {user && (
+    <div className={isPortalRoute ? "app-portal-mode" : "app-public-mode"}>
+      {/* Active Session Sticky Strip for Public Site */}
+      {user && !isPortalRoute && (
         <div style={{
-          backgroundColor: 'var(--accent-indigo)',
-          color: '#ffffff',
-          padding: '10px 30px',
-          fontSize: '0.85rem',
-          fontWeight: '600',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '15px',
-          borderBottom: '1px solid var(--border-color)',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
-          position: 'sticky',
-          top: '0',
-          zIndex: '1001'
+          backgroundColor: 'var(--accent-indigo)', color: '#ffffff', padding: '10px 30px', fontSize: '0.85rem', fontWeight: '600',
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '15px',
+          borderBottom: '1px solid var(--border-color)', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', position: 'sticky', top: '0', zIndex: '1001'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ fontSize: '1.1rem' }}>🎓</span>
-            <span>Active Session: Logged in as <strong>{user.name}</strong> ({user.role.toUpperCase()})</span>
+            <span>🎓 Active Session: Logged in as <strong>{user.name}</strong> ({user.role.toUpperCase()})</span>
           </div>
           <div style={{ display: 'flex', gap: '10px' }}>
-            <button className="btn btn-secondary" style={{ padding: '4px 12px', fontSize: '0.75rem', color: '#ffffff', borderColor: '#ffffff', background: 'transparent' }} onClick={() => setCurrentPage('dashboard')}>
-              Go to Dashboard
+            <button className="btn btn-secondary" style={{ padding: '4px 12px', fontSize: '0.75rem', color: '#ffffff', borderColor: '#ffffff', background: 'transparent' }} onClick={() => navigate(`/${user.role}/dashboard`)}>
+              Go to Portal
             </button>
             <button className="btn btn-secondary" style={{ padding: '4px 12px', fontSize: '0.75rem', color: 'var(--accent-rose)', borderColor: 'var(--accent-rose)', background: 'transparent' }} onClick={handleLogout}>
               Logout
@@ -245,132 +210,113 @@ export default function App() {
         </div>
       )}
 
-      {/* Sticky Main Navigation */}
-      <Navigation 
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        branding={branding}
-        user={user}
-        handleLogout={handleLogout}
-        theme={theme}
-        toggleTheme={toggleTheme}
-      />
+      {/* Main Navigation - Hide on Portal Routes */}
+      {!isPortalRoute && (
+        <Navigation 
+          currentPage={location.pathname === '/' ? 'home' : location.pathname.substring(1)}
+          setCurrentPage={dummySetCurrentPage}
+          branding={branding}
+          user={user}
+          handleLogout={handleLogout}
+          theme={theme}
+          toggleTheme={toggleTheme}
+        />
+      )}
 
-      {/* Main Content Sections */}
-      <main className="container" style={{ minHeight: '60vh', padding: '40px 0' }}>
-        {currentPage === 'home' && (
-          <Home 
-            branding={branding} 
-            notices={notices} 
-            setCurrentPage={setCurrentPage} 
-            setSelectedNotice={setSelectedNotice} 
-            user={user}
-            onDeleteNotice={handleDeleteNotice}
-          />
-        )}
+      {/* Main Content Area */}
+      <div className={isPortalRoute ? "" : "container"} style={isPortalRoute ? {} : { minHeight: '60vh', padding: '40px 0' }}>
+        <Routes>
+          {/* Public Website Routes */}
+          <Route path="/" element={<Home branding={branding} notices={notices} setCurrentPage={dummySetCurrentPage} setSelectedNotice={setSelectedNotice} user={user} onDeleteNotice={handleDeleteNotice} />} />
+          <Route path="/about" element={<About principalMessage={principalMessage} chairmanMessage={chairmanMessage} viceChairmanMessage={viceChairmanMessage} />} />
+          <Route path="/about_res" element={<AboutRes resInfo={resInfo} />} />
+          <Route path="/academics" element={<Academics />} />
+          <Route path="/courses" element={<Courses courses={courses} />} />
+          <Route path="/departments" element={<Departments />} />
+          <Route path="/governance" element={<Governance masterContent={masterContent} />} />
+          <Route path="/facilities" element={<Facilities masterContent={masterContent} />} />
+          <Route path="/placements" element={<Placements />} />
+          <Route path="/admissions" element={<Admissions masterContent={masterContent} />} />
+          <Route path="/research" element={<Research />} />
+          <Route path="/examinations" element={<Examinations />} />
+          <Route path="/studentcorner" element={<StudentCorner setCurrentPage={dummySetCurrentPage} />} />
+          <Route path="/downloads" element={<Downloads />} />
+          <Route path="/iqac" element={<IQAC />} />
+          <Route path="/naac" element={<NAAC />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/newsevents" element={<NewsEvents />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={
+            <Login usernameInput={usernameInput} setUsernameInput={setUsernameInput} passwordInput={passwordInput} setPasswordInput={setPasswordInput} loginError={loginError} loginLoading={loginLoading} handleLogin={handleLogin} />
+          } />
+          
+          {/* Dashboard Route (Old compatibility) */}
+          <Route path="/dashboard" element={<Navigate to={user ? `/${user.role}/dashboard` : "/login"} replace />} />
 
-        {currentPage === 'about' && (
-          <About 
-            principalMessage={principalMessage} 
-            chairmanMessage={chairmanMessage}
-            viceChairmanMessage={viceChairmanMessage}
-          />
-        )}
+          {/* Student Portal Routes */}
+          <Route element={<ProtectedRoute user={user} allowedRoles={['student']} />}>
+            <Route path="/student" element={<StudentLayout user={user} handleLogout={handleLogout} />}>
+              <Route path="dashboard" element={<Dashboard user={user} token={token} activeTab="profile" setActiveTab={() => {}} refreshNotices={refreshNotices} API_BASE={API_BASE} notices={notices} masterContent={masterContent} setMasterContent={setMasterContent} />} />
+              <Route path="attendance" element={<h2>Attendance (Coming Soon)</h2>} />
+              <Route path="assignments" element={<h2>Assignments (Coming Soon)</h2>} />
+              <Route path="results" element={<h2>Results (Coming Soon)</h2>} />
+              <Route path="fees" element={<h2>Fees (Coming Soon)</h2>} />
+            </Route>
+          </Route>
 
-        {currentPage === 'about_res' && (
-          <AboutRes resInfo={resInfo} />
-        )}
+          {/* Teacher Portal Routes */}
+          <Route element={<ProtectedRoute user={user} allowedRoles={['teacher']} />}>
+            <Route path="/teacher" element={<TeacherLayout user={user} handleLogout={handleLogout} />}>
+              <Route path="dashboard" element={<Dashboard user={user} token={token} activeTab="profile" setActiveTab={() => {}} refreshNotices={refreshNotices} API_BASE={API_BASE} notices={notices} masterContent={masterContent} setMasterContent={setMasterContent} />} />
+              <Route path="attendance" element={<h2>Attendance Management (Coming Soon)</h2>} />
+              <Route path="assignments" element={<h2>Assignments (Coming Soon)</h2>} />
+              <Route path="marks" element={<h2>Marks Entry (Coming Soon)</h2>} />
+              <Route path="study-material" element={<h2>Study Material (Coming Soon)</h2>} />
+            </Route>
+          </Route>
 
-        {currentPage === 'academics' && (
-          <Academics />
-        )}
+          {/* HOD Portal Routes */}
+          <Route element={<ProtectedRoute user={user} allowedRoles={['hod']} />}>
+            <Route path="/hod" element={<HODLayout user={user} handleLogout={handleLogout} />}>
+              <Route path="dashboard" element={<Dashboard user={user} token={token} activeTab="hod_dashboard" setActiveTab={() => {}} refreshNotices={refreshNotices} API_BASE={API_BASE} notices={notices} masterContent={masterContent} setMasterContent={setMasterContent} />} />
+              <Route path="faculty" element={<h2>Faculty Workload (Coming Soon)</h2>} />
+              <Route path="approvals" element={<h2>Approvals (Coming Soon)</h2>} />
+              <Route path="reports" element={<h2>Reports (Coming Soon)</h2>} />
+            </Route>
+          </Route>
 
-        {currentPage === 'courses' && (
-          <Courses courses={courses} />
-        )}
+          {/* Principal Portal Routes */}
+          <Route element={<ProtectedRoute user={user} allowedRoles={['principal']} />}>
+            <Route path="/principal" element={<PrincipalLayout user={user} handleLogout={handleLogout} />}>
+              <Route path="dashboard" element={<Dashboard user={user} token={token} activeTab="principal_overview" setActiveTab={() => {}} refreshNotices={refreshNotices} API_BASE={API_BASE} notices={notices} masterContent={masterContent} setMasterContent={setMasterContent} />} />
+              <Route path="analytics" element={<h2>Analytics (Coming Soon)</h2>} />
+              <Route path="reports" element={<h2>Reports (Coming Soon)</h2>} />
+              <Route path="directory" element={<h2>Directory (Coming Soon)</h2>} />
+            </Route>
+          </Route>
 
-        {currentPage === 'departments' && (
-          <Departments />
-        )}
+          {/* Website Admin CMS Routes */}
+          <Route element={<ProtectedRoute user={user} allowedRoles={['admin']} />}>
+            <Route path="/admin" element={<AdminLayout user={user} handleLogout={handleLogout} />}>
+              <Route path="dashboard" element={<Dashboard user={user} token={token} activeTab="admin_dashboard" setActiveTab={() => {}} refreshNotices={refreshNotices} API_BASE={API_BASE} notices={notices} masterContent={masterContent} setMasterContent={setMasterContent} />} />
+              <Route path="media" element={<h2>Media Library (Coming Soon)</h2>} />
+              <Route path="pages" element={<h2>Page Editor (Coming Soon)</h2>} />
+              <Route path="news" element={<h2>News & Notices (Coming Soon)</h2>} />
+              <Route path="users" element={<h2>User Management (Coming Soon)</h2>} />
+              <Route path="settings" element={<h2>Global Settings (Coming Soon)</h2>} />
+            </Route>
+          </Route>
 
-        {currentPage === 'governance' && (
-          <Governance masterContent={masterContent} />
-        )}
-
-        {currentPage === 'facilities' && (
-          <Facilities masterContent={masterContent} />
-        )}
-
-        {currentPage === 'placements' && (
-          <Placements />
-        )}
-
-        {currentPage === 'admissions' && (
-          <Admissions masterContent={masterContent} />
-        )}
-
-        {currentPage === 'research' && (
-          <Research />
-        )}
-
-        {currentPage === 'examinations' && (
-          <Examinations />
-        )}
-
-        {currentPage === 'studentcorner' && (
-          <StudentCorner setCurrentPage={setCurrentPage} />
-        )}
-
-        {currentPage === 'downloads' && (
-          <Downloads />
-        )}
-
-        {currentPage === 'iqac' && (
-          <IQAC />
-        )}
-
-        {currentPage === 'naac' && (
-          <NAAC />
-        )}
-
-        {currentPage === 'gallery' && (
-          <Gallery />
-        )}
-
-        {currentPage === 'newsevents' && (
-          <NewsEvents />
-        )}
-
-        {currentPage === 'contact' && (
-          <Contact />
-        )}
-
-        {currentPage === 'login' && (
-          <Login 
-            usernameInput={usernameInput}
-            setUsernameInput={setUsernameInput}
-            passwordInput={passwordInput}
-            setPasswordInput={setPasswordInput}
-            loginError={loginError}
-            loginLoading={loginLoading}
-            handleLogin={handleLogin}
-          />
-        )}
-
-        {currentPage === 'dashboard' && user && (
-          <Dashboard 
-            user={user} 
-            token={token} 
-            activeTab={activeDashboardTab} 
-            setActiveTab={setActiveDashboardTab}
-            refreshNotices={refreshNotices}
-            API_BASE={API_BASE}
-            notices={notices}
-            masterContent={masterContent}
-            setMasterContent={setMasterContent}
-          />
-        )}
-      </main>
+          {/* 404 Route */}
+          <Route path="*" element={
+            <div style={{ textAlign: 'center', padding: '50px' }}>
+              <h2>404 - Page Not Found</h2>
+              <p>The page you are looking for does not exist.</p>
+              <button className="btn btn-primary mt-3" onClick={() => navigate('/')}>Return to Homepage</button>
+            </div>
+          } />
+        </Routes>
+      </div>
 
       {/* Notice Detail Modal Dialog */}
       {selectedNotice && (
@@ -400,8 +346,8 @@ export default function App() {
         </div>
       )}
       
-      {/* Universal Footer */}
-      <Footer setCurrentPage={setCurrentPage} />
+      {/* Universal Footer - Hide on Portal Routes */}
+      {!isPortalRoute && <Footer setCurrentPage={dummySetCurrentPage} />}
     </div>
   );
 }

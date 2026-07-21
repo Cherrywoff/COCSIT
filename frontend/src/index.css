@@ -582,3 +582,14 @@ footer {
   flex-wrap: wrap;
   gap: 15px;
 }
+  
+/* Portal Layout Styles */  
+.portal-layout { display: flex; min-height: 100vh; background-color: #f8f9fa; }  
+.portal-sidebar { width: 250px; background-color: #ffffff; border-right: 1px solid #eaeaea; display: flex; flex-direction: column; padding: 20px 0; }  
+.sidebar-header { padding: 0 20px 20px; border-bottom: 1px solid #eaeaea; margin-bottom: 20px; }  
+.sidebar-header h2 { color: var(--accent-indigo); font-size: 1.25rem; margin-bottom: 5px; }  
+.sidebar-nav { display: flex; flex-direction: column; }  
+.sidebar-nav a { padding: 12px 20px; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: background 0.2s, color 0.2s; }  
+.sidebar-nav a:hover { background-color: #f0f4ff; color: var(--accent-indigo); border-right: 3px solid var(--accent-indigo); }  
+.portal-main { flex: 1; padding: 40px; overflow-y: auto; }  
+.app-portal-mode { min-height: 100vh; } 

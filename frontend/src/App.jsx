@@ -53,7 +53,7 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'https://cocsit-production.up.railway.app/api';
 
 export default function App() {
   const navigate = useNavigate();

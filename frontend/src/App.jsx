@@ -8,6 +8,10 @@ import TeacherLayout from './layouts/TeacherLayout';
 import HODLayout from './layouts/HODLayout';
 import PrincipalLayout from './layouts/PrincipalLayout';
 import AdminLayout from './layouts/AdminLayout';
+import NewsEditor from './pages/admin/NewsEditor';
+import SettingsEditor from './pages/admin/SettingsEditor';
+import MediaLibrary from './pages/admin/MediaLibrary';
+import PageEditor from './pages/admin/PageEditor';
 
 // Components
 import Navigation from './components/Navigation';
@@ -299,11 +303,11 @@ export default function App() {
           <Route element={<ProtectedRoute user={user} allowedRoles={['admin']} />}>
             <Route path="/admin" element={<AdminLayout user={user} handleLogout={handleLogout} />}>
               <Route path="dashboard" element={<Dashboard user={user} token={token} activeTab="admin_dashboard" setActiveTab={() => {}} refreshNotices={refreshNotices} API_BASE={API_BASE} notices={notices} masterContent={masterContent} setMasterContent={setMasterContent} />} />
-              <Route path="media" element={<h2>Media Library (Coming Soon)</h2>} />
-              <Route path="pages" element={<h2>Page Editor (Coming Soon)</h2>} />
-              <Route path="news" element={<h2>News & Notices (Coming Soon)</h2>} />
+              <Route path="media" element={<MediaLibrary />} />
+              <Route path="pages" element={<PageEditor />} />
+              <Route path="news" element={<NewsEditor />} />
               <Route path="users" element={<h2>User Management (Coming Soon)</h2>} />
-              <Route path="settings" element={<h2>Global Settings (Coming Soon)</h2>} />
+              <Route path="settings" element={<SettingsEditor />} />
             </Route>
           </Route>
 

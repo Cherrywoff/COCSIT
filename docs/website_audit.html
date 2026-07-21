@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Audit Report - COCSIT Latur</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #151c2c;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-blue: #3b82f6;
+            --accent-teal: #14b8a6;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --border-color: #1f2937;
+            --glow-color: rgba(59, 130, 246, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header Card */
+        header {
+            background: linear-gradient(135deg, var(--card-bg), #0f172a);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.1) 0%, transparent 70%);
+            z-index: 1;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            z-index: 1;
+        }
+
+        .meta-badge {
+            background: rgba(20, 184, 166, 0.1);
+            color: var(--accent-teal);
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ffffff, #93c5fd, #2dd4bf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            max-width: 700px;
+        }
+
+        .meta-details {
+            display: flex;
+            gap: 30px;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            z-index: 2;
+            position: relative;
+        }
+
+        .meta-item strong {
+            color: var(--text-primary);
+        }
+
+        /* Executive Summary Section */
+        .summary-card {
+            background: rgba(59, 130, 246, 0.03);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+        }
+
+        .section-title svg {
+            color: var(--accent-blue);
+        }
+
+        /* Table Card */
+        .table-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            padding: 16px;
+            border-bottom: 2px solid var(--border-color);
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 18px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            vertical-align: top;
+        }
+
+        tr:hover td {
+            color: var(--text-primary);
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .badge-tech {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+
+        /* Alert Box CSS overrides */
+        .alert {
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .alert-important {
+            background-color: rgba(244, 63, 94, 0.05);
+            border: 1px solid rgba(244, 63, 94, 0.2);
+            color: #fda4af;
+        }
+
+        .alert-warning {
+            background-color: rgba(245, 158, 11, 0.05);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            color: #fde047;
+        }
+
+        .alert-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+            font-family: 'Outfit', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .alert-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Structured Report Cards */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .meta-details {
+                flex-direction: column;
+                gap: 15px;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        .audit-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .audit-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-circle.blue { background-color: rgba(59, 130, 246, 0.1); color: var(--accent-blue); }
+        .icon-circle.teal { background-color: rgba(20, 184, 166, 0.1); color: var(--accent-teal); }
+        .icon-circle.amber { background-color: rgba(245, 158, 11, 0.1); color: var(--accent-amber); }
+        .icon-circle.rose { background-color: rgba(244, 63, 94, 0.1); color: var(--accent-rose); }
+
+        .list-items {
+            list-style: none;
+        }
+
+        .list-items li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .list-items li::before {
+            content: "•";
+            position: absolute;
+            left: 8px;
+            top: 0;
+            color: var(--accent-blue);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Recommendations Section */
+        .recomm-section {
+            background: linear-gradient(to bottom right, #111827, #0f172a);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .recomm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .recomm-item {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            position: relative;
+        }
+
+        .recomm-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.03);
+            line-height: 1;
+        }
+
+        .recomm-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .recomm-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .link-text {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .link-text:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Main Header Card -->
+        <header>
+            <div class="meta-badge">Security & Tech Audit</div>
+            <h1>Web Development Audit Report</h1>
+            <div class="subtitle">A detailed review of the structural, performance, security, and SEO deficiencies of the current COCSIT institution website.</div>
+            <div class="meta-details">
+                <div class="meta-item">Target Domain: <strong>cocsit.org.in</strong></div>
+                <div class="meta-item">Status: <strong>Analyzed</strong></div>
+                <div class="meta-item">Date: <strong>July 20, 2026</strong></div>
+            </div>
+        </header>
+
+        <!-- Executive Summary -->
+        <div class="summary-card">
+            <h2 class="section-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>
+                Executive Summary
+            </h2>
+            <p style="color: var(--text-secondary); font-size: 1.05rem;">
+                The COCSIT college portal provides continuous updates for academic tables, syllabus schedules, and recruiters for the 2025-26 and 2026-27 timelines. However, the site’s fundamental layout, tech stack, and resource setups date back to the early 2010s. The site suffers from structural layout bottlenecks (using layout tables and floats instead of Flexbox/Grid), accessibility violations, missing image lazy loading (70 downloads at load time), duplicate tag definitions, and several hardcoded insecure http links for portal dashboards.
+            </p>
+        </div>
+
+        <!-- Section: Tech Stack Table -->
+        <h2 class="section-title" style="margin-bottom: 20px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+            Technology Stack Details
+        </h2>
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Stack Layer</th>
+                        <th style="width: 30%;">Component / Library</th>
+                        <th style="width: 15%;">Version</th>
+                        <th style="width: 30%;">Auditor Assessment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Hosting Server</strong></td>
+                        <td>Apache HTTP Server</td>
+                        <td><span class="badge-tech">Apache</span></td>
+                        <td>Web server header response verified. Standard setup.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Backend Tech</strong></td>
+                        <td>Native PHP Pages</td>
+                        <td><span class="badge-tech">PHP</span></td>
+                        <td>Handles routing via physical index.php and about_res.php pages.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CSS Framework</strong></td>
+                        <td>Bootstrap CSS</td>
+                        <td><span class="badge-tech">v3.x / Legacy</span></td>
+                        <td>Relies on legacy grid systems, floats, and custom positioning.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>JS Engine</strong></td>
+                        <td>jQuery Library</td>
+                        <td><span class="badge-tech">Legacy Core</span></td>
+                        <td>Core library handling plugins. Needs upgrade to modern JS/TS.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Compatibility</strong></td>
+                        <td>Modernizr & Respond.js</td>
+                        <td><span class="badge-tech">Legacy</span></td>
+                        <td>Installed polyfills to support IE8/IE9 layouts. Obsolete today.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Media Slider</strong></td>
+                        <td>Revolution Slider</td>
+                        <td><span class="badge-tech">v1.x</span></td>
+                        <td>Themepunch plugin for banners. Overloaded with legacy dependencies.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Icon Library</strong></td>
+                        <td>Font Awesome Icons</td>
+                        <td><span class="badge-tech">v4.7.0</span></td>
+                        <td>Uses CSS fonts instead of fast, modern inline SVG shapes.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section: Structured Audits Grid -->
+        <h2 class="section-title" style="margin-bottom: 20px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            Core Deficiency Areas
+        </h2>
+
+        <!-- Alert Highlights -->
+        <div class="alert alert-important">
+            <div class="alert-content">
+                <div class="alert-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                    Critical SEO Hierarchy Error
+                </div>
+                The home page contains only <strong>one H1 tag</strong>, which is nested at the bottom in the recruiter marquee section with the text <em>"And Many More..."</em>. The core brand title and college description are set in generic bold/strong tags with inline sizes rather than proper header structures, negatively impacting search rankings.
+            </div>
+        </div>
+
+        <div class="alert alert-warning">
+            <div class="alert-content">
+                <div class="alert-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    Mixed Content Portal Links
+                </div>
+                Key user buttons (Staff Login, LMS, and Student Webmail) link to external dashboards over insecure protocols: <code>http://school.eduera.org.in</code>, <code>http://lms.cocsit.org.in</code>, and <code>http://webmail.cocsit.org.in</code>. These links trigger "Not Secure" warning indicators in modern web browsers.
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <!-- Card 1: Design & UX -->
+            <div class="audit-card">
+                <div class="card-header">
+                    <h3 class="card-title">Design & UX Details</h3>
+                    <div class="icon-circle teal">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"></path><path d="M12 8A4 4 0 1 0 12 16A4 4 0 1 0 12 8Z"></path></svg>
+                    </div>
+                </div>
+                <ul class="list-items">
+                    <li>Uses standard Helvetica/Arial font stacks instead of high-legibility Google Fonts like Outfit or Inter.</li>
+                    <li>Employs a repeating textured background pattern (`pattern.jpg`) reminiscent of older web templates.</li>
+                    <li>Utilizes floats instead of modern CSS Flexbox and Grid layouts. Flex/Grid container declarations are entirely absent (Count: 0).</li>
+                    <li>Main header utilizes legacy HTML `table` structures to align the branding logo and details instead of responsive divs.</li>
+                </ul>
+            </div>
+
+            <!-- Card 2: Performance -->
+            <div class="audit-card">
+                <div class="card-header">
+                    <h3 class="card-title">Performance & Speed</h3>
+                    <div class="icon-circle amber">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    </div>
+                </div>
+                <ul class="list-items">
+                    <li>Downloads **70 images** on the home page with **zero lazy-loading** configuration.</li>
+                    <li>Images are delivered using legacy format extensions (`.png`, `.jpg`, `.jpeg`, `.gif`) rather than compressed `.webp` or `.avif` formats.</li>
+                    <li>Loads **19 separate external JS files**, locking the browser rendering pipeline and slowing interactivity.</li>
+                    <li>Home page size is 95 KB, filled with redundant markup and extensive inline styling declarations.</li>
+                </ul>
+            </div>
+
+            <!-- Card 3: Accessibility -->
+            <div class="audit-card">
+                <div class="card-header">
+                    <h3 class="card-title">Accessibility (A11y)</h3>
+                    <div class="icon-circle rose">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    </div>
+                </div>
+                <ul class="list-items">
+                    <li>Contains virtually zero screen-reader optimizations. ARIA-role container declarations are absent (Count: 0).</li>
+                    <li>Includes **26 images without alt-text tags** on the home page, including main flyer banners and recruiter icons.</li>
+                    <li>Does not use Bootstrap's standard screen-reader assist utility class (`sr-only`) for navigation menus.</li>
+                    <li>Multiple navigation elements use obsolete `javascript:void(0)` actions rather than clean HTML structures.</li>
+                </ul>
+            </div>
+
+            <!-- Card 4: Quality & Standards -->
+            <div class="audit-card">
+                <div class="card-header">
+                    <h3 class="card-title">Code Quality & Errors</h3>
+                    <div class="icon-circle blue">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                    </div>
+                </div>
+                <ul class="list-items">
+                    <li>Features **135 inline style declarations** on the home page, overriding CSS stylesheets and complicating modifications.</li>
+                    <li>A CSS typo exists on line 37 of the main stylesheet `style.css`: <code>ine-height: 22px;</code> (missing the letter 'l' in line-height).</li>
+                    <li>Contains duplicate `<meta charset>` and viewport configuration elements in the page head.</li>
+                    <li>Includes multiple blocks of dead, commented-out HTML code within the page source.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section: Modernization Recommendations -->
+        <div class="recomm-section">
+            <h2 class="section-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Core Recommendations for the Rebuild
+            </h2>
+            <p style="color: var(--text-secondary); margin-bottom: 10px;">To meet modern web development standards, the rebuild team should focus on these key structural improvements:</p>
+            <div class="recomm-grid">
+                <div class="recomm-item">
+                    <div class="recomm-number">01</div>
+                    <h4 class="recomm-title">CSS Grid & Flexbox</h4>
+                    <p class="recomm-desc">Replace table structures and float styles with CSS Grid and Flexbox layouts. Remove legacy IE polyfills.</p>
+                </div>
+                <div class="recomm-item">
+                    <div class="recomm-number">02</div>
+                    <h4 class="recomm-title">SEO & Markup Audit</h4>
+                    <p class="recomm-desc">Restructure header items into a clean heading hierarchy with the main college name inside the `h1` tag.</p>
+                </div>
+                <div class="recomm-item">
+                    <div class="recomm-number">03</div>
+                    <h4 class="recomm-title">Media Optimization</h4>
+                    <p class="recomm-desc">Convert all image files to compressed next-gen formats (.webp/.avif) and configure lazy loading attributes.</p>
+                </div>
+                <div class="recomm-item">
+                    <div class="recomm-number">04</div>
+                    <h4 class="recomm-title">Security Upgrade</h4>
+                    <p class="recomm-desc">Migrate all external student dashboard and login portal links to secure HTTPS URLs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

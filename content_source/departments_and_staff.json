@@ -1,0 +1,89 @@
+{
+  "administration": {
+    "president": "Dr. M. R. Patil (President of Royal Education Society)",
+    "vice_president": "Mr. L. M. Patil (Vice-President of Royal Education Society)",
+    "principal": "Dr. R. S. Awasthi",
+    "former_principal": "Dr. V. A. Jadhav",
+    "officer_on_special_duty": "Dr. E. U. Masumdar",
+    "consultant_director": "Mr. N. D. Jagtap",
+    "vice_principals": [
+      "Dr. N. S. Zulpe",
+      "Dr. V. V. Bhosale"
+    ],
+    "office_superintendent": "Mr. P. R. Kawale",
+    "librarian": "Mr. L. K. Dhotre"
+  },
+  "departments": [
+    {
+      "name": "Department of Computer Science",
+      "head": "Dr. N. S. Zulpe"
+    },
+    {
+      "name": "Department of Computer Application",
+      "head": "Dr. V. V. Bhosle"
+    },
+    {
+      "name": "Department of Biotechnology",
+      "head": "Dr. N. V. More"
+    },
+    {
+      "name": "Department of Management Science",
+      "head": "Dr. R. S. Dombe"
+    },
+    {
+      "name": "Department of Software Development and B.Voc.",
+      "head": "Mr. N. A. Mhetre"
+    },
+    {
+      "name": "Department of IT and CM",
+      "head": "Dr. D. H. Mahamuni"
+    },
+    {
+      "name": "Department of Data Science",
+      "head": "Mr. N. D. Jagtap"
+    },
+    {
+      "name": "Department of AI & ML",
+      "head": "Dr. S. S. Chowhan"
+    },
+    {
+      "name": "Department of Software Engineering",
+      "head": "Dr. S. B. Kale"
+    },
+    {
+      "name": "Department of Maths & IKS (Indian Knowledge System)",
+      "head": "Mr. V. S. Asawa"
+    },
+    {
+      "name": "Department of English",
+      "head": "Mr. V. M. Basvante"
+    },
+    {
+      "name": "Department of Marathi & Cultural",
+      "head": "Mr. J. V. Bansode"
+    },
+    {
+      "name": "Department of Sports & NSS",
+      "head": "Mr. B. B. Devade"
+    }
+  ],
+  "cells_and_centers": [
+    {
+      "name": "Training & Placement Cell",
+      "officer": "Mr. K. R. Jadhav"
+    },
+    {
+      "name": "Library",
+      "librarian": "Mr. L. K. Dhotre"
+    },
+    {
+      "name": "Maintenance Cell"
+    },
+    {
+      "name": "Research Center"
+    },
+    {
+      "name": "Equal Opportunity Cell"
+    }
+  ]
+}

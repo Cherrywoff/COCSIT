@@ -1,0 +1,3024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COCSIT College Portal - Version 2.0 Review</title>
+  
+  <!-- Premium Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Premium Light Theme (Default) */
+      --bg-dark: #ffffff;
+      --bg-card: #f8fafc;
+      --bg-card-hover: #ffffff;
+      --border-color: rgba(0, 0, 0, 0.06);
+      --border-focus: #0f172a;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent-indigo: #0f172a; /* Deep Blue primary */
+      --accent-blue: #1e3a8a;
+      --accent-teal: #0d9488;
+      --accent-amber: #d97706; /* Golden Yellow accent */
+      --accent-rose: #e11d48;
+      --font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+      --glow-indigo: rgba(15, 23, 42, 0.03);
+      --glow-teal: rgba(13, 148, 136, 0.03);
+      --shadow-color: rgba(0, 0, 0, 0.04);
+      --shadow-hover: rgba(0, 0, 0, 0.08);
+      --header-bg: #ffffff;
+    }
+
+    body.dark-theme {
+      /* Premium Dark Theme */
+      --bg-dark: #0b0f19;
+      --bg-card: rgba(21, 28, 44, 0.7);
+      --bg-card-hover: rgba(29, 38, 59, 0.9);
+      --border-color: rgba(255, 255, 255, 0.06);
+      --border-focus: rgba(255, 255, 255, 0.4);
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --accent-indigo: #818cf8;
+      --accent-blue: #3b82f6;
+      --accent-teal: #14b8a6;
+      --accent-amber: #fbbf24;
+      --accent-rose: #f87171;
+      --glow-indigo: rgba(99, 102, 241, 0.15);
+      --glow-teal: rgba(20, 184, 166, 0.15);
+      --shadow-color: rgba(0, 0, 0, 0.5);
+      --shadow-hover: rgba(0, 0, 0, 0.75);
+      --header-bg: #0f172a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.15s ease, box-shadow 0.3s ease;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      background-image: radial-gradient(circle at 50% 0%, rgba(30, 58, 138, 0.025) 0%, transparent 60%);
+      background-attachment: fixed;
+    }
+
+    body.dark-theme {
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.02) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(20, 184, 166, 0.02) 0%, transparent 40%);
+    }
+
+    a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+
+    a:hover {
+      color: var(--accent-amber);
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+
+    section {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-primary);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+
+    h1 { font-size: 3.2rem; }
+    h2 { font-size: 2.1rem; margin-bottom: 20px; }
+    h3 { font-size: 1.45rem; margin-bottom: 15px; }
+
+    .section-tag {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent-amber);
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 4px 20px 0 var(--shadow-color);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s, background-color 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px 0 var(--shadow-hover);
+      background-color: var(--bg-card-hover);
+      border-color: var(--border-focus);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      border: none;
+      font-family: var(--font-family);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-indigo);
+      color: #ffffff;
+      box-shadow: 0 4px 14px var(--glow-indigo);
+    }
+
+    body.dark-theme .btn-primary {
+      background-color: var(--text-primary);
+      color: var(--bg-dark);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      box-shadow: 0 6px 20px var(--glow-indigo);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-card);
+      border-color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+
+    .btn-accent {
+      background-color: var(--accent-amber);
+      color: #ffffff;
+    }
+
+    .btn-accent:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    /* Navigation */
+    .top-bar {
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 8px 0;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .top-bar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .top-bar-links {
+      display: flex;
+      gap: 15px;
+      list-style: none;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 15px 0;
+    }
+
+    body.dark-theme .navbar {
+      background-color: rgba(11, 15, 25, 0.8);
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-item {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 20px;
+      transition: all 0.2s;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      color: var(--text-primary);
+      background-color: var(--bg-card);
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      min-width: 200px;
+      padding: 12px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s;
+      list-style: none;
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-item {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .dropdown-item:hover {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+    }
+
+    /* Grids */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+    @media (max-width: 1024px) {
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .grid-4 { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    /* Inputs */
+    .form-group { margin-bottom: 20px; }
+    .form-label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; color: var(--text-secondary); }
+    .form-input { width: 100%; padding: 12px 18px; background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-primary); font-family: inherit; font-size: 0.95rem; outline: none; }
+    .form-input:focus { border-color: var(--text-primary); box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.05); }
+
+    /* Tables */
+    .table-container { overflow-x: auto; border-radius: 16px; border: 1px solid var(--border-color); }
+    .custom-table { width: 100%; border-collapse: collapse; text-align: left; background: var(--bg-dark); }
+    .custom-table th { padding: 16px 20px; background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); color: var(--text-primary); font-weight: 700; font-size: 0.85rem; }
+    .custom-table td { padding: 16px 20px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.9rem; }
+    .custom-table tr:last-child td { border-bottom: none; }
+
+    /* Badges */
+    .badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; border: 1px solid transparent; }
+    .badge-info { background: rgba(30, 58, 138, 0.04); color: var(--accent-blue); border-color: rgba(30, 58, 138, 0.1); }
+    .badge-success { background: rgba(13, 148, 136, 0.04); color: var(--accent-teal); border-color: rgba(13, 148, 136, 0.1); }
+    .badge-warning { background: rgba(217, 119, 6, 0.04); color: var(--accent-amber); border-color: rgba(217, 119, 6, 0.1); }
+    .badge-danger { background: rgba(225, 29, 72, 0.04); color: var(--accent-rose); border-color: rgba(225, 29, 72, 0.1); }
+
+    /* Theme Switcher */
+    .theme-toggle-btn { background: none; border: none; cursor: pointer; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 50%; }
+    .theme-toggle-btn:hover { background-color: var(--bg-card); color: var(--text-primary); }
+
+    /* Modals */
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(15, 23, 42, 0.3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 30px; }
+    .modal-content { background-color: var(--bg-dark); max-width: 600px; width: 100%; padding: 40px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); border: 1px solid var(--border-color); }
+
+    /* Dashboards */
+    .dashboard-layout { display: grid; grid-template-columns: 240px 1fr; gap: 40px; }
+    @media (max-width: 900px) { .dashboard-layout { grid-template-columns: 1fr; } }
+    .sidebar-item { padding: 12px 18px; border-radius: 12px; font-weight: 600; color: var(--text-secondary); cursor: pointer; margin-bottom: 5px; }
+    .sidebar-item:hover, .sidebar-item.active { background-color: var(--bg-card); color: var(--text-primary); }
+
+    /* Footer */
+    footer { background-color: var(--bg-card); border-top: 1px solid var(--border-color); padding: 60px 0 30px; color: var(--text-secondary); font-size: 0.85rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 40px; }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; } }
+    .footer-column h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-primary); margin-bottom: 20px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- ACTIVE SESSION STICKY STRIP -->
+  <div id="activeSessionStrip" class="hidden" style="background-color: var(--accent-indigo); color: #ffffff; padding: 10px 30px; font-size: 0.85rem; font-weight: 600; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1001; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="font-size: 1.1rem;">🎓</span>
+      <span>Active Session: Logged in as <strong id="sessionUserName">User</strong> (<span id="sessionUserRole">Student</span>)</span>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <button class="btn btn-secondary" style="padding: 4px 12px; font-size: 0.75rem; color: #ffffff; border-color: #ffffff; background: transparent;" onclick="navigateTo('dashboard')">
+        Go to Dashboard
+      </button>
+      <button class="btn btn-secondary" style="padding: 4px 12px; font-size: 0.75rem; color: var(--accent-rose); border-color: var(--accent-rose); background: transparent;" onclick="handleLogout()">
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <div id="topBar" class="top-bar">
+    <div class="container top-bar-content">
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <span>📞 Admissions Support: +91 (02382) 229191</span>
+        <span>✉️ Email: info@cocsit.org.in</span>
+        <span style="color: var(--accent-amber); font-weight: 700;">⭐ NAAC Grade: B+ Re-Accredited</span>
+      </div>
+      <div style="display: flex; gap: 20px; align-items: center;">
+        <span>Affiliation: SRTMU Nanded</span>
+        <ul class="top-bar-links">
+          <li><a href="http://school.eduera.org.in" target="_blank">Eduera Portal</a></li>
+          <li><a href="http://lms.cocsit.org.in" target="_blank">LMS Student</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY HEADER -->
+  <header class="navbar">
+    <div class="container navbar-container">
+      <div class="brand" onclick="navigateTo('home')">
+        <span style="font-size: 1.5rem; letter-spacing: -0.04em;">🏢</span>
+        <div style="display: flex; flexDirection: column; line-height: 1.1;">
+          <span style="font-size: 1.25rem; font-weight: 800;">COCSIT</span>
+          <span style="font-size: 0.65rem; color: var(--text-secondary); font-weight: 600;">Latur, Autonomous</span>
+        </div>
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item active" onclick="navigateTo('home')">Home</li>
+          
+          <li class="nav-item nav-dropdown">
+            About Us ▾
+            <ul class="dropdown-menu">
+              <li class="dropdown-item" onclick="navigateTo('about')">College Profile</li>
+              <li class="dropdown-item" onclick="navigateTo('about_res')">Royal Education Society</li>
+            </ul>
+          </li>
+
+          <li class="nav-item nav-dropdown">
+            Academics ▾
+            <ul class="dropdown-menu">
+              <li class="dropdown-item" onclick="navigateTo('academics')">Overview</li>
+              <li class="dropdown-item" onclick="navigateTo('departments')">Departments</li>
+              <li class="dropdown-item" onclick="navigateTo('courses')">Degrees Offered</li>
+              <li class="dropdown-item" onclick="navigateTo('governance')">Governing Councils</li>
+            </ul>
+          </li>
+
+          <li class="nav-item" onclick="navigateTo('placements')">Placements</li>
+
+          <li class="nav-item nav-dropdown">
+            Campus Life ▾
+            <ul class="dropdown-menu">
+              <li class="dropdown-item" onclick="navigateTo('facilities')">Facilities</li>
+              <li class="dropdown-item" onclick="navigateTo('gallery')">Media Gallery</li>
+              <li class="dropdown-item" onclick="navigateTo('newsevents')">News & Events</li>
+            </ul>
+          </li>
+
+          <li class="nav-item nav-dropdown">
+            Student Corner ▾
+            <ul class="dropdown-menu">
+              <li class="dropdown-item" onclick="navigateTo('studentcorner')">Portal Access</li>
+              <li class="dropdown-item" onclick="navigateTo('examinations')">Examinations</li>
+              <li class="dropdown-item" onclick="navigateTo('downloads')">Downloads</li>
+            </ul>
+          </li>
+
+          <li class="nav-item nav-dropdown">
+            Accreditations ▾
+            <ul class="dropdown-menu">
+              <li class="dropdown-item" onclick="navigateTo('naac')">NAAC Hub</li>
+              <li class="dropdown-item" onclick="navigateTo('iqac')">IQAC Cell</li>
+              <li class="dropdown-item" onclick="navigateTo('research')">Research Center</li>
+            </ul>
+          </li>
+
+          <li class="nav-item" onclick="navigateTo('contact')">Contact</li>
+
+          <li id="portalNavBtn" onclick="navigateTo('login')">
+            <button class="btn btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">Portal Login</button>
+          </li>
+          
+          <li id="logoutNavBtn" class="hidden" onclick="handleLogout()">
+            <button class="btn btn-secondary" style="padding: 8px 18px; font-size: 0.85rem;">Logout</button>
+          </li>
+
+          <li>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Theme">
+              🌓
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="container" style="min-height: 60vh; padding: 40px 0;">
+
+    <!-- VIEW: HOME -->
+    <div id="view-home" class="view">
+      <div class="hero" style="height: 420px; border-radius: 24px; background: linear-gradient(to right, rgba(15,23,42,0.85), rgba(30,58,138,0.7)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1200') center/cover; display: flex; align-items: center; color: white; padding: 60px; margin-bottom: 40px;">
+        <div>
+          <span class="section-tag" style="color: var(--accent-amber);">Amrut Mahotsav Celebrations</span>
+          <h1 style="color: white; font-size: 2.8rem; margin-bottom: 15px;">Pioneering Computer & Bio Education</h1>
+          <p style="color: #cbd5e1; font-size: 1.1rem; max-width: 650px; margin-bottom: 25px;">Re-accredited by NAAC with B+ Grade. We run professional degree programs aligned with the NEP 2020 framework.</p>
+          <div style="display: flex; gap: 15px;">
+            <button class="btn btn-accent" onclick="navigateTo('admissions')">Admissions Open 2026</button>
+            <button class="btn btn-secondary" style="color: white; border-color: white;" onclick="navigateTo('courses')">Explore Courses</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistics -->
+      <section style="padding: 20px 0;">
+        <div class="grid-4" style="text-align: center;">
+          <div class="card" style="padding: 20px;"><h2>25+</h2><p style="font-size: 0.85rem; color: var(--text-secondary);">Years of Service</p></div>
+          <div class="card" style="padding: 20px;"><h2>4,000+</h2><p style="font-size: 0.85rem; color: var(--text-secondary);">Enrolled Students</p></div>
+          <div class="card" style="padding: 20px;"><h2>120+</h2><p style="font-size: 0.85rem; color: var(--text-secondary);">Experienced Faculty</p></div>
+          <div class="card" style="padding: 20px;"><h2>90%</h2><p style="font-size: 0.85rem; color: var(--text-secondary);">Placements Record</p></div>
+        </div>
+      </section>
+
+      <!-- About brief -->
+      <section class="grid-2" style="align-items: center;">
+        <div>
+          <span class="section-tag">Institute Profile</span>
+          <h2>Nurturing Technocrats & Researchers</h2>
+          <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.75;">The College of Computer Science and Information Technology (COCSIT), Latur, is a premier autonomous educational institute run by the Royal Education Society. We bridge the gap between classroom guidelines and software industry demands.</p>
+          <button class="btn btn-primary" onclick="navigateTo('about')">Read Principal Desk Message</button>
+        </div>
+        <div style="border-radius: 20px; overflow: hidden; height: 260px;">
+          <img src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=600" alt="COCSIT campus" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+      </section>
+
+      <!-- Notices tabs -->
+      <section>
+        <div style="text-align: center; margin-bottom: 30px;">
+          <span class="section-tag">Updates</span>
+          <h2>Latest College Circulars & Notices</h2>
+        </div>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 30px;">
+          <button class="btn btn-primary" id="btn-notice-all" onclick="filterNotices('all')">All</button>
+          <button class="btn btn-secondary" id="btn-notice-academics" onclick="filterNotices('academics')">Academics</button>
+          <button class="btn btn-secondary" id="btn-notice-placement" onclick="filterNotices('placement')">Placements</button>
+        </div>
+        <div class="grid-3" id="homeNoticesContainer">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW: ABOUT -->
+    <div id="view-about" class="view hidden">
+      <div style="padding: 40px 0; text-align: center; background: var(--bg-card); border-radius: 20px; margin-bottom: 40px;">
+        <span class="section-tag">Governance Board</span>
+        <h2>About COCSIT Latur</h2>
+      </div>
+
+      <div class="grid-3" style="margin-bottom: 50px;">
+        <div class="card">
+          <h3>🔭 Vision Statement</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 10px;">To impart quality education and job-oriented training in the fields of Computer Science, Information Technology, Biotechnology, and Management Science.</p>
+        </div>
+        <div class="card">
+          <h3>🎯 Mission Statement</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 10px;">To provide the best possible education by fostering innovation, critical thinking, and practical coding skills designed for industry recruitment.</p>
+        </div>
+        <div class="card">
+          <h3>📜 Institutional Motto</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 10px;">“Knowledge is liberation of mankind” (ऋते ज्ञानान्न मुक्ति:), driving our students to achieve scientific excellence.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Principal's Desk Message</h3>
+        <p style="color: var(--text-secondary); margin-top: 10px; line-height: 1.8;">
+          “Welcome to COCSIT Latur. We focus on outcome-based learning and skill competencies development. Our autonomous curriculum runs parallel with modern industry frameworks to make learners placement-ready.”<br>
+          <strong>— Dr. R. S. Awasthi (Principal, COCSIT)</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- VIEW: ABOUT RES -->
+    <div id="view-about_res" class="view hidden">
+      <div class="card" style="max-width: 800px; margin: 0 auto;">
+        <span class="section-tag">Governing Society</span>
+        <h2>Royal Education Society, Latur</h2>
+        <p style="color: var(--text-secondary); line-height: 1.8; margin-top: 15px;">
+          Established in 2001 by Dr. M. R. Patil, the Royal Education Society was founded with a dream to spread professional computer training to students in the rural areas of Marathwada, Maharashtra. Today, the society manages top institutes equipped with modern research wings, computer labs, and biotechnology divisions.
+        </p>
+      </div>
+    </div>
+
+    <!-- VIEW: ACADEMICS -->
+    <div id="view-academics" class="view hidden">
+      <div class="grid-2">
+        <div class="card">
+          <h3>🎓 Teaching Methodologies</h3>
+          <p style="color: var(--text-secondary); margin-top: 10px;">We follow modern guidelines aligned with NEP 2020, focusing on practical programming exercises, internal credit projects, and seminar sessions.</p>
+        </div>
+        <div class="card">
+          <h3>📢 Attendance Rules</h3>
+          <p style="color: var(--text-rose); margin-top: 10px;"><strong>75% lecture attendance</strong> is strictly mandatory to sit for autonomous terminal examinations. Medical leaves must be certified by registered officers.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: COURSES (REUSABLE DATA-DRIVEN TEMPLATE SWITCHER) -->
+    <div id="view-courses" class="view hidden">
+      <div id="coursesCatalogView">
+        <div style="text-align: center; margin-bottom: 40px;">
+          <span class="section-tag">Programs Offered</span>
+          <h2>Degrees & Curricular Calendars</h2>
+        </div>
+        <div class="grid-3" id="coursesGridContainer">
+          <!-- Populated via Javascript -->
+        </div>
+      </div>
+
+      <!-- Course Template Layout -->
+      <div id="courseTemplateView" class="hidden">
+        <button class="btn btn-secondary" style="margin-bottom: 25px; padding: 6px 14px; font-size: 0.8rem;" onclick="closeCourseTemplate()">← Back to All Courses</button>
+        <div class="card" style="padding: 45px; margin-bottom: 30px;">
+          <span class="section-tag" id="tmplCourseAbbrev">Course</span>
+          <h2 id="tmplCourseName" style="margin-bottom: 10px;">Course Title</h2>
+          <p id="tmplCourseFocus" style="color: var(--text-secondary); margin-bottom: 25px;">Course focus description.</p>
+          
+          <div class="grid-3" style="margin-bottom: 35px;">
+            <div style="padding: 15px; border: 1px solid var(--border-color); borderRadius: 12px; background: rgba(0,0,0,0.01);">
+              <strong>⏱️ Program Duration</strong>
+              <div id="tmplCourseDuration" style="font-size: 0.9rem; color: var(--text-secondary); marginTop: 5px;">3 Years</div>
+            </div>
+            <div style="padding: 15px; border: 1px solid var(--border-color); borderRadius: 12px; background: rgba(0,0,0,0.01);">
+              <strong>👥 Intake capacity</strong>
+              <div id="tmplCourseIntake" style="font-size: 0.9rem; color: var(--text-secondary); marginTop: 5px;">80 Seats</div>
+            </div>
+            <div style="padding: 15px; border: 1px solid var(--border-color); borderRadius: 12px; background: rgba(0,0,0,0.01);">
+              <strong>💵 Fees Structure</strong>
+              <div id="tmplCourseFees" style="font-size: 0.9rem; color: var(--text-secondary); marginTop: 5px;">₹18,500/year</div>
+            </div>
+          </div>
+
+          <h3 style="margin-bottom: 15px;">Eligibility Parameters</h3>
+          <p id="tmplCourseElig" style="color: var(--text-secondary); margin-bottom: 25px; font-size: 0.95rem; line-height: 1.6;">Eligibility text.</p>
+
+          <h3 style="margin-bottom: 15px;">Semester Subjects</h3>
+          <div class="grid-3" id="tmplCourseSubjectsContainer">
+            <!-- Dynamic semesters -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: DEPARTMENTS (REUSABLE DATA-DRIVEN SWITCHER) -->
+    <div id="view-departments" class="view hidden">
+      <div class="dashboard-layout">
+        <div class="sidebar card" style="padding: 20px;">
+          <h4>Divisions</h4>
+          <div class="sidebar-item active" onclick="switchDept('cs', this)">Computer Science</div>
+          <div class="sidebar-item" onclick="switchDept('ca', this)">Computer Application</div>
+          <div class="sidebar-item" onclick="switchDept('biotech', this)">Biotechnology</div>
+          <div class="sidebar-item" onclick="switchDept('mgmt', this)">Management</div>
+        </div>
+        
+        <!-- Reusable Department Template Content -->
+        <div class="card" style="padding: 40px;" id="deptDetailContent">
+          <!-- Dynamic -->
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: GOVERNANCE -->
+    <div id="view-governance" class="view hidden">
+      <div class="card" style="margin-bottom: 40px;">
+        <h3>College Development Committee (CDC) 2025-26</h3>
+        <div class="table-container" style="margin-top: 20px;">
+          <table class="custom-table" id="cdcTableBody">
+            <!-- Populated via JS -->
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: FACILITIES -->
+    <div id="view-facilities" class="view hidden">
+      <div class="grid-3" id="facilitiesGrid">
+        <!-- Dynamic -->
+      </div>
+    </div>
+
+    <!-- VIEW: PLACEMENTS -->
+    <div id="view-placements" class="view hidden">
+      <div class="grid-2" style="margin-bottom: 40px;">
+        <div class="card">
+          <h3>Placement Cell Desks</h3>
+          <p style="color: var(--text-secondary); margin-top: 10px;">
+            Under TPO coordinator Mr. K. R. Jadhav, the placements wing coordinates mock resumes check, logical coding rounds, and interview mockups.<br>
+            <strong>TPO Email: placement@cocsit.org.in</strong>
+          </p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <h3>Package Metrics</h3>
+          <h2 style="font-size: 3rem; color: var(--accent-amber); margin: 15px 0;">₹6.5 LPA</h2>
+          <p style="color: var(--text-secondary);">Highest Annual Compensation Package</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: RESEARCH -->
+    <div id="view-research" class="view hidden">
+      <div class="card">
+        <h3>Doctoral Research Cell</h3>
+        <p style="color: var(--text-secondary); margin-top: 10px;">We coordinate PG research scholars under regulatory research cell approval committees. Over 15 active research papers are published annually in Scopus-indexed libraries.</p>
+        <p style="color: var(--text-secondary); font-style: italic; margin-top: 10px;">⚠️ Patents & collaborations details: [Content to be updated soon by advisory boards]</p>
+      </div>
+    </div>
+
+    <!-- VIEW: EXAMINATIONS -->
+    <div id="view-examinations" class="view hidden">
+      <div class="card">
+        <h3>Examinations Rules & Schedules</h3>
+        <p style="color: var(--text-secondary); margin-top: 10px;">Daily hall seatings roll schedules and timetable PDF links are updated inside the Downloads center during active term-ends.</p>
+      </div>
+    </div>
+
+    <!-- VIEW: STUDENT CORNER -->
+    <div id="view-studentcorner" class="view hidden">
+      <div class="grid-3">
+        <div class="card" style="text-align: center;">
+          <h3>🖥️ LMS Portal</h3>
+          <p style="margin: 15px 0; font-size: 0.85rem; color: var(--text-secondary);">Access digital lectures and assignments.</p>
+          <a href="http://lms.cocsit.org.in" target="_blank" class="btn btn-secondary">Open LMS</a>
+        </div>
+        <div class="card" style="text-align: center;">
+          <h3>📊 Staff Portal</h3>
+          <p style="margin: 15px 0; font-size: 0.85rem; color: var(--text-secondary);">Access Eduera marks entry and syllabus.</p>
+          <a href="http://school.eduera.org.in" target="_blank" class="btn btn-secondary">Open Eduera</a>
+        </div>
+        <div class="card" style="text-align: center;">
+          <h3>🔑 Grades Portal</h3>
+          <p style="margin: 15px 0; font-size: 0.85rem; color: var(--text-secondary);">Check internal grades and marks.</p>
+          <button class="btn btn-primary" onclick="navigateTo('login')">Login Portal</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: DOWNLOADS -->
+    <div id="view-downloads" class="view hidden">
+      <div style="margin-bottom: 30px;">
+        <input type="text" class="form-input" id="downloadSearchInput" placeholder="🔍 Search document downloads..." onkeyup="filterDownloads()">
+      </div>
+      <div class="grid-3" id="downloadsContainer">
+        <!-- Dynamic -->
+      </div>
+    </div>
+
+    <!-- VIEW: IQAC -->
+    <div id="view-iqac" class="view hidden">
+      <div class="card">
+        <h3>Internal Quality Assurance Cell (IQAC)</h3>
+        <p style="color: var(--text-secondary); margin-top: 10px;">IQAC is chaired by Principal Dr. R. S. Awasthi and coordinated by Dr. N. S. Zulpe. It focuses on maintaining institutional benchmarks for credit courses, surveys feedback, and training approvals.</p>
+      </div>
+    </div>
+
+    <!-- VIEW: NAAC -->
+    <div id="view-naac" class="view hidden">
+      <div class="card">
+        <h3>NAAC Accreditation (Cycle-II)</h3>
+        <p style="color: var(--text-secondary); margin-top: 10px;">COCSIT Latur has been accredited with **B+ Grade** by the National Assessment and Accreditation Council. All criteria self disclosure document parameters are active in downloads.</p>
+      </div>
+    </div>
+
+    <!-- VIEW: GALLERY -->
+    <div id="view-gallery" class="view hidden">
+      <div class="grid-3">
+        <div class="card"><img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=400" style="width: 100%; border-radius: 12px; height: 160px; object-fit: cover;"><h4>College Campus Front</h4></div>
+        <div class="card"><img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?q=80&w=400" style="width: 100%; border-radius: 12px; height: 160px; object-fit: cover;"><h4>Central Library Rooms</h4></div>
+        <div class="card"><img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=400" style="width: 100%; border-radius: 12px; height: 160px; object-fit: cover;"><h4>Software Computing Labs</h4></div>
+      </div>
+    </div>
+
+    <!-- VIEW: NEWS EVENTS -->
+    <div id="view-newsevents" class="view hidden">
+      <div class="grid-2">
+        <div class="card">
+          <span class="badge badge-info">2026-03-15</span>
+          <h3 style="margin-top: 10px;">Silver Jubilee celebrations inaugurations</h3>
+          <p style="color: var(--text-secondary); margin-top: 10px;">Royal Education Society celebrates 25 years of IT excellence in Latur.</p>
+        </div>
+        <div class="card">
+          <span class="badge badge-success">2026-04-10</span>
+          <h3 style="margin-top: 10px;">National seminar on NEP credits alignment</h3>
+          <p style="color: var(--text-secondary); margin-top: 10px;">Academic councils discuss outcome based curriculum parameters.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: CONTACT -->
+    <div id="view-contact" class="view hidden">
+      <div class="grid-2">
+        <div class="card">
+          <h3>Inquiry desk</h3>
+          <p style="color: var(--text-secondary); margin-top: 10px;">
+            📍 Ambajogai Road, Latur - 413531,<br>Maharashtra, India.<br><br>
+            📞 Phone: +91 (02382) 229191<br>
+            ✉️ Email: info@cocsit.org.in
+          </p>
+        </div>
+        <div class="card">
+          <h3>Send Message</h3>
+          <form onsubmit="event.preventDefault(); alert('Message sent!');">
+            <div class="form-group"><input type="text" class="form-input" placeholder="Your Name" required></div>
+            <div class="form-group"><input type="email" class="form-input" placeholder="Your Email" required></div>
+            <div class="form-group"><textarea class="form-input" placeholder="Message details" required style="min-height: 80px;"></textarea></div>
+            <button class="btn btn-primary" type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: LOGIN -->
+    <div id="view-login" class="view hidden">
+      <div class="card" style="max-width: 420px; margin: 0 auto;">
+        <h3 style="text-align: center; margin-bottom: 20px;">Sign In to Dashboard Portal</h3>
+        <div id="loginErrorMsg" style="color: var(--accent-rose); font-size: 0.85rem; margin-bottom: 15px; text-align: center;" class="hidden"></div>
+        
+        <form onsubmit="handleLoginSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <input type="text" id="loginUser" class="form-input" placeholder="e.g. admin or student_cs" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" id="loginPass" class="form-input" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+        </form>
+
+        <div style="margin-top: 25px; border-top: 1px solid var(--border-color); paddingTop: 15px; font-size: 0.8rem; color: var(--text-secondary);">
+          <div style="font-weight: 700; margin-bottom: 5px; color: var(--text-primary);">Test Logins:</div>
+          <p>• Admin: <code>admin</code> / <code>password123</code></p>
+          <p>• Faculty: <code>teacher_cs</code> / <code>password123</code></p>
+          <p>• Student: <code>student_cs</code> / <code>password123</code></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: DASHBOARD (VERSION 2.0 INTEGRATED SUBTABS) -->
+    <div id="view-dashboard" class="view hidden">
+      <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <div class="sidebar card" style="padding: 20px;">
+          <div style="text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color);">
+            <div id="dashAvatar" style="width: 50px; height: 50px; border-radius: 50%; background: var(--accent-indigo); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: 700;">U</div>
+            <h4 id="dashUserName">User</h4>
+            <span id="dashUserRole" class="badge badge-info" style="margin-top: 5px;">Student</span>
+          </div>
+
+          <div class="sidebar-item active" id="tabBtn-profile" onclick="switchDashTab('profile')">Profile Info</div>
+          
+          <!-- Student only tabs -->
+          <div class="sidebar-item hidden" id="tabBtn-attendance" onclick="switchDashTab('attendance')">My Attendance</div>
+          <div class="sidebar-item hidden" id="tabBtn-timetable" onclick="switchDashTab('timetable')">My Timetable</div>
+          <div class="sidebar-item hidden" id="tabBtn-fees" onclick="switchDashTab('fees')">Fees Structure</div>
+          <div class="sidebar-item hidden" id="tabBtn-assignments" onclick="switchDashTab('assignments')">My Assignments</div>
+          <div class="sidebar-item hidden" id="tabBtn-grades" onclick="switchDashTab('grades')">Term Grades</div>
+          <div class="sidebar-item hidden" id="tabBtn-student_exams" onclick="switchDashTab('student_exams')">Examinations & Results</div>
+          <div class="sidebar-item hidden" id="tabBtn-student_downloads" onclick="switchDashTab('student_downloads')">ERP Downloads</div>
+          
+          <!-- Principal only tabs -->
+          <div class="sidebar-item hidden" id="tabBtn-principal_overview" onclick="switchDashTab('principal_overview')">College Overview</div>
+          <div class="sidebar-item hidden" id="tabBtn-principal_students" onclick="switchDashTab('principal_students')">Search Students</div>
+          <div class="sidebar-item hidden" id="tabBtn-principal_faculty" onclick="switchDashTab('principal_faculty')">Faculty Workloads</div>
+          <div class="sidebar-item hidden" id="tabBtn-principal_approvals" onclick="switchDashTab('principal_approvals')">Calendar Approvals</div>
+          <div class="sidebar-item hidden" id="tabBtn-principal_finances" onclick="switchDashTab('principal_finances')">Fee Collections Audit</div>
+
+          <!-- HOD only tabs -->
+          <div class="sidebar-item hidden" id="tabBtn-hod_dashboard" onclick="switchDashTab('hod_dashboard')">Department Overview</div>
+          <div class="sidebar-item hidden" id="tabBtn-hod_students" onclick="switchDashTab('hod_students')">Department Students</div>
+          <div class="sidebar-item hidden" id="tabBtn-hod_faculty" onclick="switchDashTab('hod_faculty')">Faculty Workloads</div>
+          <div class="sidebar-item hidden" id="tabBtn-hod_analytics" onclick="switchDashTab('hod_analytics')">Academic Analytics</div>
+          <div class="sidebar-item hidden" id="tabBtn-hod_approvals" onclick="switchDashTab('hod_approvals')">Pending Approvals</div>
+
+          <!-- Staff/Admin only tabs -->
+          <div class="sidebar-item hidden" id="tabBtn-student_dossiers" onclick="switchDashTab('student_dossiers')">Student Records Dossier</div>
+          <div class="sidebar-item hidden" id="tabBtn-mark" onclick="switchDashTab('mark')">Mark Attendance</div>
+          <div class="sidebar-item hidden" id="tabBtn-marks_entry" onclick="switchDashTab('marks_entry')">Marks Entry</div>
+          <div class="sidebar-item hidden" id="tabBtn-materials" onclick="switchDashTab('materials')">Study Materials</div>
+          <div class="sidebar-item hidden" id="tabBtn-notice" onclick="switchDashTab('notice')">Manage Notices</div>
+          <div class="sidebar-item hidden" id="tabBtn-register" onclick="switchDashTab('register')">Mock User Manager</div>
+          <div class="sidebar-item hidden" id="tabBtn-editor" onclick="switchDashTab('editor')">Website Content Editor</div>
+        </div>
+
+        <!-- Panel -->
+        <div class="card" style="padding: 40px;" id="dashPanelContent">
+          
+          <!-- SUBTAB: PROFILE -->
+          <div id="dashSub-profile" class="dashSub">
+            <h2>Portal Profile Details</h2>
+            <div class="grid-2" style="margin-top: 25px;">
+              <div style="padding: 15px; background: rgba(0,0,0,0.01); border: 1px solid var(--border-color); border-radius: 10px;">
+                <span style="font-size: 0.75rem; color: var(--text-secondary);">Full Name</span>
+                <div id="profileNameVal" style="font-weight: 700;">Rahul Sharma</div>
+              </div>
+              <div style="padding: 15px; background: rgba(0,0,0,0.01); border: 1px solid var(--border-color); border-radius: 10px;">
+                <span style="font-size: 0.75rem; color: var(--text-secondary);">Official Email</span>
+                <div id="profileEmailVal" style="font-weight: 700;">student@cocsit.org.in</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUBTAB: ATTENDANCE (STUDENT ONLY) -->
+          <div id="dashSub-attendance" class="dashSub hidden">
+            <h2>Academic Attendance summary</h2>
+            <div class="grid-3" style="margin-top: 25px;" id="attendanceCardsContainer">
+              <!-- Dynamic -->
+            </div>
+          </div>
+
+          <!-- STUDENT SUBTAB: TIMETABLE -->
+          <div id="dashSub-timetable" class="dashSub hidden">
+            <h2>Daily Lecture Schedule</h2>
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;" id="timetableContainer">
+              <!-- Dynamic -->
+            </div>
+          </div>
+
+          <!-- STUDENT SUBTAB: FEES -->
+          <div id="dashSub-fees" class="dashSub hidden">
+            <h2>Program Fees & Installments History</h2>
+            <div class="grid-3" style="margin-top: 20px;">
+              <div class="card" style="padding: 20px; text-align: center;">
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">Total Fee</span>
+                <h3 style="margin-top: 5px;">₹18,500</h3>
+              </div>
+              <div class="card" style="padding: 20px; text-align: center; border-top: 4px solid var(--accent-teal);">
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">Total Paid</span>
+                <h3 style="margin-top: 5px; color: var(--accent-teal);">₹12,000</h3>
+              </div>
+              <div class="card" style="padding: 20px; text-align: center; border-top: 4px solid var(--accent-amber);">
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">Balance Due</span>
+                <h3 style="margin-top: 5px; color: var(--accent-amber);">₹6,500</h3>
+              </div>
+            </div>
+            <h4 style="margin-top: 30px; margin-bottom: 15px;">Transaction Logs</h4>
+            <div class="table-container">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Installment</th>
+                    <th>Date Paid</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>CAP Seat Deposit</td><td>2025-06-18</td><td>₹5,000</td><td><span class="badge badge-success">Paid</span></td></tr>
+                  <tr><td>First Installment Term-Start</td><td>2025-09-02</td><td>₹7,000</td><td><span class="badge badge-success">Paid</span></td></tr>
+                  <tr><td>Final Balance Clearance</td><td>Pending</td><td>₹6,500</td><td><span class="badge badge-warning">Balance</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- STUDENT SUBTAB: ASSIGNMENTS -->
+          <div id="dashSub-assignments" class="dashSub hidden">
+            <h2>Academic Assignments</h2>
+            <div class="table-container" style="margin-top: 20px;">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Subject Scope</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Assignment 1: Java Classes & OOPs</td><td>Java Core</td><td>2026-07-28</td><td><span class="badge badge-success">Submitted</span></td></tr>
+                  <tr><td>Assignment 2: Schema Normalizations</td><td>Database systems</td><td>2026-08-04</td><td><span class="badge badge-warning">Pending</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- SUBTAB: GRADES (STUDENT ONLY) -->
+          <div id="dashSub-grades" class="dashSub hidden">
+            <h2>Term Report Card</h2>
+            <div class="table-container" style="margin-top: 20px;">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Subject</th>
+                    <th>Exam</th>
+                    <th>Marks Obtained</th>
+                    <th>Total Marks</th>
+                  </tr>
+                </thead>
+                <tbody id="studentGradesBody">
+                  <!-- Dynamic -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- SUBTAB: STUDENT DOSSIERS RECORDS (TEACHER, HOD, ADMIN ONLY) -->
+          <div id="dashSub-student_dossiers" class="dashSub hidden">
+            <div id="dossierListView">
+              <h2>Student Records Dossier</h2>
+              <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 25px;">
+                Select any active student to view, edit, and track their academic profile, marks, presentee, homework tasks, and fee logs.
+              </p>
+              <div class="grid-2" id="dossiersRosterContainer">
+                <!-- Populated via Javascript -->
+              </div>
+            </div>
+
+            <!-- Single Student Dossier Workspace -->
+            <div id="dossierWorkspaceView" class="hidden">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
+                <div>
+                  <h2 id="dossierTitleName">Rahul Sharma</h2>
+                  <span style="font-size: 0.85rem; color: var(--text-secondary);">
+                    Roll ID: <code id="dossierTitleRoll">student_cs</code> | Email: <span id="dossierTitleEmail">rahul.sharma@cocsit.org.in</span>
+                  </span>
+                </div>
+                <button class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="closeDossierWorkspace()">
+                  ← Back to Student List
+                </button>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 30px;">
+                <!-- Grades Card -->
+                <div class="card" style="padding: 30px;">
+                  <h3 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">📊 Academic Grades & Test Scores</h3>
+                  <div class="table-container" style="margin-bottom: 20px;">
+                    <table class="custom-table">
+                      <thead>
+                        <tr><th>Subject Scope</th><th>Exam Name</th><th>Marks Obtained</th><th>Max Marks</th></tr>
+                      </thead>
+                      <tbody id="dossierGradesBody">
+                        <!-- Dynamic -->
+                      </tbody>
+                    </table>
+                  </div>
+                  <h4>Edit or Add Marks Entry</h4>
+                  <form onsubmit="saveDossierMarksForm(event)" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 15px;" class="grid-3">
+                    <select id="editMarkSub" class="form-input">
+                      <option>Java Programming</option>
+                      <option>Database Systems</option>
+                      <option>Software Engineering</option>
+                    </select>
+                    <input type="text" id="editMarkExam" class="form-input" placeholder="e.g. Test 1" required>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                      <input type="number" id="editMarkVal" class="form-input" style="width: 80px;" min="0" max="100" value="20" required>
+                      <span>/</span>
+                      <input type="number" id="editMarkMax" class="form-input" style="width: 80px;" min="1" max="100" value="25" required>
+                      <button type="submit" class="btn btn-primary" style="padding: 10px 18px; font-size: 0.8rem;">Save</button>
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Attendance Card -->
+                <div class="card" style="padding: 30px;">
+                  <h3 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">🗓️ Attendance Check</h3>
+                  <div class="grid-3" style="gap: 20px; margin-bottom: 20px;" id="dossierAttContainer">
+                    <!-- Dynamic cards -->
+                  </div>
+                  <h4>Update Presentee Days</h4>
+                  <form onsubmit="saveDossierAttForm(event)" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 15px;" class="grid-3">
+                    <select id="editAttSub" class="form-input">
+                      <option>Java Programming</option>
+                      <option>Database Systems</option>
+                      <option>Software Engineering</option>
+                    </select>
+                    <input type="number" id="editAttPresent" class="form-input" placeholder="Present Days" min="0" required>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                      <input type="number" id="editAttTotal" class="form-input" placeholder="Total Lectures" min="1" required>
+                      <button type="submit" class="btn btn-primary" style="padding: 10px 18px; font-size: 0.8rem;">Save</button>
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Homework Card -->
+                <div class="card" style="padding: 30px;">
+                  <h3 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">📝 Homework & Tasks</h3>
+                  <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;" id="dossierHwList">
+                    <!-- Dynamic homeworks list -->
+                  </div>
+                  <h4>Assign New Homework Task</h4>
+                  <form onsubmit="saveDossierHwForm(event)" style="display: grid; grid-template-columns: 2fr 1fr 120px; gap: 15px; margin-top: 15px;" class="grid-3">
+                    <input type="text" id="editHwTitle" class="form-input" placeholder="Task Name (e.g. Unit 3 normalized)" required>
+                    <select id="editHwStatus" class="form-input">
+                      <option value="Pending">Pending</option>
+                      <option value="Submitted">Submitted</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary" style="padding: 10px; font-size: 0.8rem;">Assign Task</button>
+                  </form>
+                </div>
+
+                <!-- Fees Ledger Card -->
+                <div class="card" style="padding: 30px;">
+                  <h3 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">💰 Fees installment ledger</h3>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px;" class="grid-3">
+                    <div style="padding: 15px; border: 1px solid var(--border-color); borderRadius: 12px; background: rgba(0,0,0,0.01); text-align: center;">
+                      <span style="font-size: 0.8rem; color: var(--text-secondary);">Total Fee Assigned</span>
+                      <h3 id="feeAssignedVal">₹18,500</h3>
+                    </div>
+                    <div style="padding: 15px; border: 1px solid var(--border-color); borderRadius: 12px; background: rgba(0,0,0,0.01); text-align: center;">
+                      <span style="font-size: 0.8rem; color: var(--text-secondary);">Total Fee Paid</span>
+                      <h3 id="feePaidVal" style="color: var(--accent-teal);">₹12,000</h3>
+                    </div>
+                    <div style="padding: 15px; border: 1px solid var(--border-color); borderRadius: 12px; background: rgba(0,0,0,0.01); text-align: center;">
+                      <span style="font-size: 0.8rem; color: var(--text-secondary);">Outstanding Balance</span>
+                      <h3 id="feeDueVal" style="color: var(--accent-amber);">₹6,500</h3>
+                    </div>
+                  </div>
+                  <h4>Update Fees Installment</h4>
+                  <form onsubmit="saveDossierFeesForm(event)" style="display: grid; grid-template-columns: 1fr 1fr 120px; gap: 15px; margin-top: 15px;" class="grid-3">
+                    <div class="form-group" style="margin: 0;"><label class="form-label">Total Assigned (₹)</label><input type="number" id="editFeeTotalField" class="form-input" required></div>
+                    <div class="form-group" style="margin: 0;"><label class="form-label">Amount Paid (₹)</label><input type="number" id="editFeePaidField" class="form-input" required></div>
+                    <div style="display: flex; align-items: flex-end;">
+                      <button type="submit" class="btn btn-primary" style="padding: 12px; font-size: 0.8rem; width: 100%;">Update Ledger</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUBTAB: MARK ATTENDANCE (TEACHER/HOD/ADMIN) -->
+          <div id="dashSub-mark" class="dashSub hidden">
+            <h2>Mark Daily Lecture Attendance</h2>
+            <form onsubmit="submitMarkAttendance(event)" style="margin-top: 20px;">
+              <div class="grid-2">
+                <div class="form-group">
+                  <label class="form-label">Subject</label>
+                  <select class="form-input" id="markSubject">
+                    <option>Java Programming</option>
+                    <option>Software Engineering</option>
+                    <option>Database Systems</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Date</label>
+                  <input type="date" class="form-input" id="markDate" value="2026-07-21">
+                </div>
+              </div>
+              <h4>Student Attendance Sheet</h4>
+              <div id="teacherRollSheet" style="margin: 20px 0; max-height: 200px; overflow-y: auto;">
+                <!-- Dynamic -->
+              </div>
+              <button class="btn btn-primary" type="submit">Submit Attendance Sheet</button>
+            </form>
+          </div>
+
+          <!-- FACULTY SUBTAB: MARKS ENTRY -->
+          <div id="dashSub-marks_entry" class="dashSub hidden">
+            <h2>Faculty Student Marks Entry</h2>
+            <form onsubmit="event.preventDefault(); alert('Marks entries saved successfully!');" style="margin-top: 20px;">
+              <div class="form-group">
+                <label class="form-label">Select Student</label>
+                <select class="form-input">
+                  <option>Rahul Sharma (student_cs)</option>
+                  <option>Priya Deshmukh (student_cs2)</option>
+                </select>
+              </div>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label class="form-label">Subject</label>
+                  <select class="form-input"><option>Java Programming</option><option>Database Systems</option></select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Exam Name</label>
+                  <select class="form-input"><option>Internal Test 1</option><option>Viva Voce</option></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Marks Obtained (out of 25)</label>
+                <input type="number" class="form-input" min="0" max="25" value="20">
+              </div>
+              <button class="btn btn-primary" type="submit">Submit Marks</button>
+            </form>
+          </div>
+
+          <!-- FACULTY SUBTAB: STUDY MATERIALS -->
+          <div id="dashSub-materials" class="dashSub hidden">
+            <h2>Syllabus & Study Materials Uploads</h2>
+            <form onsubmit="event.preventDefault(); alert('Study material slides published successfully.');" style="margin-top: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px;">
+              <div class="form-group">
+                <label class="form-label">Document Title</label>
+                <input type="text" class="form-input" placeholder="e.g. Unit 3 normalization slide deck" required>
+              </div>
+              <button class="btn btn-primary" type="submit">Publish Material</button>
+            </form>
+            <h4>Uploaded References</h4>
+            <ul style="padding-left: 20px; margin-top: 15px; color: var(--text-secondary);" id="teacherMaterialsList">
+              <li>Unit 1 OOPs Programming Core slides — <code>Java Core</code></li>
+            </ul>
+          </div>
+
+          <!-- SUBTAB: MANAGE NOTICES (ADMIN/HOD) -->
+          <div id="dashSub-notice" class="dashSub hidden">
+            <h2>Post Academic or Placement notice</h2>
+            <form onsubmit="submitPostNotice(event)" style="margin-top: 20px; padding-bottom: 30px; border-bottom: 1px solid var(--border-color); margin-bottom: 30px;">
+              <div class="form-group">
+                <label class="form-label">Notice Title</label>
+                <input type="text" class="form-input" id="noticeTitle" placeholder="e.g. Summer Timetable published" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <select class="form-input" id="noticeCategory">
+                  <option value="general">General</option>
+                  <option value="academics">Academics</option>
+                  <option value="placement">Placement</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Content details</label>
+                <textarea class="form-input" id="noticeContent" placeholder="Describe announcement details..." required></textarea>
+              </div>
+              <button class="btn btn-primary" type="submit">Publish Notice</button>
+            </form>
+
+            <h3>Delete notices list</h3>
+            <div id="adminNoticeList" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+              <!-- Dynamic deletion panel -->
+            </div>
+          </div>
+
+          <!-- ADMIN SUBTAB: REGISTER / MOCK USER ROSTER -->
+          <div id="dashSub-register" class="dashSub hidden">
+            <h2>Mock User Management Roster</h2>
+            <div class="table-container" style="margin-top: 15px; margin-bottom: 30px;">
+              <table class="custom-table">
+                <thead>
+                  <tr><th>Username</th><th>Name</th><th>Role</th><th>Email</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="adminUserRosterBody">
+                  <!-- Dynamic roster -->
+                </tbody>
+              </table>
+            </div>
+            <h3>Add New Roster User</h3>
+            <form onsubmit="submitAddUser(event)">
+              <div class="grid-2">
+                <div class="form-group"><label class="form-label">Username</label><input type="text" id="regUsername" class="form-input" placeholder="pdeshmukh" required></div>
+                <div class="form-group"><label class="form-label">Name</label><input type="text" id="regName" class="form-input" placeholder="Priya Deshmukh" required></div>
+              </div>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label class="form-label">User Role</label>
+                  <select id="regRole" class="form-input"><option value="student">Student</option><option value="teacher">Teacher</option></select>
+                </div>
+                <div class="form-group"><label class="form-label">Email</label><input type="email" id="regEmail" class="form-input" placeholder="priya@cocsit.org.in" required></div>
+              </div>
+              <button class="btn btn-primary" type="submit">Save Profile</button>
+            </form>
+          </div>
+
+          <!-- SUBTAB: VISUAL & JSON WEBSITE EDITOR (ADMIN ONLY) -->
+          <div id="dashSub-editor" class="dashSub hidden">
+            <h2>Website Content Settings Editor</h2>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 20px;">Allows the administrator to edit rules, scholarship guidelines, and infrastructure descriptions dynamically.</p>
+            
+            <!-- Editor Tabs -->
+            <div style="display: flex; gap: 10px; margin-bottom: 25px;">
+              <button type="button" id="btn-edit-visual" class="btn btn-primary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="switchEditorMode('visual')">Visual Editor Form</button>
+              <button type="button" id="btn-edit-json" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="switchEditorMode('json')">Advanced JSON Editor</button>
+            </div>
+
+            <!-- Visual Form Editor -->
+            <div id="editorModeVisual">
+              <form onsubmit="saveVisualContentForm(event)" style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="card" style="padding: 25px;">
+                  <h3>🏢 Girls' Hostel Settings</h3>
+                  <div class="form-group">
+                    <label class="form-label">Hostel Details & Description</label>
+                    <textarea id="formHostelDesc" class="form-input" style="min-height: 80px;"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Hostel Rules (one rule per line)</label>
+                    <textarea id="formHostelRules" class="form-input" style="min-height: 100px; font-family: monospace;"></textarea>
+                  </div>
+                </div>
+
+                <div class="card" style="padding: 25px;">
+                  <h3>💰 Scholarships Concessions Details (one item per line)</h3>
+                  <textarea id="formScholarships" class="form-input" style="min-height: 100px; font-family: monospace;"></textarea>
+                </div>
+
+                <div class="card" style="padding: 25px;">
+                  <h3>🧱 Campus Physical Infrastructure Details</h3>
+                  <textarea id="formInfrastructure" class="form-input" style="min-height: 80px;"></textarea>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Save Visual Settings</button>
+              </form>
+            </div>
+
+            <!-- Raw JSON Editor -->
+            <div id="editorModeJson" class="hidden">
+              <form onsubmit="submitSaveJson(event)">
+                <div class="form-group">
+                  <textarea id="rawJsonTextarea" class="form-input" style="min-height: 350px; font-family: monospace; font-size: 0.85rem; color: #10b981; background: #0b0f19; border: 1px solid #1e293b;"></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Save Raw JSON</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- STUDENT SUBTAB: EXAMINATIONS & RESULTS -->
+          <div id="dashSub-student_exams" class="dashSub hidden">
+            <h2>Terminal Examinations Hall Ticket & Outcomes</h2>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;" class="grid-2">
+              <div class="card" style="padding: 30px; border: 2px dashed var(--border-color); border-radius: 20px;">
+                <div style="text-align: center; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 15px;">
+                  <h3 style="margin: 0; font-size: 1.2rem;">COCSIT AUTONOMOUS COLLEGE, LATUR</h3>
+                  <span style="font-size: 0.75rem; color: var(--text-secondary);">HALL TICKET / ADMIT CARD - WINTER TERM 2026</span>
+                </div>
+                <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                  <div style="width: 60px; height: 60px; border-radius: 6px; background: var(--accent-indigo); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem;">RS</div>
+                  <div>
+                    <h4 style="margin: 0;">Rahul Sharma</h4>
+                    <span style="font-size: 0.75rem; color: var(--text-secondary);">PRN: 202507390192 | Roll: CS-2025-01 | Sem III</span>
+                  </div>
+                </div>
+                <div class="table-container">
+                  <table class="custom-table" style="font-size: 0.8rem;">
+                    <thead>
+                      <tr><th>Code</th><th>Subject</th><th>Exam Date</th><th>Session Time</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>BCA-301</td><td>Java Programming Core</td><td>2026-11-20</td><td>10:00 AM - 01:00 PM</td></tr>
+                      <tr><td>BCA-302</td><td>Database Systems Architecture</td><td>2026-11-22</td><td>10:00 AM - 01:00 PM</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 0.7rem; color: var(--text-secondary);">* Attendance check approved (88%).</span>
+                  <button class="btn btn-secondary" style="padding: 5px 12px; font-size: 0.75rem;" onclick="alert('Printing admit card copy...')">🖨️ Print Admit Card</button>
+                </div>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="card" style="padding: 20px; text-align: center; border-top: 4px solid var(--accent-teal);">
+                  <span style="font-size: 0.8rem; color: var(--text-secondary);">Current SGPA</span>
+                  <h2 style="color: var(--accent-teal); font-size: 2.5rem; margin: 5px 0;">8.75</h2>
+                  <span class="badge badge-success">Grade: A+</span>
+                </div>
+                <div class="card" style="padding: 20px; text-align: center; border-top: 4px solid var(--accent-blue);">
+                  <span style="font-size: 0.8rem; color: var(--text-secondary);">Cumulative CGPA</span>
+                  <h2 style="color: var(--accent-blue); font-size: 2.5rem; margin: 5px 0;">8.88</h2>
+                  <span class="badge badge-info">Distinction Roster</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STUDENT SUBTAB: DOWNLOADS -->
+          <div id="dashSub-student_downloads" class="dashSub hidden">
+            <h2>Student ERP Forms & Certificates Center</h2>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 20px;">Download certificates, bonafide requests, and declarations directly.</p>
+            <div class="table-container">
+              <table class="custom-table">
+                <thead>
+                  <tr><th>Document Name</th><th>Category</th><th>Size</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Bonafide Certificate Request Form</strong></td>
+                    <td>Academic Forms</td>
+                    <td>142 KB</td>
+                    <td><button class="btn btn-primary" style="padding: 4px 10px; font-size: 0.75rem;" onclick="alert('Downloading Bonafide Request template...')">📥 Download</button></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Government Scholarship Eligibility circular</strong></td>
+                    <td>Scholarships</td>
+                    <td>250 KB</td>
+                    <td><button class="btn btn-primary" style="padding: 4px 10px; font-size: 0.75rem;" onclick="alert('Downloading Scholarship Form PDF...')">📥 Download</button></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Anti Ragging affidavit compliance format</strong></td>
+                    <td>Declarations</td>
+                    <td>110 KB</td>
+                    <td><button class="btn btn-primary" style="padding: 4px 10px; font-size: 0.75rem;" onclick="alert('Downloading Anti-ragging affidavit format...')">📥 Download</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- PRINCIPAL SUBTAB: OVERVIEW -->
+          <div id="dashSub-principal_overview" class="dashSub hidden">
+            <h2>College Academic Analytics & Statistics</h2>
+            <div class="grid-4" style="margin-top: 20px; margin-bottom: 30px;">
+              <div class="card" style="padding: 20px; text-align: center;">
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">Enrolled Students</span>
+                <h3 style="margin-top: 5px;">4,180</h3>
+              </div>
+              <div class="card" style="padding: 20px; text-align: center;">
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">Active Faculty</span>
+                <h3 style="margin-top: 5px;">124</h3>
+              </div>
+              <div class="card" style="padding: 20px; text-align: center; border-top: 4px solid var(--accent-teal);">
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">Overall Attendance Avg</span>
+                <h3 style="margin-top: 5px; color: var(--accent-teal);">86.4%</h3>
+              </div>
+              <div class="card" style="padding: 20px; text-align: center; border-top: 4px solid var(--accent-amber);">
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">Fees Collection</span>
+                <h3 style="margin-top: 5px; color: var(--accent-amber);">₹56.0L</h3>
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="card" style="padding: 25px;">
+                <h3>Academic Research Publications</h3>
+                <ul style="padding-left: 20px; margin-top: 10px; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6;">
+                  <li>Biotech division: 14 papers published in Scopus index indexes.</li>
+                  <li>CS division: 18 papers cataloged under international journals.</li>
+                  <li>Patents approved: 2 registered under autonomous advisory boards.</li>
+                </ul>
+              </div>
+              <div class="card" style="padding: 25px;">
+                <h3>Placement Highlights</h3>
+                <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-secondary);">
+                  <div>Highest annual CTC: <strong>₹6.5 LPA</strong></div>
+                  <div>Average CTC: <strong>₹3.2 LPA</strong></div>
+                  <div>Total recruiters: <strong>Tech Mahindra, TCS, Wipro, Infosys</strong></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PRINCIPAL SUBTAB: SEARCH STUDENTS -->
+          <div id="dashSub-principal_students" class="dashSub hidden">
+            <h2>Global Student Registry Directory</h2>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 20px;">Oversight Directory: Search and inspect any student profile across the institution.</p>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px; margin-bottom: 20px;" class="grid-2">
+              <input type="text" id="principalSearchInput" class="form-input" placeholder="🔍 Search student name..." onkeyup="filterPrincipalStudentsList()">
+              <select id="principalDeptFilter" class="form-input" onchange="filterPrincipalStudentsList()">
+                <option value="all">All Departments</option>
+                <option value="Computer Science">Computer Science</option>
+              </select>
+            </div>
+            <div class="table-container">
+              <table class="custom-table">
+                <thead>
+                  <tr><th>PRN / Roll</th><th>Name</th><th>Department</th><th>Paid/Total Fees</th><th>Audit</th></tr>
+                </thead>
+                <tbody id="principalStudentsBody">
+                  <!-- Mapped via Javascript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- PRINCIPAL SUBTAB: FACULTY WORKLOAD -->
+          <div id="dashSub-principal_faculty" class="dashSub hidden">
+            <h2>Faculty Qualifications & Workloads</h2>
+            <div class="table-container" style="margin-top: 20px;">
+              <table class="custom-table">
+                <thead>
+                  <tr><th>Faculty Name</th><th>Qualification</th><th>Department</th><th>Assigned Workload</th><th>Experience</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Dr. N. S. Zulpe</strong></td>
+                    <td>Ph.D (Computer Science)</td>
+                    <td>Computer Science</td>
+                    <td>14 hours / week</td>
+                    <td>18+ Years</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Prof. Rajesh Patil</strong></td>
+                    <td>MCA, NET</td>
+                    <td>Computer Science</td>
+                    <td>16 hours / week</td>
+                    <td>12+ Years</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Dr. N. V. More</strong></td>
+                    <td>Ph.D (Biotechnology)</td>
+                    <td>Biotechnology</td>
+                    <td>12 hours / week</td>
+                    <td>15+ Years</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- PRINCIPAL SUBTAB: APPROVALS -->
+          <div id="dashSub-principal_approvals" class="dashSub hidden">
+            <h2>Principal Approvals Desk</h2>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 25px;">Approve college-wide leave requests, department events, project proposals, and circular bulletins.</p>
+            <h3 style="margin-bottom: 15px;">Pending Approvals</h3>
+            <div id="principalPendingContainer" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px;">
+              <!-- Javascript -->
+            </div>
+            <h3>Approved Logs History</h3>
+            <ul id="principalApprovedList" style="padding-left: 20px; color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">
+              <li>Leave Request approved for Prof. Rajesh Patil</li>
+            </ul>
+          </div>
+
+          <!-- PRINCIPAL SUBTAB: FEE COLLECTIONS AUDIT -->
+          <div id="dashSub-principal_finances" class="dashSub hidden">
+            <h2>Fee Collections Audit Ledgers</h2>
+            <div class="grid-3" style="margin-top: 20px; margin-bottom: 30px;">
+              <div class="card" style="padding: 20px; text-align: center;">
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">Total Fee Assessed</span>
+                <h3>₹74,000</h3>
+              </div>
+              <div class="card" style="padding: 20px; text-align: center; border-top: 4px solid var(--accent-teal);">
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">Collected Amount</span>
+                <h3 style="color: var(--accent-teal);">₹55,500</h3>
+              </div>
+              <div class="card" style="padding: 20px; text-align: center; border-top: 4px solid var(--accent-amber);">
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">Pending Arrears</span>
+                <h3 style="color: var(--accent-amber);">₹18,500</h3>
+              </div>
+            </div>
+            <div class="table-container">
+              <table class="custom-table">
+                <thead>
+                  <tr><th>Student Name</th><th>PRN Code</th><th>Total Assigned</th><th>Total Paid</th><th>Outstanding Balance</th></tr>
+                </thead>
+                <tbody id="principalFinancesBody">
+                  <!-- Javascript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- HOD SUBTAB: OVERVIEW -->
+          <div id="dashSub-hod_dashboard" class="dashSub hidden">
+            <h2>Department Oversight Control Desk</h2>
+            <div class="grid-4" style="margin-top: 20px; margin-bottom: 30px;">
+              <div class="card" style="padding: 20px; text-align: center;">
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">Faculty Strength</span>
+                <h3 id="hodFacultyCountText" style="margin-top: 5px;">3 Active</h3>
+              </div>
+              <div class="card" style="padding: 20px; text-align: center;">
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">Student Strength</span>
+                <h3 id="hodStudentCountText" style="margin-top: 5px;">3 Enrolled</h3>
+              </div>
+              <div class="card" style="padding: 20px; text-align: center; border-top: 4px solid var(--accent-teal);">
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">Average Attendance</span>
+                <h3 style="margin-top: 5px; color: var(--accent-teal);">85.7%</h3>
+              </div>
+              <div class="card" style="padding: 20px; text-align: center; border-top: 4px solid var(--accent-amber);">
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">TechM Placements</span>
+                <h3 style="margin-top: 5px; color: var(--accent-amber);">14 Placed</h3>
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="card" style="padding: 25px;">
+                <h3>Schedule Department Seminar / Event</h3>
+                <form onsubmit="submitHodEvent(event)" style="margin-top: 15px; display: flex; flex-direction: column; gap: 15px;">
+                  <div class="form-group">
+                    <label class="form-label">Event Topic</label>
+                    <input type="text" id="hodEventTitle" class="form-input" placeholder="e.g. Kotlin Workshop" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Event Date</label>
+                    <input type="date" id="hodEventDate" class="form-input" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Schedule Event</button>
+                </form>
+              </div>
+              <div class="card" style="padding: 25px;">
+                <h3>Department Upcoming Events</h3>
+                <ul id="hodEventsList" style="padding-left: 20px; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8; margin-top: 15px;">
+                  <li>NEP Syllabus Workshop - 2026-08-05</li>
+                  <li>CS Coding Hackathon - 2026-08-12</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- HOD SUBTAB: DEPARTMENT STUDENTS -->
+          <div id="dashSub-hod_students" class="dashSub hidden">
+            <h2>Department Student Registry</h2>
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 15px; margin-top: 20px; margin-bottom: 20px;" class="grid-3">
+              <input type="text" id="hodSearchInput" class="form-input" placeholder="🔍 Search name..." onkeyup="filterHodStudentsList()">
+              <select id="hodSemFilter" class="form-input" onchange="filterHodStudentsList()">
+                <option value="all">All Semesters</option>
+                <option value="Semester III">Semester III</option>
+              </select>
+              <select id="hodDivFilter" class="form-input" onchange="filterHodStudentsList()">
+                <option value="all">All Divisions</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+              </select>
+            </div>
+            <div class="table-container">
+              <table class="custom-table">
+                <thead>
+                  <tr><th>PRN / Roll</th><th>Name</th><th>Course</th><th>Semester</th><th>Fees Status</th><th>Action</th></tr>
+                </thead>
+                <tbody id="hodStudentsBody">
+                  <!-- Mapped via javascript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- HOD SUBTAB: FACULTY WORKLOADS -->
+          <div id="dashSub-hod_faculty" class="dashSub hidden">
+            <h2>Department Faculty Workspace Workloads</h2>
+            <div class="table-container" style="margin-top: 20px;">
+              <table class="custom-table">
+                <thead>
+                  <tr><th>Faculty Name</th><th>Qualification</th><th>Subject Workload</th><th>Teaching Experience</th><th>Workload Status</th></tr>
+                </thead>
+                <tbody id="hodFacultyBody">
+                  <!-- Mapped via javascript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- HOD SUBTAB: ACADEMIC ANALYTICS -->
+          <div id="dashSub-hod_analytics" class="dashSub hidden">
+            <h2>Department Academic Performance Analytics</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 25px;" class="grid-2">
+              <div class="card" style="padding: 25px;">
+                <h3>Semester Pass Rates</h3>
+                <div style="display: flex; flex-direction: column; gap: 15px; marginTop: 20px;">
+                  <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px;">
+                      <span>BCA Program</span>
+                      <strong>92.4% Pass Rate</strong>
+                    </div>
+                    <div style="width: 100%; height: 8px; background: var(--border-color); border-radius: 4px; overflow: hidden;">
+                      <div style="width: 92.4%; height: 100%; background: var(--accent-teal);"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px;">
+                      <span>B.Sc. CS Program</span>
+                      <strong>88.7% Pass Rate</strong>
+                    </div>
+                    <div style="width: 100%; height: 8px; background: var(--border-color); border-radius: 4px; overflow: hidden;">
+                      <div style="width: 88.7%; height: 100%; background: var(--accent-teal);"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card" style="padding: 25px;">
+                <h3>Backlog Logs Overview</h3>
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                    <span>Active Backlog rate:</span>
+                    <strong style="color: var(--accent-rose);">4.8%</strong>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                    <span>Remedial Tutorials classes scheduled:</span>
+                    <strong>8 Lectures / week</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- HOD SUBTAB: APPROVALS -->
+          <div id="dashSub-hod_approvals" class="dashSub hidden">
+            <h2>Department Approvals Workspace</h2>
+            <h3 style="margin-top: 20px; margin-bottom: 15px;">Pending Staff Requests</h3>
+            <div id="hodPendingContainer" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px;">
+              <!-- Javascript -->
+            </div>
+            <h3>Approvals Log History</h3>
+            <ul id="hodApprovedList" style="padding-left: 20px; color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">
+              <!-- Javascript -->
+            </ul>
+          </div>
+
+        </div>
+
+        </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- WELCOME ALERTS POPUP MODAL -->
+  <div id="welcomePopup" class="modal-overlay">
+    <div class="modal-content" style="text-align: center;">
+      <span style="font-size: 3rem; margin-bottom: 15px; display: block;">🔔</span>
+      <h3 style="color: var(--accent-indigo); margin-bottom: 15px;">Admission Announcement 2026-27</h3>
+      <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 25px; line-height: 1.6;">
+        Online Registration forms for BCA, B.Sc Computer Science, B.Sc Biotech, BBA, and MCA/MBA programs are open under MAH-CET guidelines. Please complete forms before timelines.
+      </p>
+      <button class="btn btn-primary" onclick="closePopup()">Enter College Website</button>
+    </div>
+  </div>
+
+  <!-- UNIVERSAL FOOTER -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-column">
+        <h3 style="margin-bottom: 15px; font-size: 1.2rem;">COCSIT Latur</h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">College of Computer Science and Information Technology (COCSIT), Latur, is a premier NAAC B+ Grade institute administering computer curriculum.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Academics</h4>
+        <ul class="footer-links">
+          <li><a href="#" onclick="navigateTo('academics')">Overview</a></li>
+          <li><a href="#" onclick="navigateTo('departments')">Departments</a></li>
+          <li><a href="#" onclick="navigateTo('courses')">Degrees</a></li>
+          <li><a href="#" onclick="navigateTo('governance')">CDC Governance</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Student</h4>
+        <ul class="footer-links">
+          <li><a href="#" onclick="navigateTo('studentcorner')">LMS Login</a></li>
+          <li><a href="#" onclick="navigateTo('examinations')">Examinations</a></li>
+          <li><a href="#" onclick="navigateTo('downloads')">Prospectus PDF</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Location</h4>
+        <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
+          Ambajogai Road, Latur - 413531,<br>Maharashtra, India.
+        </p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© 2026 COCSIT autonomous portal redesign review. All Rights Reserved.</p>
+      <div style="display: flex; gap: 20px; font-size: 0.8rem;">
+        <a href="#" onclick="navigateTo('home')">Privacy</a>
+        <a href="#" onclick="navigateTo('home')">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- DATA & CONTROLLER SCRIPTS -->
+  <script>
+    // Theme Toggling
+    let theme = 'light';
+    function toggleTheme() {
+      theme = theme === 'light' ? 'dark' : 'light';
+      if (theme === 'dark') {
+        document.body.classList.add('dark-theme');
+      } else {
+        document.body.classList.remove('dark-theme');
+      }
+    }
+
+    // Modal Close
+    function closePopup() {
+      document.getElementById('welcomePopup').classList.add('hidden');
+    }
+
+    // Navigation Switcher Routing
+    function navigateTo(pageId) {
+      document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
+      const activeView = document.getElementById('view-' + pageId);
+      if (activeView) activeView.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+      
+      window.scrollTo(0, 0);
+    }
+
+    // Database Mock Schema Content
+    let database = {
+      girls_hostel: {
+        title: "Girls' Hostel Facilities",
+        details: ["Safe residential boarding inside secure campus perimeters for outstation students."],
+        rules: ["Located inside campus limits.", "24/7 security wardens present."]
+      },
+      scholarships: {
+        title: "Welfare Scholarships Assistance",
+        details: ["Rajarshi Chhatrapati Shahu Maharaj concessions.", "Government Post-Matric schemes."]
+      },
+      infrastructure: {
+        title: "Infrastructure assets",
+        details: ["Modern computing centers and smart classrooms guidelines."]
+      },
+      notices: [
+        { id: 1, title: "MAH-CET B.Sc/BCA Online Admission Registration 2026-27", content: "State Common Entrance Test Cell has opened the online form submissions. Candidates must fill details before deadline.", date: "2026-03-21", category: "academics" },
+        { id: 2, title: "Tech Mahindra campus pool drive dates scheduled", content: "Placements drive schedule by Tech Mahindra for passing out batch. BCA and B.Sc streams eligible.", date: "2026-04-24", category: "placement" },
+        { id: 3, title: "College session academic calendar released", content: "Find the detailed prospectus guidelines in the downloads directory.", date: "2026-04-15", category: "academics" }
+      ],
+      courses: [
+        { name: "Bachelor of Computer Application", abbrev: "BCA", focus: "Software programming, Java, python, web design systems.", duration: "3 Years", intake: "80 Seats", fees: "₹18,500 per year", elig: "Passed 10+2 in Science or Commerce with Mathematics.", subjects: ["C Programming", "Mathematical foundations", "Database systems", "Java Core", "Python Scripting", "Project work"] },
+        { name: "B.Sc. Computer Science", abbrev: "B.Sc (CS)", focus: "Theoretical computer science, database structures, core coding.", duration: "3 Years", intake: "80 Seats", fees: "₹19,000 per year", elig: "Passed 10+2 in Science with Mathematics.", subjects: ["Computer fundamentals", "Data Structures", "Digital electronics", "Linux operating systems"] },
+        { name: "Master of Computer Applications", abbrev: "MCA", focus: "Advanced software design, database administration, system engineering.", duration: "2 Years", intake: "40 Seats", fees: "₹38,000 per year", elig: "Graduates in computing with valid MAH-MCA-CET scores.", subjects: ["Advanced Algorithm design", "ML models", "Cloud architectures", "Industrial project"] }
+      ],
+      downloads: [
+        { title: "Academic Calendar 2025-26 PDF", category: "calendar" },
+        { title: "BCA FY Fees Structure Proposal", category: "fees" },
+        { title: "Fire Safety Certificate autonomous", category: "regulatory" }
+      ],
+      cdc: [
+        { name: "Dr. M. R. Patil", role: "Chairman (President of Royal Education Society)" },
+        { name: "Mr. L. M. Patil", role: "Member (Vice-President of Royal Education Society)" },
+        { name: "Dr. R. S. Awasthi", role: "Member Secretary (Principal)" }
+      ]
+    };
+
+    // User Roles Profiles Authentication
+    let mockRoster = [
+      { username: "admin", name: "Super Admin", role: "admin", email: "admin@cocsit.org.in" },
+      { username: "principal", name: "Dr. R. S. Awasthi", role: "principal", email: "principal@cocsit.org.in" },
+      { username: "hod_cs", name: "Dr. N. S. Zulpe", role: "hod", email: "nszulpe@cocsit.org.in", department: "Computer Science" },
+      { username: "hod_mgmt", name: "Dr. K. S. Patil", role: "hod", email: "kspatil@cocsit.org.in", department: "Management Science" },
+      { username: "teacher_cs", name: "Prof. Rajesh Patil", role: "teacher", email: "rpatil@cocsit.org.in", subject: "Java Programming" },
+      { username: "teacher_mgmt", name: "Prof. Sanjay Shah", role: "teacher", email: "sshah@cocsit.org.in", subject: "Business Management" },
+      { username: "student_bca", name: "Rahul Sharma", role: "student", email: "rahul.bca@cocsit.org.in" },
+      { username: "student_bsc", name: "Priya Deshmukh", role: "student", email: "priya.bsc@cocsit.org.in" },
+      { username: "student_se", name: "Amit Kamble", role: "student", email: "amit.se@cocsit.org.in" },
+      { username: "student_bba", name: "Pooja Joshi", role: "student", email: "pooja.bba@cocsit.org.in" }
+    ];
+
+    // Stateful Student Records Dossiers
+    let studentDossiers = {
+      "student_bca": {
+        username: "student_bca",
+        name: "Rahul Sharma",
+        email: "rahul.bca@cocsit.org.in",
+        department: "Computer Science",
+        course: "BCA",
+        roll: "BCA-2025-01",
+        fees: { total: 18500, paid: 12000 },
+        grades: [
+          { subject: "Java Programming", exam: "Internal Test 1", marks: 22, max: 25 },
+          { subject: "Database Systems", exam: "Internal Test 1", marks: 24, max: 25 }
+        ],
+        attendance: [
+          { subject: "Java Programming", present: 22, total: 25 },
+          { subject: "Software Engineering", present: 20, total: 22 },
+          { subject: "Database Systems", present: 17, total: 25 }
+        ],
+        homework: [
+          { title: "Assignment 1: Class polymorphism codes", status: "Submitted" },
+          { title: "Assignment 2: Schema Normalization exercises", status: "Pending" }
+        ]
+      },
+      "student_bsc": {
+        username: "student_bsc",
+        name: "Priya Deshmukh",
+        email: "priya.bsc@cocsit.org.in",
+        department: "Computer Science",
+        course: "B.Sc (CS)",
+        roll: "BSC-2025-01",
+        fees: { total: 18500, paid: 15000 },
+        grades: [
+          { subject: "Java Programming", exam: "Internal Test 1", marks: 20, max: 25 },
+          { subject: "Database Systems", exam: "Internal Test 1", marks: 18, max: 25 }
+        ],
+        attendance: [
+          { subject: "Java Programming", present: 24, total: 25 },
+          { subject: "Software Engineering", present: 21, total: 22 },
+          { subject: "Database Systems", present: 23, total: 25 }
+        ],
+        homework: [
+          { title: "Assignment 1: Class polymorphism codes", status: "Submitted" },
+          { title: "Assignment 2: Schema Normalization exercises", status: "Submitted" }
+        ]
+      },
+      "student_se": {
+        username: "student_se",
+        name: "Amit Kamble",
+        email: "amit.se@cocsit.org.in",
+        department: "Computer Science",
+        course: "B.Sc (SE)",
+        roll: "SE-2025-01",
+        fees: { total: 18500, paid: 10000 },
+        grades: [
+          { subject: "Java Programming", exam: "Internal Test 1", marks: 15, max: 25 },
+          { subject: "Database Systems", exam: "Internal Test 1", marks: 16, max: 25 }
+        ],
+        attendance: [
+          { subject: "Java Programming", present: 19, total: 25 },
+          { subject: "Software Engineering", present: 18, total: 22 },
+          { subject: "Database Systems", present: 20, total: 25 }
+        ],
+        homework: [
+          { title: "Assignment 1: Class polymorphism codes", status: "Submitted" },
+          { title: "Assignment 2: Schema Normalization exercises", status: "Pending" }
+        ]
+      },
+      "student_bba": {
+        username: "student_bba",
+        name: "Pooja Joshi",
+        email: "pooja.bba@cocsit.org.in",
+        department: "Management Science",
+        course: "BBA",
+        roll: "BBA-2025-01",
+        fees: { total: 19500, paid: 19500 },
+        grades: [
+          { subject: "Business Management", exam: "Internal Test 1", marks: 23, max: 25 },
+          { subject: "Marketing Strategies", exam: "Internal Test 1", marks: 21, max: 25 }
+        ],
+        attendance: [
+          { subject: "Business Management", present: 22, total: 25 },
+          { subject: "Marketing Strategies", present: 21, total: 25 }
+        ],
+        homework: [
+          { title: "Assignment 1: Business Plan Draft", status: "Submitted" },
+          { title: "Assignment 2: Retail Market Survey report", status: "Submitted" }
+        ]
+      }
+    };
+
+    let activeDossierStudent = null;
+
+    const testAccounts = {
+      admin: { id: "admin", name: "Super Admin", role: "admin", email: "admin@cocsit.org.in" },
+      principal: { id: "principal", name: "Dr. R. S. Awasthi", role: "principal", email: "principal@cocsit.org.in" },
+      hod_cs: { id: "hod_cs", name: "Dr. N. S. Zulpe", role: "hod", email: "nszulpe@cocsit.org.in", department: "Computer Science" },
+      hod_mgmt: { id: "hod_mgmt", name: "Dr. K. S. Patil", role: "hod", email: "kspatil@cocsit.org.in", department: "Management Science" },
+      teacher_cs: { id: "teacher_cs", name: "Prof. Rajesh Patil", role: "teacher", email: "rpatil@cocsit.org.in", subject: "Java Programming" },
+      teacher_mgmt: { id: "teacher_mgmt", name: "Prof. Sanjay Shah", role: "teacher", email: "sshah@cocsit.org.in", subject: "Business Management" },
+      student_bca: { id: "student_bca", name: "Rahul Sharma", role: "student", email: "rahul.bca@cocsit.org.in" },
+      student_bsc: { id: "student_bsc", name: "Priya Deshmukh", role: "student", email: "priya.bsc@cocsit.org.in" },
+      student_se: { id: "student_se", name: "Amit Kamble", role: "student", email: "amit.se@cocsit.org.in" },
+      student_bba: { id: "student_bba", name: "Pooja Joshi", role: "student", email: "pooja.bba@cocsit.org.in" }
+    };
+
+    // Render Notices Home
+    function renderNotices() {
+      const container = document.getElementById('homeNoticesContainer');
+      container.innerHTML = '';
+      database.notices.forEach(n => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style = 'display: flex; flex-direction: column; justify-content: space-between;';
+        card.innerHTML = `
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span class="badge ${n.category === 'placement' ? 'badge-warning' : n.category === 'academics' ? 'badge-success'}">${n.category}</span>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 0.75rem; color: var(--text-secondary);">${n.date}</span>
+                ${currentUser && currentUser.role === 'admin' ? `
+                  <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem; color: var(--accent-rose); border-color: rgba(225,29,72,0.15); background: transparent;" onclick="event.stopPropagation(); deleteNoticeFromHome(${n.id})">
+                    🗑️ Delete
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+            <h4>${n.title}</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">${n.content}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function deleteNoticeFromHome(id) {
+      if (!confirm('Are you sure you want to delete this notice?')) return;
+      database.notices = database.notices.filter(n => n.id !== id);
+      renderNotices();
+      if (currentUser && currentUser.role === 'admin') {
+        renderAdminNoticesList();
+      }
+    }
+
+    // Filter Notices
+    function filterNotices(cat) {
+      document.getElementById('btn-notice-all').className = cat === 'all' ? 'btn btn-primary' : 'btn btn-secondary';
+      document.getElementById('btn-notice-academics').className = cat === 'academics' ? 'btn btn-primary' : 'btn btn-secondary';
+      document.getElementById('btn-notice-placement').className = cat === 'placement' ? 'btn btn-primary' : 'btn btn-secondary';
+
+      const container = document.getElementById('homeNoticesContainer');
+      container.innerHTML = '';
+      database.notices.filter(n => cat === 'all' || n.category === cat).forEach(n => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span class="badge ${n.category === 'placement' ? 'badge-warning' : n.category === 'academics' ? 'badge-success'}">${n.category}</span>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 0.75rem; color: var(--text-secondary);">${n.date}</span>
+              ${currentUser && currentUser.role === 'admin' ? `
+                <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem; color: var(--accent-rose); border-color: rgba(225,29,72,0.15); background: transparent;" onclick="event.stopPropagation(); deleteNoticeFromHome(${n.id})">
+                  🗑️ Delete
+                </button>
+              ` : ''}
+            </div>
+          </div>
+          <h4>${n.title}</h4>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">${n.content}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Render Courses Page list using Reusable Courses template
+    function renderCourses() {
+      const container = document.getElementById('coursesGridContainer');
+      container.innerHTML = '';
+      database.courses.forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style = 'display: flex; flex-direction: column; justify-content: space-between;';
+        card.innerHTML = `
+          <div>
+            <h3>${c.name} (${c.abbrev})</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 10px; margin-bottom: 15px;">${c.focus}</p>
+          </div>
+          <div>
+            <button class="btn btn-primary" style="font-size: 0.8rem; padding: 6px 14px;" onclick="openCourseTemplate('${c.abbrev}')">View Details & Subjects →</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Open Course Reusable Template View
+    function openCourseTemplate(abbrev) {
+      const c = database.courses.find(item => item.abbrev === abbrev);
+      if (!c) return;
+
+      document.getElementById('tmplCourseAbbrev').innerText = c.abbrev + ' Program';
+      document.getElementById('tmplCourseName').innerText = c.name;
+      document.getElementById('tmplCourseFocus').innerText = c.focus;
+      document.getElementById('tmplCourseDuration').innerText = c.duration;
+      document.getElementById('tmplCourseIntake').innerText = c.intake;
+      document.getElementById('tmplCourseFees').innerText = c.fees;
+      document.getElementById('tmplCourseElig').innerText = c.elig;
+
+      // Render subjects list
+      const subjCont = document.getElementById('tmplCourseSubjectsContainer');
+      subjCont.innerHTML = '';
+      c.subjects.forEach((subj, idx) => {
+        subjCont.innerHTML += `
+          <div style="padding: 12px 18px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-dark);">
+            <strong>Subject ${idx + 1}</strong>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 3px;">${subj}</p>
+          </div>
+        `;
+      });
+
+      document.getElementById('coursesCatalogView').classList.add('hidden');
+      document.getElementById('courseTemplateView').classList.remove('hidden');
+    }
+
+    function closeCourseTemplate() {
+      document.getElementById('courseTemplateView').classList.add('hidden');
+      document.getElementById('coursesCatalogView').classList.remove('hidden');
+    }
+
+    // Render CDC Council members
+    function renderCDC() {
+      const tbody = document.getElementById('cdcTableBody');
+      tbody.innerHTML = `
+        <tr><th>Member name</th><th>Designation / Board role</th></tr>
+      `;
+      database.cdc.forEach(m => {
+        tbody.innerHTML += `
+          <tr><td><strong>${m.name}</strong></td><td><span class="badge badge-info">${m.role}</span></td></tr>
+        `;
+      });
+    }
+
+    // Render Downloads Page list
+    function renderDownloads() {
+      const container = document.getElementById('downloadsContainer');
+      container.innerHTML = '';
+      database.downloads.forEach(d => {
+        container.innerHTML += `
+          <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="badge badge-info" style="margin-bottom: 10px;">${d.category}</span>
+              <h4>${d.title}</h4>
+            </div>
+            <a href="#" class="btn btn-primary" style="margin-top: 15px; font-size: 0.8rem; padding: 6px 14px;" onclick="event.preventDefault(); alert('Downloading PDF...');">📥 Download PDF</a>
+          </div>
+        `;
+      });
+    }
+
+    function filterDownloads() {
+      const val = document.getElementById('downloadSearchInput').value.toLowerCase();
+      const container = document.getElementById('downloadsContainer');
+      container.innerHTML = '';
+      database.downloads.filter(d => d.title.toLowerCase().includes(val)).forEach(d => {
+        container.innerHTML += `
+          <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="badge badge-info" style="margin-bottom: 10px;">${d.category}</span>
+              <h4>${d.title}</h4>
+            </div>
+            <a href="#" class="btn btn-primary" style="margin-top: 15px; font-size: 0.8rem; padding: 6px 14px;" onclick="event.preventDefault(); alert('Downloading PDF...');">📥 Download PDF</a>
+          </div>
+        `;
+      });
+    }
+
+    // Reusable Department Template switcher
+    const deptInfo = {
+      cs: {
+        name: "Department of Computer Science & IT",
+        desc: "Equips students with discrete mathematics, logic systems, algorithms structures, and servers management.",
+        hod: "Dr. N. S. Zulpe (HOD)"
+      },
+      biotech: {
+        name: "Department of Biotechnology & Biosciences",
+        desc: "Focuses on analytical laboratory kits, molecular tissue plant cultures, assay systems, and organic microbes analysis.",
+        hod: "Dr. N. V. More (HOD)"
+      },
+      ca: {
+        name: "Department of Computer Applications",
+        desc: "Trains candidates in full-stack web technology, Java programming, mobile Flutter systems, and MySQL databases.",
+        hod: "Dr. V. V. Bhosle (HOD)"
+      },
+      mgmt: {
+        name: "Department of Management Science",
+        desc: "Coordinates lessons in strategic operations, marketing administration, finance trading simulation cells, and business statistics.",
+        hod: "Dr. R. S. Dombe (HOD)"
+      }
+    };
+
+    function switchDept(key, elem) {
+      document.querySelectorAll('#view-departments .sidebar-item').forEach(item => item.classList.remove('active'));
+      if (elem) elem.classList.add('active');
+
+      const data = deptInfo[key] || deptInfo['cs'];
+
+      const content = document.getElementById('deptDetailContent');
+      content.innerHTML = `
+        <span class="section-tag">Division details</span>
+        <h3>${data.name}</h3>
+        <p style="margin: 15px 0; color: var(--text-secondary); line-height: 1.7;">${data.desc}</p>
+        <div class="card" style="background: var(--bg-dark); padding: 15px 20px;">
+          <strong>HOD desk Message</strong><br>
+          <span style="font-size: 0.85rem; color: var(--text-secondary);">"${data.hod}: We run professional credits models aligned with national guidelines to make learners job ready."</span>
+        </div>
+      `;
+    }
+
+    // Facilities Tab render
+    function renderFacilities() {
+      const container = document.getElementById('facilitiesGrid');
+      container.innerHTML = `
+        <div class="card"><h3>Central library</h3><p style="color: var(--text-secondary); margin-top: 5px;">15,000+ textbook volumes.</p></div>
+        <div class="card"><h3>Biotech Research Lab</h3><p style="color: var(--text-secondary); margin-top: 5px;">Specialized diagnostics clean chambers.</p></div>
+        <div class="card"><h3>Girls' Residential Hostel</h3><p style="color: var(--text-secondary); margin-top: 5px;">Housing for 240 outstation students.</p></div>
+      `;
+    }
+
+    // Authentication Submissions
+    function handleLoginSubmit(event) {
+      event.preventDefault();
+      const user = document.getElementById('loginUser').value;
+      const pass = document.getElementById('loginPass').value;
+      const errBox = document.getElementById('loginErrorMsg');
+      errBox.classList.add('hidden');
+
+      if (testAccounts[user] && pass === 'password123') {
+        currentUser = testAccounts[user];
+        
+        // Show session strip & Update UI
+        document.getElementById('portalNavBtn').classList.add('hidden');
+        document.getElementById('logoutNavBtn').classList.remove('hidden');
+        document.getElementById('activeSessionStrip').classList.remove('hidden');
+
+        document.getElementById('sessionUserName').innerText = currentUser.name;
+        document.getElementById('sessionUserRole').innerText = currentUser.role.toUpperCase();
+
+        // Setup dashboard sidebar tabs visibility
+        document.getElementById('tabBtn-attendance').classList.add('hidden');
+        document.getElementById('tabBtn-timetable').classList.add('hidden');
+        document.getElementById('tabBtn-fees').classList.add('hidden');
+        document.getElementById('tabBtn-assignments').classList.add('hidden');
+        document.getElementById('tabBtn-grades').classList.add('hidden');
+        document.getElementById('tabBtn-student_exams').classList.add('hidden');
+        document.getElementById('tabBtn-student_downloads').classList.add('hidden');
+        
+        document.getElementById('tabBtn-principal_overview').classList.add('hidden');
+        document.getElementById('tabBtn-principal_students').classList.add('hidden');
+        document.getElementById('tabBtn-principal_faculty').classList.add('hidden');
+        document.getElementById('tabBtn-principal_approvals').classList.add('hidden');
+        document.getElementById('tabBtn-principal_finances').classList.add('hidden');
+
+        document.getElementById('tabBtn-hod_dashboard').classList.add('hidden');
+        document.getElementById('tabBtn-hod_students').classList.add('hidden');
+        document.getElementById('tabBtn-hod_faculty').classList.add('hidden');
+        document.getElementById('tabBtn-hod_analytics').classList.add('hidden');
+        document.getElementById('tabBtn-hod_approvals').classList.add('hidden');
+
+        document.getElementById('tabBtn-student_dossiers').classList.add('hidden');
+        document.getElementById('tabBtn-mark').classList.add('hidden');
+        document.getElementById('tabBtn-marks_entry').classList.add('hidden');
+        document.getElementById('tabBtn-materials').classList.add('hidden');
+        document.getElementById('tabBtn-notice').classList.add('hidden');
+        document.getElementById('tabBtn-register').classList.add('hidden');
+        document.getElementById('tabBtn-editor').classList.add('hidden');
+
+        let defaultTab = 'profile';
+
+        if (currentUser.role === 'student') {
+          document.getElementById('tabBtn-attendance').classList.remove('hidden');
+          document.getElementById('tabBtn-timetable').classList.remove('hidden');
+          document.getElementById('tabBtn-fees').classList.remove('hidden');
+          document.getElementById('tabBtn-assignments').classList.remove('hidden');
+          document.getElementById('tabBtn-grades').classList.remove('hidden');
+          document.getElementById('tabBtn-student_exams').classList.remove('hidden');
+          document.getElementById('tabBtn-student_downloads').classList.remove('hidden');
+          renderStudentDashboard();
+        } else if (currentUser.role === 'principal') {
+          document.getElementById('tabBtn-principal_overview').classList.remove('hidden');
+          document.getElementById('tabBtn-principal_students').classList.remove('hidden');
+          document.getElementById('tabBtn-principal_faculty').classList.remove('hidden');
+          document.getElementById('tabBtn-principal_approvals').classList.remove('hidden');
+          document.getElementById('tabBtn-principal_finances').classList.remove('hidden');
+          renderPrincipalDashboard();
+          defaultTab = 'principal_overview';
+        } else if (currentUser.role === 'hod') {
+          document.getElementById('tabBtn-hod_dashboard').classList.remove('hidden');
+          document.getElementById('tabBtn-hod_students').classList.remove('hidden');
+          document.getElementById('tabBtn-hod_faculty').classList.remove('hidden');
+          document.getElementById('tabBtn-hod_analytics').classList.remove('hidden');
+          document.getElementById('tabBtn-hod_approvals').classList.remove('hidden');
+          document.getElementById('tabBtn-notice').classList.remove('hidden');
+          renderHodDashboard();
+          defaultTab = 'hod_dashboard';
+        } else {
+          // Teacher or Admin has full Student Dossiers access
+          document.getElementById('tabBtn-student_dossiers').classList.remove('hidden');
+          document.getElementById('tabBtn-mark').classList.remove('hidden');
+          
+          if (currentUser.role === 'teacher') {
+            document.getElementById('tabBtn-marks_entry').classList.remove('hidden');
+            document.getElementById('tabBtn-materials').classList.remove('hidden');
+            renderTeacherDashboard();
+          } else if (currentUser.role === 'admin') {
+            document.getElementById('tabBtn-notice').classList.remove('hidden');
+            document.getElementById('tabBtn-register').classList.remove('hidden');
+            document.getElementById('tabBtn-editor').classList.remove('hidden');
+            renderAdminDashboard();
+          }
+        }
+
+        // Fill dashboard headers
+        document.getElementById('dashAvatar').innerText = currentUser.name.charAt(0);
+        document.getElementById('dashUserName').innerText = currentUser.name;
+        document.getElementById('dashUserRole').innerText = currentUser.role.toUpperCase();
+
+        // Fill Profile subtab
+        document.getElementById('profileNameVal').innerText = currentUser.name;
+        document.getElementById('profileEmailVal').innerText = currentUser.email;
+
+        // Redirect
+        navigateTo('dashboard');
+        switchDashTab(defaultTab);
+        renderNotices(); // Re-render to show admin inline deletes
+      } else {
+        errBox.innerText = 'Authentication failed. Please verify credentials.';
+        errBox.classList.remove('hidden');
+      }
+    }
+
+    function handleLogout() {
+      currentUser = null;
+      document.getElementById('portalNavBtn').classList.remove('hidden');
+      document.getElementById('logoutNavBtn').classList.add('hidden');
+      document.getElementById('activeSessionStrip').classList.add('hidden');
+      navigateTo('home');
+      renderNotices(); // Strip admin inline deletes
+    }
+
+    // Switch Dashboard Subtabs
+    function switchDashTab(tabId) {
+      document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+      const activeBtn = document.getElementById('tabBtn-' + tabId);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      document.querySelectorAll('.dashSub').forEach(sub => sub.classList.add('hidden'));
+      document.getElementById('dashSub-' + tabId).classList.remove('hidden');
+
+      if (tabId === 'student_dossiers') {
+        renderDossierRosterList();
+      }
+    }
+
+    // Render Role Specific dashboards
+    function renderStudentDashboard() {
+      // Attendance summary
+      const attCont = document.getElementById('attendanceCardsContainer');
+      attCont.innerHTML = '';
+      const studData = studentDossiers['student_cs'];
+      studData.attendance.forEach(item => {
+        const pct = Math.round((item.present / item.total) * 100);
+        attCont.innerHTML += `
+          <div class="card" style="padding: 20px; text-align: center; border-top: 4px solid ${pct >= 75 ? 'var(--accent-teal)' : 'var(--accent-rose)'};">
+            <h4>${item.subject}</h4>
+            <h2 style="color: ${pct >= 75 ? 'var(--accent-teal)' : 'var(--accent-rose)'};">${pct}%</h2>
+            <p style="font-size: 0.8rem; color: var(--text-secondary);">Lectures: ${item.present}/${item.total}</p>
+          </div>
+        `;
+      });
+
+      // Timetable
+      const timetCont = document.getElementById('timetableContainer');
+      timetCont.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border: 1px solid var(--border-color); border-radius: 8px;">
+          <span><strong>09:30 AM: Java Programming Core</strong><br><span style="font-size: 0.75rem; color: var(--text-secondary);">Lab 3 | Teacher: Prof. Rajesh Patil</span></span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border: 1px solid var(--border-color); border-radius: 8px;">
+          <span><strong>11:00 AM: Software Engineering</strong><br><span style="font-size: 0.75rem; color: var(--text-secondary);">Room 102 | Teacher: Prof. G. S. Patil</span></span>
+        </div>
+      `;
+
+      // Grades summary
+      const gradesCont = document.getElementById('studentGradesBody');
+      gradesCont.innerHTML = '';
+      studData.grades.forEach(g => {
+        gradesCont.innerHTML += `
+          <tr><td>${g.subject}</td><td>${g.exam}</td><td>${g.marks}</td><td>${g.max}</td></tr>
+        `;
+      });
+    }
+
+    function renderTeacherDashboard() {
+      const rollSheet = document.getElementById('teacherRollSheet');
+      rollSheet.innerHTML = '';
+      Object.values(studentDossiers).forEach(stud => {
+        rollSheet.innerHTML += `
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--border-color);">
+            <span>${stud.name} (ID: ${stud.username})</span>
+            <select class="form-input" style="width: 120px; padding: 4px 8px;"><option>Present</option><option>Absent</option></select>
+          </div>
+        `;
+      });
+    }
+
+    function renderAdminDashboard() {
+      renderTeacherDashboard(); 
+      renderAdminNoticesList(); 
+      renderAdminUserRoster();
+      
+      // Load raw json and sync visual editor states
+      document.getElementById('rawJsonTextarea').value = JSON.stringify(database, null, 2);
+      
+      document.getElementById('formHostelDesc').value = database.girls_hostel.details.join('\n');
+      document.getElementById('formHostelRules').value = database.girls_hostel.rules.join('\n');
+      document.getElementById('formScholarships').value = database.scholarships.details.join('\n');
+      document.getElementById('formInfrastructure').value = database.infrastructure.details.join('\n');
+    }
+
+    function renderAdminUserRoster() {
+      const tbody = document.getElementById('adminUserRosterBody');
+      tbody.innerHTML = '';
+      mockRoster.forEach(u => {
+        tbody.innerHTML += `
+          <tr>
+            <td><code>${u.username}</code></td>
+            <td><strong>${u.name}</strong></td>
+            <td><span class="badge badge-info">${u.role}</span></td>
+            <td>${u.email}</td>
+            <td>
+              ${u.username !== 'admin' ? `
+                <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.75rem; color: var(--accent-rose); border-color: rgba(225,29,72,0.15); background: transparent;" onclick="deleteUser('${u.username}')">
+                  🗑️ Delete
+                </button>
+              ` : '<span style="font-size: 0.8rem; color: var(--text-secondary);">System Root</span>'}
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    let hodPendingApprovals = [
+      { id: 301, type: "Faculty Leave Application", name: "Prof. Rajesh Patil", desc: "Medical Leave request for 2 days" },
+      { id: 302, type: "Syllabus Plan Review", name: "Prof. Sanjay Shah", desc: "Business Management semester outline plan review" },
+      { id: 303, type: "Seminar Project Approval", name: "Amit Kamble", desc: "B.Sc Software Engineering final term project setup" }
+    ];
+
+    function renderHodDashboard() {
+      // Set strength stats dynamically
+      const isCS = currentUser.username === 'hod_cs';
+      document.getElementById('hodFacultyCountText').innerText = isCS ? '3 Active' : '2 Active';
+      document.getElementById('hodStudentCountText').innerText = isCS ? '3 Enrolled' : '1 Enrolled';
+      
+      renderHodStudentsList();
+      renderHodFacultyList();
+      renderHodApprovals();
+    }
+
+    function renderHodStudentsList() {
+      const tbody = document.getElementById('hodStudentsBody');
+      tbody.innerHTML = '';
+      Object.values(studentDossiers).forEach(stud => {
+        if (currentUser.username === 'hod_cs' && stud.department !== 'Computer Science') return;
+        if (currentUser.username === 'hod_mgmt' && stud.department !== 'Management Science') return;
+
+        tbody.innerHTML += `
+          <tr>
+            <td><code>${stud.prn || "202507390192"}</code><br><span style="font-size:0.75rem; color:var(--text-secondary);">${stud.roll}</span></td>
+            <td><strong>${stud.name}</strong><br><span style="font-size:0.75rem; color:var(--text-secondary);">${stud.email}</span></td>
+            <td><span class="badge badge-info">${stud.course || 'BCA'}</span></td>
+            <td>${stud.semester}</td>
+            <td>
+              <span class="badge ${stud.fees.paid === stud.fees.total ? 'badge-success' : 'badge-warning'}">
+                ${stud.fees.paid === stud.fees.total ? 'Cleared' : `Due: ₹${stud.fees.total - stud.fees.paid}`}
+              </span>
+            </td>
+            <td>
+              <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.75rem;" onclick="inspectStudentHod('${stud.username}')">👁️ Inspect</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function inspectStudentHod(username) {
+      const stud = studentDossiers[username];
+      if (!stud) return;
+      alert(`STUDENT REPORT DOSSIER AUDIT:\n----------------------------------\nName: ${stud.name}\nPRN: ${stud.prn || "202507390192"}\nCourse: ${stud.course || 'BCA'}\nDepartment: ${stud.department}\nTotal Fees Assigned: ₹${stud.fees.total}\nTotal Paid: ₹${stud.fees.paid}\nCategory: ${stud.category}\nAddress: ${stud.address}\nFather Name: ${stud.parentName}\nParent Phone: ${stud.parentPhone}\n\nVerified Documents: 10th Certificate, 12th Marksheet`);
+    }
+
+    function filterHodStudentsList() {
+      const query = document.getElementById('hodSearchInput').value.toLowerCase();
+      const sem = document.getElementById('hodSemFilter').value;
+      const div = document.getElementById('hodDivFilter').value;
+      
+      const tbody = document.getElementById('hodStudentsBody');
+      tbody.innerHTML = '';
+      
+      Object.values(studentDossiers).forEach(stud => {
+        if (currentUser.username === 'hod_cs' && stud.department !== 'Computer Science') return;
+        if (currentUser.username === 'hod_mgmt' && stud.department !== 'Management Science') return;
+
+        const matchName = stud.name.toLowerCase().includes(query) || stud.username.toLowerCase().includes(query);
+        const matchSem = sem === 'all' || stud.semester === sem;
+        const matchDiv = div === 'all' || stud.division === div;
+        
+        if (matchName && matchSem && matchDiv) {
+          tbody.innerHTML += `
+            <tr>
+              <td><code>${stud.prn || "202507390192"}</code><br><span style="font-size:0.75rem; color:var(--text-secondary);">${stud.roll}</span></td>
+              <td><strong>${stud.name}</strong><br><span style="font-size:0.75rem; color:var(--text-secondary);">${stud.email}</span></td>
+              <td><span class="badge badge-info">${stud.course || 'BCA'}</span></td>
+              <td>${stud.semester}</td>
+              <td>
+                <span class="badge ${stud.fees.paid === stud.fees.total ? 'badge-success' : 'badge-warning'}">
+                  ${stud.fees.paid === stud.fees.total ? 'Cleared' : `Due: ₹${stud.fees.total - stud.fees.paid}`}
+                </span>
+              </td>
+              <td>
+                <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.75rem;" onclick="inspectStudentHod('${stud.username}')">👁️ Inspect</button>
+              </td>
+            </tr>
+          `;
+        }
+      });
+    }
+
+    function renderHodFacultyList() {
+      const tbody = document.getElementById('hodFacultyBody');
+      tbody.innerHTML = '';
+      if (currentUser.username === 'hod_cs') {
+        tbody.innerHTML += `
+          <tr>
+            <td><strong>Dr. N. S. Zulpe (HOD)</strong></td>
+            <td>Ph.D (Computer Science)</td>
+            <td>Java Programming Core, Research Seminars</td>
+            <td>18+ Years</td>
+            <td><span class="badge badge-success">Approved (14 hrs)</span></td>
+          </tr>
+          <tr>
+            <td><strong>Prof. Rajesh Patil</strong></td>
+            <td>MCA, NET</td>
+            <td>Java Programming, Database Systems</td>
+            <td>12+ Years</td>
+            <td><span class="badge badge-success">Approved (16 hrs)</span></td>
+          </tr>
+        `;
+      } else {
+        tbody.innerHTML += `
+          <tr>
+            <td><strong>Dr. K. S. Patil (HOD)</strong></td>
+            <td>Ph.D (Management Science)</td>
+            <td>Business Management, Retail Economics</td>
+            <td>15+ Years</td>
+            <td><span class="badge badge-success">Approved (12 hrs)</span></td>
+          </tr>
+        `;
+      }
+    }
+
+    function submitHodEvent(event) {
+      event.preventDefault();
+      const topic = document.getElementById('hodEventTitle').value;
+      const date = document.getElementById('hodEventDate').value;
+      if (!topic || !date) return;
+      
+      const li = document.createElement('li');
+      li.innerText = `${topic} - ${date}`;
+      document.getElementById('hodEventsList').appendChild(li);
+      
+      document.getElementById('hodEventTitle').value = '';
+      document.getElementById('hodEventDate').value = '';
+      alert('Department Event scheduled successfully!');
+    }
+
+    function renderHodApprovals() {
+      const cont = document.getElementById('hodPendingContainer');
+      cont.innerHTML = '';
+      hodPendingApprovals.forEach(app => {
+        cont.innerHTML += `
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0,0,0,0.01);">
+            <div>
+              <span class="badge badge-info" style="margin-right: 10px;">${app.type}</span>
+              <strong>${app.name}</strong>
+              <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">${app.desc}</div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.75rem;" onclick="approveHodItem(${app.id})">Approve</button>
+              <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.75rem; color: var(--accent-rose);" onclick="declineHodItem(${app.id})">Decline</button>
+            </div>
+          </div>
+        `;
+      });
+      if (hodPendingApprovals.length === 0) {
+        cont.innerHTML = '<p style="color: var(--text-secondary);">No pending approvals.</p>';
+      }
+    }
+
+    function approveHodItem(id) {
+      const item = hodPendingApprovals.find(i => i.id === id);
+      if (!item) return;
+      hodPendingApprovals = hodPendingApprovals.filter(i => i.id !== id);
+      const li = document.createElement('li');
+      li.innerText = `${item.type} for ${item.name} Approved.`;
+      document.getElementById('hodApprovedList').appendChild(li);
+      alert('Request approved successfully!');
+      renderHodApprovals();
+    }
+
+    function declineHodItem(id) {
+      hodPendingApprovals = hodPendingApprovals.filter(i => i.id !== id);
+      alert('Request declined/returned.');
+      renderHodApprovals();
+    }
+
+    function deleteUser(username) {
+      if (!confirm(`Are you sure you want to delete profile for user ${username}?`)) return;
+      mockRoster = mockRoster.filter(u => u.username !== username);
+      delete studentDossiers[username];
+      renderAdminUserRoster();
+      renderDossierRosterList();
+    }
+
+    let principalPendingApprovals = [
+      { id: 201, type: "Leave Request", name: "Prof. G. S. Patil", desc: "Casual Leave on 2026-07-28" },
+      { id: 202, type: "Project Proposal", name: "Rahul Sharma", desc: "Autonomous Credit Portal Redesign v2" },
+      { id: 203, type: "Notice Draft", name: "HOD Computer Science", desc: "NEP syllabus slide deck notice" }
+    ];
+
+    function renderPrincipalDashboard() {
+      renderPrincipalStudentsList();
+      renderPrincipalApprovals();
+      renderPrincipalFinances();
+    }
+
+    function renderPrincipalStudentsList() {
+      const tbody = document.getElementById('principalStudentsBody');
+      tbody.innerHTML = '';
+      Object.values(studentDossiers).forEach(stud => {
+        tbody.innerHTML += `
+          <tr>
+            <td><code>${stud.username}</code></td>
+            <td><strong>${stud.name}</strong><br><span style="font-size:0.75rem; color:var(--text-secondary);">${stud.email}</span></td>
+            <td>{stud.department || 'Computer Science'}</td>
+            <td>₹${stud.fees.paid} / ₹${stud.fees.total}</td>
+            <td>
+              <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.75rem;" onclick="inspectStudentPrincipal('${stud.username}')">👁️ Audit Dossier</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function inspectStudentPrincipal(username) {
+      const stud = studentDossiers[username];
+      if (!stud) return;
+      alert(`STUDENT REPORT DOSSIER AUDIT:\n----------------------------------\nName: ${stud.name}\nPRN: ${stud.username}\nDepartment: ${stud.department}\nTotal Fees Assigned: ₹${stud.fees.total}\nTotal Paid: ₹${stud.fees.paid}\nVerified Documents: 10th Passing Certificate, 12th Marksheet\n\n(Academic marks and edits are handled by HOD/Faculty only)`);
+    }
+
+    function filterPrincipalStudentsList() {
+      const query = document.getElementById('principalSearchInput').value.toLowerCase();
+      const dept = document.getElementById('principalDeptFilter').value;
+      const tbody = document.getElementById('principalStudentsBody');
+      tbody.innerHTML = '';
+      
+      Object.values(studentDossiers).forEach(stud => {
+        const matchName = stud.name.toLowerCase().includes(query) || stud.username.toLowerCase().includes(query);
+        const matchDept = dept === 'all' || stud.department === dept;
+        if (matchName && matchDept) {
+          tbody.innerHTML += `
+            <tr>
+              <td><code>${stud.username}</code></td>
+              <td><strong>${stud.name}</strong><br><span style="font-size:0.75rem; color:var(--text-secondary);">${stud.email}</span></td>
+              <td>${stud.department}</td>
+              <td>₹${stud.fees.paid} / ₹${stud.fees.total}</td>
+              <td>
+                <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.75rem;" onclick="inspectStudentPrincipal('${stud.username}')">👁️ Audit Dossier</button>
+              </td>
+            </tr>
+          `;
+        }
+      });
+    }
+
+    function renderPrincipalApprovals() {
+      const cont = document.getElementById('principalPendingContainer');
+      cont.innerHTML = '';
+      principalPendingApprovals.forEach(app => {
+        cont.innerHTML += `
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0,0,0,0.01);">
+            <div>
+              <span class="badge badge-info" style="margin-right: 10px;">${app.type}</span>
+              <strong>${app.name}</strong>
+              <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">${app.desc}</div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.75rem;" onclick="approvePrincipalItem(${app.id})">Approve</button>
+              <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.75rem; color: var(--accent-rose);" onclick="declinePrincipalItem(${app.id})">Decline</button>
+            </div>
+          </div>
+        `;
+      });
+      if (principalPendingApprovals.length === 0) {
+        cont.innerHTML = '<p style="color: var(--text-secondary);">No pending approvals requests.</p>';
+      }
+    }
+
+    function approvePrincipalItem(id) {
+      const item = principalPendingApprovals.find(app => app.id === id);
+      if (!item) return;
+      principalPendingApprovals = principalPendingApprovals.filter(app => app.id !== id);
+      const li = document.createElement('li');
+      li.innerText = `${item.type} for ${item.name} Approved: ${item.desc}`;
+      document.getElementById('principalApprovedList').appendChild(li);
+      alert(`${item.type} approved successfully!`);
+      renderPrincipalApprovals();
+    }
+
+    function declinePrincipalItem(id) {
+      principalPendingApprovals = principalPendingApprovals.filter(app => app.id !== id);
+      alert('Approval request declined/returned.');
+      renderPrincipalApprovals();
+    }
+
+    function renderPrincipalFinances() {
+      const tbody = document.getElementById('principalFinancesBody');
+      tbody.innerHTML = '';
+      Object.values(studentDossiers).forEach(stud => {
+        tbody.innerHTML += `
+          <tr>
+            <td><strong>${stud.name}</strong></td>
+            <td><code>202507390${stud.username.slice(-2)}</code></td>
+            <td>₹${stud.fees.total}</td>
+            <td style="color: var(--accent-teal); font-weight: bold;">₹${stud.fees.paid}</td>
+            <td style="color: var(--accent-amber); font-weight: bold;">₹${stud.fees.total - stud.fees.paid}</td>
+          </tr>
+        `;
+      });
+    }
+
+    function submitAddUser(event) {
+      event.preventDefault();
+      const username = document.getElementById('regUsername').value;
+      const name = document.getElementById('regName').value;
+      const role = document.getElementById('regRole').value;
+      const email = document.getElementById('regEmail').value;
+
+      mockRoster.push({ username, name, role, email });
+      if (role === 'student') {
+        studentDossiers[username] = {
+          username: username,
+          name: name,
+          email: email,
+          department: "Computer Science",
+          fees: { total: 18500, paid: 0 },
+          grades: [{ subject: "Java Programming", exam: "Internal Test 1", marks: 0, max: 25 }],
+          attendance: [
+            { subject: "Java Programming", present: 0, total: 25 },
+            { subject: "Database Systems", present: 0, total: 25 }
+          ],
+          homework: []
+        };
+      }
+      alert('Mock roster user profile added successfully!');
+      document.getElementById('regUsername').value = '';
+      document.getElementById('regName').value = '';
+      document.getElementById('regEmail').value = '';
+      renderAdminUserRoster();
+    }
+
+    // Render Student Records Dossiers lists
+    function renderDossierRosterList() {
+      const container = document.getElementById('dossiersRosterContainer');
+      container.innerHTML = '';
+      Object.values(studentDossiers)
+        .filter(stud => {
+          if (!currentUser) return true;
+          if (currentUser.username === 'hod_cs' || currentUser.username === 'teacher_cs') return stud.department === 'Computer Science';
+          if (currentUser.username === 'hod_mgmt' || currentUser.username === 'teacher_mgmt') return stud.department === 'Management Science';
+          return true;
+        })
+        .forEach(stud => {
+          container.innerHTML += `
+          <div class="card" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h4 style="margin: 0;">${stud.name}</h4>
+                <span class="badge badge-info" style="font-size: 0.7rem;">${stud.username}</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 5px;">📧 ${stud.email}</p>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 15px;">📚 Department: ${stud.department}</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <button class="btn btn-primary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="openDossierWorkspace('${stud.username}')">🔍 View Dossier Profile</button>
+              <button class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.8rem; color: var(--accent-rose); border-color: rgba(225,29,72,0.15); background: transparent;" onclick="deleteUserDossier('${stud.username}')">🗑️ Delete</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function deleteUserDossier(username) {
+      if (!confirm(`Delete student dossier for ${username}?`)) return;
+      delete studentDossiers[username];
+      mockRoster = mockRoster.filter(u => u.username !== username);
+      renderDossierRosterList();
+    }
+
+    function openDossierWorkspace(username) {
+      activeDossierStudent = username;
+      const stud = studentDossiers[username];
+      if (!stud) return;
+
+      document.getElementById('dossierTitleName').innerText = stud.name;
+      document.getElementById('dossierTitleRoll').innerText = stud.username;
+      document.getElementById('dossierTitleEmail').innerText = stud.email;
+
+      const subSelect1 = document.getElementById('editMarkSub');
+      const subSelect2 = document.getElementById('editAttSub');
+      if (subSelect1 && subSelect2) {
+        subSelect1.innerHTML = '';
+        subSelect2.innerHTML = '';
+        if (currentUser && currentUser.username === 'teacher_cs') {
+          const opt = `<option value="Java Programming">Java Programming</option>`;
+          subSelect1.innerHTML = opt;
+          subSelect2.innerHTML = opt;
+        } else if (currentUser && currentUser.username === 'teacher_mgmt') {
+          const opt = `<option value="Business Management">Business Management</option>`;
+          subSelect1.innerHTML = opt;
+          subSelect2.innerHTML = opt;
+        } else {
+          const opts = `
+            <option value="Java Programming">Java Programming</option>
+            <option value="Software Engineering">Software Engineering</option>
+            <option value="Database Systems">Database Systems</option>
+            <option value="Business Management">Business Management</option>
+            <option value="Marketing Strategies">Marketing Strategies</option>
+          `;
+          subSelect1.innerHTML = opts;
+          subSelect2.innerHTML = opts;
+        }
+      }
+
+      renderDossierSubsections();
+
+      document.getElementById('dossierListView').classList.add('hidden');
+      document.getElementById('dossierWorkspaceView').classList.remove('hidden');
+    }
+
+    function closeDossierWorkspace() {
+      document.getElementById('dossierWorkspaceView').classList.add('hidden');
+      document.getElementById('dossierListView').classList.remove('hidden');
+      activeDossierStudent = null;
+    }
+
+    function renderDossierSubsections() {
+      const stud = studentDossiers[activeDossierStudent];
+      if (!stud) return;
+
+      // Render Grades
+      const gradesTbody = document.getElementById('dossierGradesBody');
+      gradesTbody.innerHTML = '';
+      stud.grades.forEach(g => {
+        gradesTbody.innerHTML += `
+          <tr>
+            <td><strong>${g.subject}</strong></td>
+            <td>${g.exam}</td>
+            <td><strong style="color: var(--accent-indigo);">${g.marks}</strong></td>
+            <td>${g.max}</td>
+          </tr>
+        `;
+      });
+
+      // Render Attendance
+      const attCont = document.getElementById('dossierAttContainer');
+      attCont.innerHTML = '';
+      stud.attendance.forEach(a => {
+        const pct = Math.round((a.present / a.total) * 100);
+        attCont.innerHTML += `
+          <div style="padding: 15px; border: 1px solid var(--border-color); border-radius: 12px; text-align: center; background: rgba(0,0,0,0.01);">
+            <strong>${a.subject}</strong>
+            <h2 style="margin: 8px 0; color: ${pct >= 75 ? 'var(--accent-teal)' : 'var(--accent-rose)'};">${pct}%</h2>
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">Lectures: ${a.present}/${a.total}</span>
+          </div>
+        `;
+      });
+
+      // Render Homework
+      const hwList = document.getElementById('dossierHwList');
+      hwList.innerHTML = '';
+      stud.homework.forEach((hw, idx) => {
+        hwList.innerHTML += `
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0,0,0,0.01);">
+            <div>
+              <strong>${hw.title}</strong>
+              <div style="margin-top: 3px;"><span class="badge ${hw.status === 'Submitted' ? 'badge-success' : 'badge-warning'}">${hw.status}</span></div>
+            </div>
+            <button class="btn btn-secondary" style="padding: 5px 12px; font-size: 0.75rem;" onclick="toggleHomeworkStatus(${idx})">🔄 Toggle Status</button>
+          </div>
+        `;
+      });
+      if (stud.homework.length === 0) {
+        hwList.innerHTML = '<p style="color: var(--text-secondary);">No assignments assigned yet.</p>';
+      }
+
+      // Render Fees
+      document.getElementById('feeAssignedVal').innerText = '₹' + stud.fees.total;
+      document.getElementById('feePaidVal').innerText = '₹' + stud.fees.paid;
+      document.getElementById('feeDueVal').innerText = '₹' + (stud.fees.total - stud.fees.paid);
+
+      document.getElementById('editFeeTotalField').value = stud.fees.total;
+      document.getElementById('editFeePaidField').value = stud.fees.paid;
+    }
+
+    // Dossier Update form saves
+    function saveDossierMarksForm(event) {
+      event.preventDefault();
+      const sub = document.getElementById('editMarkSub').value;
+      const exam = document.getElementById('editMarkExam').value;
+      const marks = Number(document.getElementById('editMarkVal').value);
+      const max = Number(document.getElementById('editMarkMax').value);
+
+      const stud = studentDossiers[activeDossierStudent];
+      const index = stud.grades.findIndex(g => g.subject === sub && g.exam === exam);
+      if (index !== -1) {
+        stud.grades[index].marks = marks;
+        stud.grades[index].max = max;
+      } else {
+        stud.grades.push({ subject: sub, exam: exam, marks, max });
+      }
+
+      alert('Student exam score updated successfully!');
+      renderDossierSubsections();
+    }
+
+    function saveDossierAttForm(event) {
+      event.preventDefault();
+      const sub = document.getElementById('editAttSub').value;
+      const pres = Number(document.getElementById('editAttPresent').value);
+      const tot = Number(document.getElementById('editAttTotal').value);
+
+      const stud = studentDossiers[activeDossierStudent];
+      const index = stud.attendance.findIndex(a => a.subject === sub);
+      if (index !== -1) {
+        stud.attendance[index].present = pres;
+        stud.attendance[index].total = tot;
+      } else {
+        stud.attendance.push({ subject: sub, present: pres, total: tot });
+      }
+
+      alert('Student attendance metrics saved.');
+      renderDossierSubsections();
+    }
+
+    function saveDossierHwForm(event) {
+      event.preventDefault();
+      const title = document.getElementById('editHwTitle').value;
+      const status = document.getElementById('editHwStatus').value;
+
+      studentDossiers[activeDossierStudent].homework.push({ title, status });
+      document.getElementById('editHwTitle').value = '';
+      
+      alert('Homework assigned successfully.');
+      renderDossierSubsections();
+    }
+
+    function toggleHomeworkStatus(idx) {
+      const hw = studentDossiers[activeDossierStudent].homework[idx];
+      if (hw) {
+        hw.status = hw.status === 'Submitted' ? 'Pending' : 'Submitted';
+      }
+      renderDossierSubsections();
+    }
+
+    function saveDossierFeesForm(event) {
+      event.preventDefault();
+      const tot = Number(document.getElementById('editFeeTotalField').value);
+      const paid = Number(document.getElementById('editFeePaidField').value);
+
+      studentDossiers[activeDossierStudent].fees.total = tot;
+      studentDossiers[activeDossierStudent].fees.paid = paid;
+
+      alert('Fee installment ledger updated.');
+      renderDossierSubsections();
+    }
+
+    function renderAdminNoticesList() {
+      const list = document.getElementById('adminNoticeList');
+      list.innerHTML = '';
+      database.notices.forEach(n => {
+        list.innerHTML += `
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border: 1px solid var(--border-color); border-radius: 8px;">
+            <div>
+              <strong>${n.title}</strong>
+              <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 3px;">Category: ${n.category} | Date: ${n.date}</div>
+            </div>
+            <button class="btn btn-secondary" style="color: var(--accent-rose); border-color: rgba(225,29,72,0.1); padding: 5px 10px; font-size: 0.8rem;" onclick="adminDeleteNotice(${n.id})">Delete notice</button>
+          </div>
+        `;
+      });
+    }
+
+    // Submit notice creation
+    function submitPostNotice(event) {
+      event.preventDefault();
+      const title = document.getElementById('noticeTitle').value;
+      const category = document.getElementById('noticeCategory').value;
+      const content = document.getElementById('noticeContent').value;
+
+      const newId = database.notices.length + 1;
+      const date = new Date().toISOString().slice(0, 10);
+      database.notices.unshift({ id: newId, title, content, date, category });
+
+      alert('Announcement published successfully.');
+      document.getElementById('noticeTitle').value = '';
+      document.getElementById('noticeContent').value = '';
+
+      renderNotices();
+      renderAdminNoticesList();
+    }
+
+    // Submit notice deletion
+    function adminDeleteNotice(id) {
+      if (!confirm('Are you sure you want to delete this notice?')) return;
+      database.notices = database.notices.filter(n => n.id !== id);
+      renderNotices();
+      renderAdminNoticesList();
+    }
+
+    // Submit Mark attendance
+    function submitMarkAttendance(event) {
+      event.preventDefault();
+      alert('Attendance logs saved successfully.');
+    }
+
+    // Visual Settings Form Editor
+    function switchEditorMode(mode) {
+      document.getElementById('btn-edit-visual').className = mode === 'visual' ? 'btn btn-primary' : 'btn btn-secondary';
+      document.getElementById('btn-edit-json').className = mode === 'json' ? 'btn btn-primary' : 'btn btn-secondary';
+
+      if (mode === 'visual') {
+        document.getElementById('editorModeVisual').classList.remove('hidden');
+        document.getElementById('editorModeJson').classList.add('hidden');
+      } else {
+        document.getElementById('editorModeVisual').classList.add('hidden');
+        document.getElementById('editorModeJson').classList.remove('hidden');
+      }
+    }
+
+    function saveVisualContentForm(event) {
+      event.preventDefault();
+      
+      database.girls_hostel.details = document.getElementById('formHostelDesc').value.split('\n').filter(l => l.trim() !== '');
+      database.girls_hostel.rules = document.getElementById('formHostelRules').value.split('\n').filter(l => l.trim() !== '');
+      database.scholarships.details = document.getElementById('formScholarships').value.split('\n').filter(l => l.trim() !== '');
+      database.infrastructure.details = document.getElementById('formInfrastructure').value.split('\n').filter(l => l.trim() !== '');
+
+      document.getElementById('rawJsonTextarea').value = JSON.stringify(database, null, 2);
+      alert('Website settings updated successfully via Visual Form!');
+    }
+
+    // Save JSON editor configurations
+    function submitSaveJson(event) {
+      event.preventDefault();
+      try {
+        const parsed = JSON.parse(document.getElementById('rawJsonTextarea').value);
+        database = parsed;
+        alert('Master settings updated successfully on the website!');
+        
+        // Re-render pages
+        renderNotices();
+        renderCourses();
+        renderCDC();
+        renderDownloads();
+        renderFacilities();
+      } catch (err) {
+        alert('Error: Invalid JSON schema format. Please verify commas or brackets.');
+      }
+    }
+
+    // Initial Startup
+    window.onload = function() {
+      switchDept('cs', document.querySelector('#view-departments .sidebar-item'));
+      renderNotices();
+      renderCourses();
+      renderCDC();
+      renderDownloads();
+      renderFacilities();
+    }
+  </script>
+</body>
+</html>

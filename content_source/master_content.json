@@ -1,0 +1,114 @@
+{
+  "girls_hostel": {
+    "title": "Girls' Hostel Facilities",
+    "details": [
+      "About RES About College Central Facility Institutional Development Plan College Advisery Board Chairman's Message Vice-Chairman's Message Principal's Message",
+      "The college has a girls' hostel with the capacity to house 240 inmates. The college has magnificently designed separate hostel for girls with all modern facilities, for boarding to provide good and hygienic food to the students."
+    ],
+    "rules": [
+      "Located inside the secure college campus perimeter.",
+      "24/7 security warden presence and electronic gate entries.",
+      "Wi-Fi connectivity, clean drinking water, hot water facilities, and dynamic mess halls.",
+      "Special library and study room amenities for residents."
+    ]
+  },
+  "scholarships": {
+    "title": "Government & Institutional Scholarships",
+    "details": [
+      "About RES About College Central Facility Institutional Development Plan College Advisery Board Chairman's Message Vice-Chairman's Message Principal's Message"
+    ]
+  },
+  "central_facilities": {
+    "title": "Central Campus Facilities",
+    "facilities": [
+      {
+        "name": "Computer Laboratories",
+        "desc": "Equipped with over 400 modern high-speed workstation terminals loaded with specialized software for computing curricula."
+      },
+      {
+        "name": "Central Library",
+        "desc": "Houses over 15,000 text volumes, standard journals, newspapers, E-journals repository access, and a spacious reading room."
+      },
+      {
+        "name": "Biotech & Microbiology Labs",
+        "desc": "Specialized clean chambers and digital testing apparatus for research training."
+      },
+      {
+        "name": "College Canteen",
+        "desc": "Spacious dining hall delivering fresh, hygienic, and highly affordable meals for students and staff."
+      },
+      {
+        "name": "Sports Complex",
+        "desc": "Facilities for indoor and outdoor sports, gym equipment, and regular inter-college tournaments coordination."
+      }
+    ]
+  },
+  "infrastructure": {
+    "title": "Campus Physical Infrastructure",
+    "details": [
+      "About RES About College Central Facility Institutional Development Plan College Advisery Board Chairman's Message Vice-Chairman's Message Principal's Message"
+    ]
+  },
+  "cdc": {
+    "title": "College Development Committee (CDC) 2025-26",
+    "members": [
+      {
+        "name": "Dr. M. R. Patil",
+        "designation": "Chairman (President of Royal Education Society)"
+      },
+      {
+        "name": "Mr. L. M. Patil",
+        "designation": "Member (Vice-President of Royal Education Society)"
+      },
+      {
+        "name": "Dr. R. S. Awasthi",
+        "designation": "Member Secretary (Principal)"
+      },
+      {
+        "name": "Dr. N. S. Zulpe",
+        "designation": "Member (Teacher Representative)"
+      },
+      {
+        "name": "Dr. V. V. Bhosale",
+        "designation": "Member (Teacher Representative)"
+      },
+      {
+        "name": "Mr. N. D. Jagtap",
+        "designation": "Member (Consultant Director)"
+      },
+      {
+        "name": "Dr. E. U. Masumdar",
+        "designation": "Member (Officer on Special Duty)"
+      },
+      {
+        "name": "Mr. P. R. Kawale",
+        "designation": "Member (Non-Teaching Staff Representative)"
+      },
+      {
+        "name": "Mr. L. K. Dhotre",
+        "designation": "Member (Librarian Representative)"
+      }
+    ]
+  },
+  "committees": {
+    "title": "Autonomous Regulatory Cells & Committees",
+    "list": [
+      {
+        "name": "Anti-Ragging Committee",
+        "scope": "Ensures compliance with UGC guidelines to maintain a strictly ragging-free campus environment."
+      },
+      {
+        "name": "Internal Complaints Committee (ICC)",
+        "scope": "Focuses on female student safety, grievances, and prevention of harassment."
+      },
+      {
+        "name": "SC/ST Cell & OBC Cell",
+        "scope": "Facilitates welfare schemes, government scholarship processing, and social inclusion."
+      },
+      {
+        "name": "Student Grievance Redressal Committee (SGRC)",
+        "scope": "A transparent mechanism for addressing academic and administrative issues."
+      }
+    ]
+  }
+}

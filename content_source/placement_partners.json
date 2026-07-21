@@ -1,0 +1,28 @@
+{
+  "placement_cell": {
+    "officer": "Mr. K. R. Jadhav (Training & Placement Cell Officer)",
+    "description": "Handles industry partnerships, training seminars, resume building bootcamps, and off-campus/on-campus placement drives."
+  },
+  "major_recruiters": [
+    {
+      "name": "TCS (Tata Consultancy Services)",
+      "logo_placeholder": "img/logo/company_logo/TCS_Logo.jpg"
+    },
+    {
+      "name": "Wipro",
+      "logo_placeholder": "img/logo/company_logo/wipro_logo.jpg"
+    },
+    {
+      "name": "Tech Mahindra",
+      "logo_placeholder": "img/logo/company_logo/techm.png"
+    },
+    {
+      "name": "Infosys",
+      "logo_placeholder": "img/logo/company_logo/infosys.jpg"
+    },
+    {
+      "name": "HCL Technologies",
+      "logo_placeholder": "img/logo/company_logo/hcl_tech.png"
+    }
+  ]
+}

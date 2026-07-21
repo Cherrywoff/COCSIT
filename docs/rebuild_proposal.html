@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COCSIT Rebuild Blueprint Proposal</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Mermaid.js for dynamic diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                background: '#151c2c',
+                primaryColor: '#3b82f6',
+                primaryTextColor: '#f3f4f6',
+                lineColor: '#1f2937'
+            }
+        });
+    </script>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #151c2c;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-blue: #3b82f6;
+            --accent-teal: #14b8a6;
+            --accent-amber: #f59e0b;
+            --accent-indigo: #6366f1;
+            --border-color: #1f2937;
+            --glow-color: rgba(99, 102, 241, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header Card */
+        header {
+            background: linear-gradient(135deg, var(--card-bg), #0f172a);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+            z-index: 1;
+        }
+
+        .meta-badge {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-indigo);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ffffff, #c7d2fe, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            max-width: 800px;
+        }
+
+        /* Section layout */
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .section-title svg {
+            color: var(--accent-indigo);
+        }
+
+        /* Grid layouts */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background-color: rgba(99, 102, 241, 0.1);
+            color: var(--accent-indigo);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .card-icon.blue { background-color: rgba(59, 130, 246, 0.1); color: var(--accent-blue); }
+        .card-icon.teal { background-color: rgba(20, 184, 166, 0.1); color: var(--accent-teal); }
+        .card-icon.amber { background-color: rgba(245, 158, 11, 0.1); color: var(--accent-amber); }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .card-content {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .list-items {
+            list-style: none;
+        }
+
+        .list-items li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .list-items li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-indigo);
+            font-weight: bold;
+        }
+
+        /* Diagrams display */
+        .diagram-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: auto;
+        }
+
+        .diagram-title {
+            align-self: flex-start;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Matrix/Table design */
+        .table-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            padding: 16px;
+            border-bottom: 2px solid var(--border-color);
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 18px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            vertical-align: top;
+        }
+
+        tr:hover td {
+            color: var(--text-primary);
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+
+        .role-badge {
+            font-family: 'Outfit', sans-serif;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .role-badge.super { background: rgba(99, 102, 241, 0.1); color: var(--accent-indigo); border: 1px solid rgba(99, 102, 241, 0.2); }
+        .role-badge.hod { background: rgba(20, 184, 166, 0.1); color: var(--accent-teal); border: 1px solid rgba(20, 184, 166, 0.2); }
+        .role-badge.faculty { background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); border: 1px solid rgba(59, 130, 246, 0.2); }
+        .role-badge.student { background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.2); }
+
+        /* Prep list */
+        .prep-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .prep-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .prep-card {
+            background-color: rgba(255, 255, 255, 0.01);
+            border: 1px dashed var(--border-color);
+            border-radius: 14px;
+            padding: 24px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .prep-number {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent-indigo);
+            line-height: 1;
+        }
+
+        .prep-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .prep-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Card -->
+        <header>
+            <div class="meta-badge">Conceptual Proposal</div>
+            <h1>COCSIT Rebuild Blueprint Proposal</h1>
+            <div class="subtitle">A strategic plan to build a modern, high-performance, and secure digital ecosystem for the college, using the current site as the informational database.</div>
+        </header>
+
+        <!-- Section 1: Three Pillars -->
+        <h2 class="section-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+            The Three Pillars of the Ecosystem
+        </h2>
+        <div class="grid-3">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-icon blue">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                </div>
+                <h3 class="card-title">1. Public Showroom</h3>
+                <p class="card-content">The public web pages that require no login access. This serves as the college's digital brochure for families and auditing boards.</p>
+                <ul class="list-items">
+                    <li>Dynamic admissions & courses catalog</li>
+                    <li>Syllabus, academic calendar documents</li>
+                    <li>Clean, modern news notices boards</li>
+                    <li>Interactive alumni & placement records</li>
+                </ul>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-icon teal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <h3 class="card-title">2. Secure Portals</h3>
+                <p class="card-content">Authenticated dashboards for registered users to manage daily academic operations securely.</p>
+                <ul class="list-items">
+                    <li>Student progress tracker dashboard</li>
+                    <li>Faculty marks & grading console</li>
+                    <li>Subject timetables & schedule views</li>
+                    <li>Digital syllabus & assignment submissions</li>
+                </ul>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-icon amber">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                </div>
+                <h3 class="card-title">3. Admin Control Room</h3>
+                <p class="card-content">The unified control panel where authorized administrators publish documents and manage users.</p>
+                <ul class="list-items">
+                    <li>Visual content and notice editor</li>
+                    <li>User registrations and profile systems</li>
+                    <li>Database backup controls</li>
+                    <li>System settings & audit logs console</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 2: Diagrams -->
+        <h2 class="section-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+            Dynamic Workflows
+        </h2>
+
+        <!-- Diagram 1 -->
+        <div class="diagram-container">
+            <div class="diagram-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Ecosystem Architecture Map
+            </div>
+            <div class="mermaid">
+                graph TD
+                    A[COCSIT Digital Ecosystem] --> B[1. Public Showroom]
+                    A --> C[2. Student & Faculty Portals]
+                    A --> D[3. Admin Control Center]
+                    
+                    B --> B1(Admissions & Fees)
+                    B --> B2(Courses & Syllabus)
+                    B --> B3(News & Announcements)
+                    
+                    C --> C1(Student Dashboard)
+                    C --> C2(Faculty Dashboard)
+                    C --> C3(Timetables & Assignments)
+                    
+                    D --> D1(Manage Announcements)
+                    D --> D2(User Management & Roles)
+                    D --> D3(System Settings)
+            </div>
+        </div>
+
+        <!-- Diagram 2 -->
+        <div class="diagram-container">
+            <div class="diagram-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Content Management Cycle
+            </div>
+            <div class="mermaid">
+                sequenceDiagram
+                    participant Admin as Administrator (Admin Panel)
+                    participant DB as Database (Cloud Storage)
+                    participant Public as Public Visitor (Main Website)
+
+                    Admin->>DB: Uploads New Notice ("Tech Mahindra Drive on Friday")
+                    Note over DB: Notice is securely saved in the database
+                    Public->>DB: Loads cocsit.org.in Home Page
+                    DB-->>Public: Displays latest notice instantly
+            </div>
+        </div>
+
+        <!-- Section 3: Role Matrix -->
+        <h2 class="section-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            Role & Permission Matrix
+        </h2>
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">User Role</th>
+                        <th style="width: 20%;">Access Type</th>
+                        <th style="width: 55%;">System Permissions & Capabilities</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="role-badge super">Super Admin</span></td>
+                        <td><strong>College-Wide</strong></td>
+                        <td>Complete site modification capabilities, database configurations, employee accounts registration, and full edit controls on all pages.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="role-badge hod">HOD</span></td>
+                        <td><strong>Departmental</strong></td>
+                        <td>Manage department course files, edit specific class schedules, assign professors, and dispatch departmental notifications.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="role-badge faculty">Faculty</span></td>
+                        <td><strong>Course/Class</strong></td>
+                        <td>Register classroom attendance percentages, submit student grades and evaluations, and upload class notes.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="role-badge student">Student</span></td>
+                        <td><strong>Personal Only</strong></td>
+                        <td>View academic attendance track files, check test results, view timelines, and upload project files.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 4: Roadmap Prep -->
+        <h2 class="section-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Planning Phase Roadmap (Before Coding)
+        </h2>
+        <div class="prep-list">
+            <div class="prep-card">
+                <div class="prep-number">01</div>
+                <div>
+                    <h4 class="prep-title">Content Extraction</h4>
+                    <p class="prep-desc">Extract all database texts, logos, event logs, and flyer images from the active portal to secure raw resource files.</p>
+                </div>
+            </div>
+            <div class="prep-card">
+                <div class="prep-number">02</div>
+                <div>
+                    <h4 class="prep-title">Sitemap Architecture</h4>
+                    <p class="prep-desc">Create structural page hierarchy wireframes identifying key routing directories for student logins and public items.</p>
+                </div>
+            </div>
+            <div class="prep-card">
+                <div class="prep-number">03</div>
+                <div>
+                    <h4 class="prep-title">Design Wireframes</h4>
+                    <p class="prep-desc">Prepare flat design layouts representing dashboard aesthetics, mobile drawer transitions, and responsive columns.</p>
+                </div>
+            </div>
+            <div class="prep-card">
+                <div class="prep-number">04</div>
+                <div>
+                    <h4 class="prep-title">Database Blueprints</h4>
+                    <p class="prep-desc">Model database relationships (Student, Course, Attendance tables) mapping security constraints and access scopes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

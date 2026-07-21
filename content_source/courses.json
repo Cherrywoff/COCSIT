@@ -1,0 +1,76 @@
+{
+  "academic_frameworks": [
+    "Revised CBCS (Choice Based Credit System)",
+    "NEP 2020 (National Education Policy)"
+  ],
+  "undergraduate_programs": {
+    "description": "3-Year & 4-Year Bachelor Degrees matching NEP 2020 specifications.",
+    "courses": [
+      {
+        "abbreviation": "BCA",
+        "name": "Bachelor of Computer Applications",
+        "focus": "Computer applications, programming, software development"
+      },
+      {
+        "abbreviation": "BBA",
+        "name": "Bachelor of Business Administration",
+        "focus": "Management principles, finance, marketing, entrepreneurship"
+      },
+      {
+        "abbreviation": "B.Sc. (CS)",
+        "name": "Bachelor of Science in Computer Science",
+        "focus": "Theoretical computer science, database structures, core coding"
+      },
+      {
+        "abbreviation": "B.Sc. (SE)",
+        "name": "Bachelor of Science in Software Engineering",
+        "focus": "Software lifecycle, testing methodologies, project management"
+      },
+      {
+        "abbreviation": "B.Sc. (DS)",
+        "name": "Bachelor of Science in Data Science",
+        "focus": "Data analytics, statistical modeling, machine learning concepts"
+      },
+      {
+        "abbreviation": "B.Sc. (Biotech)",
+        "name": "Bachelor of Science in Biotechnology",
+        "focus": "Microbiology, genetics, bioinformatics, laboratory techniques"
+      },
+      {
+        "abbreviation": "B.Voc. (SD)",
+        "name": "Bachelor of Vocation in Software Development",
+        "focus": "Skills-based vocational training, industry project placements"
+      }
+    ]
+  },
+  "postgraduate_programs": {
+    "description": "2-Year Master Degrees offering specialized academic paths.",
+    "courses": [
+      {
+        "abbreviation": "MCA",
+        "name": "Master of Computer Applications",
+        "focus": "Advanced software design, database administration, system engineering"
+      },
+      {
+        "abbreviation": "MBA",
+        "name": "Master of Business Administration",
+        "focus": "Strategic management, organizational behavior, business analysis"
+      },
+      {
+        "abbreviation": "M.Sc. (CS)",
+        "name": "Master of Science in Computer Science",
+        "focus": "Advanced algorithm design, research topics, modern computing architectures"
+      },
+      {
+        "abbreviation": "M.Sc. (Biotech)",
+        "name": "Master of Science in Biotechnology",
+        "focus": "Bioprocess technology, molecular biology, advanced genetic engineering"
+      },
+      {
+        "abbreviation": "M.Sc. (SE)",
+        "name": "Master of Science in Software Engineering",
+        "focus": "Quality assurance, cloud computing deployment architectures"
+      }
+    ]
+  }
+}

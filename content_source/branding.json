@@ -1,0 +1,29 @@
+{
+  "college_name_english": "College of Computer Science and Information Technology",
+  "college_name_marathi": "संगणकशास्त्र व माहितीतंत्रज्ञान महाविद्यालय",
+  "college_abbreviation": "COCSIT",
+  "parent_organization": "Royal Education Society's",
+  "campus_address": "COCSIT Campus, Ambajogai Road, Latur - 413531 (Maharashtra) India",
+  "accreditation": {
+    "agency": "NAAC",
+    "grade": "B+ Grade (Re-Accredited)",
+    "aishe_code": "C-7398"
+  },
+  "contact_details": {
+    "address": "Ambajogai Road, Latur - 413531 (Maharashtra) India",
+    "webmail": "http://webmail.cocsit.org.in",
+    "lms": "http://lms.cocsit.org.in"
+  },
+  "logo_sources": {
+    "header_logo": "img/logo/25yearsLOGOnew.png",
+    "favicon": "img/favicon.ico"
+  },
+  "sister_organizations": [
+    "Royal Education Society",
+    "Royal Institute of Technical Education (MCA College)",
+    "COCSIT Junior College, Latur",
+    "Sharada International CBSE School Latur",
+    "Sharada International Senior-Secondary School (SISS) Latur",
+    "Sharada Semi English School Latur"
+  ]
+}

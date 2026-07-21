@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Auto Slide Image Slider</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #111;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .slider-wrapper {
+      width: 380px;
+      max-width: 100%;
+      height: 520px;
+      overflow: hidden;              /* show only one image */
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .slider-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s ease;  /* slide animation */
+    }
+
+    .slide {
+      min-width: 100%;               /* each slide = full width */
+      height: 100%;
+      flex-shrink: 0;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<div class="slider-wrapper" id="slider">
+  <div class="slider-track" id="sliderTrack">
+    <div class="slide">
+      <img src="https://cocsit.org.in/images/Azure_AZ900_congratulations/AZ-900 Certified 01.jpeg" alt="1">
+    </div>
+    <div class="slide">
+      <img src="https://cocsit.org.in/images/Azure_AZ900_congratulations/AZ-900 Certified 02.jpeg" alt="2">
+    </div>
+    <div class="slide">
+      <img src="https://cocsit.org.in/images/Azure_AZ900_congratulations/AZ-900 Certified 03.jpeg" alt="3">
+    </div>
+    <div class="slide">
+      <img src="https://cocsit.org.in/images/Azure_AZ900_congratulations/AZ-900 Certified 04.jpeg" alt="1">
+    </div>
+    <div class="slide">
+      <img src="https://cocsit.org.in/images/Azure_AZ900_congratulations/AZ-900 Certified 05.jpeg" alt="2">
+    </div>
+    <div class="slide">
+      <img src="https://cocsit.org.in/images/Azure_AZ900_congratulations/AZ-900 Certified 06.jpeg" alt="3">
+    </div>
+    <div class="slide">
+      <img src="https://cocsit.org.in/images/Azure_AZ900_congratulations/AZ-900 Certified 07.jpeg" alt="1">
+    </div>
+    <div class="slide">
+      <img src="https://cocsit.org.in/images/Azure_AZ900_congratulations/AZ-900 Certified 08.jpeg" alt="2">
+    </div>
+    <div class="slide">
+      <img src="https://cocsit.org.in/images/Azure_AZ900_congratulations/AZ-900 Certified 09.jpeg" alt="3">
+    </div>
+   
+  </div>
+</div>
+
+<script>
+  const track = document.getElementById('sliderTrack');
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+
+  let index = 0;
+  let timer = null;
+
+  function showSlide(i) {
+    // i * 100% because each slide is 100% width
+    track.style.transform = `translateX(-${i * 100}%)`;
+  }
+
+  function nextSlide() {
+    index = (index + 1) % totalSlides;   // loop back to first
+    showSlide(index);
+  }
+
+  function startAutoPlay() {
+    timer = setInterval(nextSlide, 3000); // 3s per slide
+  }
+
+  function stopAutoPlay() {
+    clearInterval(timer);
+  }
+
+  // start autoplay
+  startAutoPlay();
+
+  // optional: pause on hover
+  const slider = document.getElementById('slider');
+  slider.addEventListener('mouseenter', stopAutoPlay);
+  slider.addEventListener('mouseleave', startAutoPlay);
+</script>
+
+</body>
+</html>
+

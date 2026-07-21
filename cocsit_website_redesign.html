@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COCSIT - College of Computer Science & Information Technology, Latur</title>
+  
+  <!-- Premium Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Premium Light Theme (Default) */
+      --bg-dark: #ffffff;
+      --bg-card: #f8fafc;
+      --bg-card-hover: #ffffff;
+      --border-color: rgba(0, 0, 0, 0.06);
+      --border-focus: #0f172a;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent-indigo: #0f172a; /* Deep Blue primary */
+      --accent-blue: #1e3a8a;
+      --accent-teal: #0d9488;
+      --accent-amber: #d97706; /* Golden Yellow accent */
+      --accent-rose: #e11d48;
+      --font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+      --glow-indigo: rgba(15, 23, 42, 0.03);
+      --glow-teal: rgba(13, 148, 136, 0.03);
+      --shadow-color: rgba(0, 0, 0, 0.04);
+      --shadow-hover: rgba(0, 0, 0, 0.08);
+      --header-bg: #ffffff;
+    }
+
+    body.dark-theme {
+      /* Premium Dark Theme */
+      --bg-dark: #0b0f19;
+      --bg-card: rgba(21, 28, 44, 0.7);
+      --bg-card-hover: rgba(29, 38, 59, 0.9);
+      --border-color: rgba(255, 255, 255, 0.06);
+      --border-focus: rgba(255, 255, 255, 0.4);
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --accent-indigo: #818cf8;
+      --accent-blue: #3b82f6;
+      --accent-teal: #14b8a6;
+      --accent-amber: #fbbf24;
+      --accent-rose: #f87171;
+      --glow-indigo: rgba(99, 102, 241, 0.15);
+      --glow-teal: rgba(20, 184, 166, 0.15);
+      --shadow-color: rgba(0, 0, 0, 0.5);
+      --shadow-hover: rgba(0, 0, 0, 0.75);
+      --header-bg: #0f172a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.15s ease, box-shadow 0.3s ease;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      background-image: radial-gradient(circle at 50% 0%, rgba(30, 58, 138, 0.025) 0%, transparent 60%);
+      background-attachment: fixed;
+    }
+
+    body.dark-theme {
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.02) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(20, 184, 166, 0.02) 0%, transparent 40%);
+    }
+
+    a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+
+    a:hover {
+      color: var(--accent-amber);
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+
+    section {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-primary);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+
+    h1 { font-size: 3.2rem; }
+    h2 { font-size: 2.1rem; margin-bottom: 20px; }
+    h3 { font-size: 1.45rem; margin-bottom: 15px; }
+
+    .section-tag {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent-amber);
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 4px 20px 0 var(--shadow-color);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s, background-color 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px 0 var(--shadow-hover);
+      background-color: var(--bg-card-hover);
+      border-color: var(--border-focus);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      border: none;
+      font-family: var(--font-family);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-indigo);
+      color: #ffffff;
+      box-shadow: 0 4px 14px var(--glow-indigo);
+    }
+
+    body.dark-theme .btn-primary {
+      background-color: var(--text-primary);
+      color: var(--bg-dark);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      box-shadow: 0 6px 20px var(--glow-indigo);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-card);
+      border-color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+
+    .btn-accent {
+      background-color: var(--accent-amber);
+      color: #ffffff;
+    }
+
+    .btn-accent:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    /* Navigation */
+    .top-bar {
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 8px 0;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .top-bar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .top-bar-links {
+      display: flex;
+      gap: 15px;
+      list-style: none;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 15px 0;
+    }
+
+    body.dark-theme .navbar {
+      background-color: rgba(11, 15, 25, 0.8);
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-item {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 20px;
+      transition: all 0.2s;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      color: var(--text-primary);
+      background-color: var(--bg-card);
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      min-width: 200px;
+      padding: 12px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s;
+      list-style: none;
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-item {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .dropdown-item:hover {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+    }
+
+    /* Grids */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+    @media (max-width: 1024px) {
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .grid-4 { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    /* Inputs */
+    .form-group { margin-bottom: 20px; }
+    .form-label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; color: var(--text-secondary); }
+    .form-input { width: 100%; padding: 12px 18px; background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-primary); font-family: inherit; font-size: 0.95rem; outline: none; }
+    .form-input:focus { border-color: var(--text-primary); box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.05); }
+
+    /* Tables */
+    .table-container { overflow-x: auto; border-radius: 16px; border: 1px solid var(--border-color); }
+    .custom-table { width: 100%; border-collapse: collapse; text-align: left; background: var(--bg-dark); }
+    .custom-table th { padding: 16px 20px; background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); color: var(--text-primary); font-weight: 700; font-size: 0.85rem; }
+    .custom-table td { padding: 16px 20px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.9rem; }
+    .custom-table tr:last-child td { border-bottom: none; }
+
+    /* Badges */
+    .badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; border: 1px solid transparent; }
+    .badge-info { background: rgba(30, 58, 138, 0.04); color: var(--accent-blue); border-color: rgba(30, 58, 138, 0.1); }
+    .badge-success { background: rgba(13, 148, 136, 0.04); color: var(--accent-teal); border-color: rgba(13, 148, 136, 0.1); }
+    .badge-warning { background: rgba(217, 119, 6, 0.04); color: var(--accent-amber); border-color: rgba(217, 119, 6, 0.1); }
+    .badge-danger { background: rgba(225, 29, 72, 0.04); color: var(--accent-rose); border-color: rgba(225, 29, 72, 0.1); }
+
+    /* Theme Switcher */
+    .theme-toggle-btn { background: none; border: none; cursor: pointer; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 50%; }
+    .theme-toggle-btn:hover { background-color: var(--bg-card); color: var(--text-primary); }
+
+    /* Modals */
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(15, 23, 42, 0.3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 30px; }
+    .modal-content { background-color: var(--bg-dark); max-width: 600px; width: 100%; padding: 40px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); border: 1px solid var(--border-color); }
+
+    /* Dashboards */
+    .dashboard-layout { display: grid; grid-template-columns: 240px 1fr; gap: 40px; }
+    @media (max-width: 900px) { .dashboard-layout { grid-template-columns: 1fr; } }
+    .sidebar-item { padding: 12px 18px; border-radius: 12px; font-weight: 600; color: var(--text-secondary); cursor: pointer; margin-bottom: 5px; }
+    .sidebar-item:hover, .sidebar-item.active { background-color: var(--bg-card); color: var(--text-primary); }
+
+    /* Footer */
+    footer { background-color: var(--bg-card); border-top: 1px solid var(--border-color); padding: 60px 0 30px; color: var(--text-secondary); font-size: 0.85rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 40px; }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; } }
+    .footer-column h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-primary); margin-bottom: 20px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- 1. TOP ANNOUNCEMENTS BAR -->
+  <div id="topBar" class="top-bar">
+    <div class="container top-bar-content">
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <span>📞 Admissions: +91 (02382) 229191</span>
+        <span>✉️ Email: info@cocsit.org.in</span>
+        <span style="color: var(--accent-amber); font-weight: 700;">⭐ NAAC Grade: B+ Re-Accredited</span>
+      </div>
+      <div style="display: flex; gap: 20px; align-items: center;">
+        <span>Affiliated to SRTMU Nanded</span>
+        <ul class="top-bar-links">
+          <li><a href="http://school.eduera.org.in" target="_blank">Eduera Staff</a></li>
+          <li><a href="http://lms.cocsit.org.in" target="_blank">LMS Student</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. STICKY HEADER -->
+  <header class="navbar">
+    <div class="container navbar-container">
+      <div class="brand" onclick="navigateTo('home')">
+        <span style="font-size: 1.5rem; letter-spacing: -0.04em;">🏢</span>
+        <div style="display: flex; flexDirection: column; line-height: 1.1;">
+          <span style="font-size: 1.25rem; font-weight: 800;">COCSIT</span>
+          <span style="font-size: 0.65rem; color: var(--text-secondary); font-weight: 600;">Latur, Autonomous</span>
+        </div>
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item active" onclick="navigateTo('home')">Home</li>
+          
+          <li class="nav-item nav-dropdown">
+            About Us ▾
+            <ul class="dropdown-menu">
+              <li class="dropdown-item" onclick="navigateTo('about')">College Profile</li>
+              <li class="dropdown-item" onclick="navigateTo('about_res')">Royal Education Society</li>
+            </ul>
+          </li>
+
+          <li class="nav-item nav-dropdown">
+            Academics ▾
+            <ul class="dropdown-menu">
+              <li class="dropdown-item" onclick="navigateTo('academics')">Overview</li>
+              <li class="dropdown-item" onclick="navigateTo('departments')">Departments</li>
+              <li class="dropdown-item" onclick="navigateTo('courses')">Degrees Offered</li>
+              <li class="dropdown-item" onclick="navigateTo('governance')">Governing Councils</li>
+            </ul>
+          </li>
+
+          <li class="nav-item" onclick="navigateTo('placements')">Placements</li>
+
+          <li class="nav-item nav-dropdown">
+            Campus Life ▾
+            <ul class="dropdown-menu">
+              <li class="dropdown-item" onclick="navigateTo('facilities')">Facilities</li>
+              <li class="dropdown-item" onclick="navigateTo('gallery')">Media Gallery</li>
+              <li class="dropdown-item" onclick="navigateTo('newsevents')">News & Events</li>
+            </ul>
+          </li>
+
+          <li class="nav-item nav-dropdown">
+            Student Corner ▾
+            <ul class="dropdown-menu">
+              <li class="dropdown-item" onclick="navigateTo('studentcorner')">Portal Access</li>
+              <li class="dropdown-item" onclick="navigateTo('examinations')">Examinations</li>
+              <li class="dropdown-item" onclick="navigateTo('downloads')">Downloads</li>
+            </ul>
+          </li>
+
+          <li class="nav-item nav-dropdown">
+            Accreditations ▾
+            <ul class="dropdown-menu">
+              <li class="dropdown-item" onclick="navigateTo('naac')">NAAC Hub</li>
+              <li class="dropdown-item" onclick="navigateTo('iqac')">IQAC Cell</li>
+              <li class="dropdown-item" onclick="navigateTo('research')">Research Center</li>
+            </ul>
+          </li>
+
+          <li class="nav-item" onclick="navigateTo('contact')">Contact</li>
+
+          <li id="portalNavBtn" onclick="navigateTo('login')">
+            <button class="btn btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">Portal Login</button>
+          </li>
+          
+          <li id="logoutNavBtn" class="hidden" onclick="handleLogout()">
+            <button class="btn btn-secondary" style="padding: 8px 18px; font-size: 0.85rem;">Logout</button>
+          </li>
+
+          <li>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Theme">
+              🌓
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 3. MAIN WORKSPACE CONTAINER -->
+  <main class="container" style="min-height: 60vh; padding: 40px 0;">
+
+    <!-- VIEW: HOME -->
+    <div id="view-home" class="view">
+      <div class="hero" style="height: 400px; border-radius: 24px; background: linear-gradient(to right, rgba(15,23,42,0.85), rgba(30,58,138,0.7)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1200') center/cover; display: flex; align-items: center; color: white; padding: 60px; margin-bottom: 50px;">
+        <div>
+          <span class="section-tag" style="color: var(--accent-amber);">25 Years Celebration (Amrut Mahotsav)</span>
+          <h1 style="color: white; font-size: 2.8rem; margin-bottom: 15px;">Pioneering Computer & Bio Education</h1>
+          <p style="color: #cbd5e1; font-size: 1.1rem; max-width: 650px; margin-bottom: 25px;">Re-accredited by NAAC with B+ Grade. We run professional degree programs aligned with the NEP 2020 framework.</p>
+          <div style="display: flex; gap: 15px;">
+            <button class="btn btn-accent" onclick="navigateTo('admissions')">Admissions Open 2026</button>
+            <button class="btn btn-secondary" style="color: white; border-color: white;" onclick="navigateTo('courses')">Explore Courses</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick stats -->
+      <section style="padding: 20px 0;">
+        <div class="grid-4" style="text-align: center;">
+          <div class="card" style="padding: 20px;"><h2>25+</h2><p style="font-size: 0.85rem;">Years of Service</p></div>
+          <div class="card" style="padding: 20px;"><h2>4,000+</h2><p style="font-size: 0.85rem;">Enrolled Students</p></div>
+          <div class="card" style="padding: 20px;"><h2>120+</h2><p style="font-size: 0.85rem;">Experienced Faculty</p></div>
+          <div class="card" style="padding: 20px;"><h2>90%</h2><p style="font-size: 0.85rem;">Placements Record</p></div>
+        </div>
+      </section>
+
+      <!-- About section -->
+      <section class="grid-2" style="align-items: center;">
+        <div>
+          <span class="section-tag">Institute Profile</span>
+          <h2>Nurturing Technocrats & Researchers</h2>
+          <p style="color: var(--text-secondary); margin-bottom: 20px;">The College of Computer Science and Information Technology (COCSIT), Latur, is a premier autonomous educational institute run by the Royal Education Society. We bridge the gap between classroom guidelines and software industry demands.</p>
+          <button class="btn btn-primary" onclick="navigateTo('about')">Read More History</button>
+        </div>
+        <div style="border-radius: 20px; overflow: hidden; height: 260px;">
+          <img src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=600" alt="COCSIT campus" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+      </section>
+
+      <!-- Notices tabs -->
+      <section>
+        <div style="text-align: center; margin-bottom: 30px;">
+          <span class="section-tag">Announcements</span>
+          <h2>Latest College Circulars & Notices</h2>
+        </div>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 30px;">
+          <button class="btn btn-primary" id="btn-notice-all" onclick="filterNotices('all')">All</button>
+          <button class="btn btn-secondary" id="btn-notice-academics" onclick="filterNotices('academics')">Academics</button>
+          <button class="btn btn-secondary" id="btn-notice-placement" onclick="filterNotices('placement')">Placements</button>
+        </div>
+        <div class="grid-3" id="homeNoticesContainer">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW: ABOUT -->
+    <div id="view-about" class="view hidden">
+      <div style="padding: 40px 0; text-align: center; background: var(--bg-card); border-radius: 20px; margin-bottom: 40px;">
+        <span class="section-tag">Governance Board</span>
+        <h2>About COCSIT Latur</h2>
+      </div>
+
+      <div class="grid-3" style="margin-bottom: 50px;">
+        <div class="card">
+          <h3>🔭 Vision Statement</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">To impart quality education and job-oriented training in the fields of Computer Science, Information Technology, Biotechnology, and Management Science.</p>
+        </div>
+        <div class="card">
+          <h3>🎯 Mission Statement</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">To provide the best possible education by fostering innovation, critical thinking, and practical coding skills designed for industry recruitment.</p>
+        </div>
+        <div class="card">
+          <h3>📜 Institutional Motto</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">“Knowledge is liberation of mankind” (ऋते ज्ञानान्न मुक्ति:), driving our students to achieve scientific excellence.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Principal's MessageDesk</h3>
+        <p style="color: var(--text-secondary); margin-top: 10px; line-height: 1.8;">
+          “Welcome to COCSIT Latur. We focus on outcome-based learnings and skill competencies development. Our autonomous curriculum runs parallel with modern industry frameworks to make learners placement-ready.”<br>
+          <strong>— Dr. R. S. Awasthi (Principal, COCSIT)</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- VIEW: ABOUT RES -->
+    <div id="view-about_res" class="view hidden">
+      <div class="card" style="max-width: 800px; margin: 0 auto;">
+        <span class="section-tag">Governing Society</span>
+        <h2>Royal Education Society, Latur</h2>
+        <p style="color: var(--text-secondary); line-height: 1.8; margin-top: 15px;">
+          Established in 2001 by Dr. M. R. Patil, the Royal Education Society was founded with a dream to spread professional computer training to students in the rural areas of Marathwada, Maharashtra. Today, the society manages top institutes equipped with modern research wings, computer labs, and biotechnology divisions.
+        </p>
+      </div>
+    </div>
+
+    <!-- VIEW: ACADEMICS -->
+    <div id="view-academics" class="view hidden">
+      <div class="grid-2">
+        <div class="card">
+          <h3>🎓 Teaching Methodologies</h3>
+          <p style="color: var(--text-secondary); margin-top: 10px;">We follow modern guidelines aligned with NEP 2020, focusing on practical programming exercises, internal credit projects, and seminar sessions.</p>
+        </div>
+        <div class="card">
+          <h3>📢 Attendance Rules</h3>
+          <p style="color: var(--text-rose); margin-top: 10px;"><strong>75% lecture attendance</strong> is strictly mandatory to sit for autonomous terminal examinations. Medical leaves must be certified by registered officers.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: COURSES -->
+    <div id="view-courses" class="view hidden">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <span class="section-tag">Programs Offered</span>
+        <h2>Degrees & Curricular Calendars</h2>
+      </div>
+      <div class="grid-3" id="coursesGridContainer">
+        <!-- Populated via Javascript -->
+      </div>
+    </div>
+
+    <!-- VIEW: DEPARTMENTS -->
+    <div id="view-departments" class="view hidden">
+      <div class="dashboard-layout">
+        <div class="sidebar card" style="padding: 20px;">
+          <h4>Divisions</h4>
+          <div class="sidebar-item active" onclick="switchDept('cs', this)">Computer Science</div>
+          <div class="sidebar-item" onclick="switchDept('biotech', this)">Biotechnology</div>
+          <div class="sidebar-item" onclick="switchDept('mgmt', this)">Management</div>
+        </div>
+        <div class="card" style="padding: 40px;" id="deptDetailContent">
+          <!-- Dynamic -->
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: GOVERNANCE -->
+    <div id="view-governance" class="view hidden">
+      <div class="card" style="margin-bottom: 40px;">
+        <h3>College Development Committee (CDC) 2025-26</h3>
+        <div class="table-container" style="margin-top: 20px;">
+          <table class="custom-table" id="cdcTableBody">
+            <!-- Populated via JS -->
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: FACILITIES -->
+    <div id="view-facilities" class="view hidden">
+      <div class="grid-3" id="facilitiesGrid">
+        <!-- Dynamic -->
+      </div>
+    </div>
+
+    <!-- VIEW: PLACEMENTS -->
+    <div id="view-placements" class="view hidden">
+      <div class="grid-2" style="margin-bottom: 40px;">
+        <div class="card">
+          <h3>Placement Cell Desks</h3>
+          <p style="color: var(--text-secondary); margin-top: 10px;">
+            Under TPO coordinator Mr. K. R. Jadhav, the placements wing coordinates mock resumes check, logical coding rounds, and interview mockups.<br>
+            <strong>TPO Email: placement@cocsit.org.in</strong>
+          </p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <h3>Package Metrics</h3>
+          <h2 style="font-size: 3rem; color: var(--accent-amber); margin: 15px 0;">₹6.5 LPA</h2>
+          <p style="color: var(--text-secondary);">Highest Annual Compensation Package</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: RESEARCH -->
+    <div id="view-research" class="view hidden">
+      <div class="card">
+        <h3>Doctoral Research advisory cell</h3>
+        <p style="color: var(--text-secondary); margin-top: 10px;">We coordinate PG research scholars under regulatory research cell approval committees. Over 15 active research papers are published annually in Scopus-indexed libraries.</p>
+      </div>
+    </div>
+
+    <!-- VIEW: EXAMINATIONS -->
+    <div id="view-examinations" class="view hidden">
+      <div class="card">
+        <h3>Examinations and timetables schedules</h3>
+        <p style="color: var(--text-secondary); margin-top: 10px;">Daily hall seatings roll schedules and timetable PDF links are updated inside the Downloads center during active term-ends.</p>
+      </div>
+    </div>
+
+    <!-- VIEW: STUDENT CORNER -->
+    <div id="view-studentcorner" class="view hidden">
+      <div class="grid-3">
+        <div class="card" style="text-align: center;">
+          <h3>🖥️ LMS Portal</h3>
+          <p style="margin: 15px 0; font-size: 0.85rem; color: var(--text-secondary);">Access digital lectures and assignments.</p>
+          <a href="http://lms.cocsit.org.in" target="_blank" class="btn btn-secondary">Open LMS</a>
+        </div>
+        <div class="card" style="text-align: center;">
+          <h3>📊 Staff Portal</h3>
+          <p style="margin: 15px 0; font-size: 0.85rem; color: var(--text-secondary);">Access Eduera marks entry and syllabus.</p>
+          <a href="http://school.eduera.org.in" target="_blank" class="btn btn-secondary">Open Eduera</a>
+        </div>
+        <div class="card" style="text-align: center;">
+          <h3>🔑 Grades Portal</h3>
+          <p style="margin: 15px 0; font-size: 0.85rem; color: var(--text-secondary);">Check internal grades and marks.</p>
+          <button class="btn btn-primary" onclick="navigateTo('login')">Login Portal</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: DOWNLOADS -->
+    <div id="view-downloads" class="view hidden">
+      <div style="margin-bottom: 30px;">
+        <input type="text" class="form-input" id="downloadSearchInput" placeholder="🔍 Search document downloads..." onkeyup="filterDownloads()">
+      </div>
+      <div class="grid-3" id="downloadsContainer">
+        <!-- Dynamic -->
+      </div>
+    </div>
+
+    <!-- VIEW: IQAC -->
+    <div id="view-iqac" class="view hidden">
+      <div class="card">
+        <h3>Internal Quality Assurance Cell</h3>
+        <p style="color: var(--text-secondary); margin-top: 10px;">IQAC is chaired by Principal Dr. R. S. Awasthi and coordinated by Dr. N. S. Zulpe. It focuses on maintaining institutional benchmarks for credit courses, surveys feedback, and training approvals.</p>
+      </div>
+    </div>
+
+    <!-- VIEW: NAAC -->
+    <div id="view-naac" class="view hidden">
+      <div class="card">
+        <h3>NAAC Accreditation (Cycle-II)</h3>
+        <p style="color: var(--text-secondary); margin-top: 10px;">COCSIT Latur has been accredited with **B+ Grade** by the National Assessment and Accreditation Council. All criteria self disclosure document parameters are active in downloads.</p>
+      </div>
+    </div>
+
+    <!-- VIEW: GALLERY -->
+    <div id="view-gallery" class="view hidden">
+      <div class="grid-3">
+        <div class="card"><img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=400" style="width: 100%; border-radius: 12px; height: 160px; object-fit: cover;"><h4>College Campus Front</h4></div>
+        <div class="card"><img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?q=80&w=400" style="width: 100%; border-radius: 12px; height: 160px; object-fit: cover;"><h4>Central Library Rooms</h4></div>
+        <div class="card"><img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=400" style="width: 100%; border-radius: 12px; height: 160px; object-fit: cover;"><h4>Software Computing Labs</h4></div>
+      </div>
+    </div>
+
+    <!-- VIEW: NEWS EVENTS -->
+    <div id="view-newsevents" class="view hidden">
+      <div class="grid-2">
+        <div class="card">
+          <span class="badge badge-info">2026-03-15</span>
+          <h3 style="margin-top: 10px;">Silver Jubilee celebrations inaugurations</h3>
+          <p style="color: var(--text-secondary); margin-top: 10px;">Royal Education Society celebrates 25 years of IT excellence in Latur.</p>
+        </div>
+        <div class="card">
+          <span class="badge badge-success">2026-04-10</span>
+          <h3 style="margin-top: 10px;">National seminar on NEP credits alignment</h3>
+          <p style="color: var(--text-secondary); margin-top: 10px;">Academic councils discuss outcome based curriculum parameters.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: CONTACT -->
+    <div id="view-contact" class="view hidden">
+      <div class="grid-2">
+        <div class="card">
+          <h3>Inquiry desk</h3>
+          <p style="color: var(--text-secondary); margin-top: 10px;">
+            📍 Ambajogai Road, Latur - 413531,<br>Maharashtra, India.<br><br>
+            📞 Phone: +91 (02382) 229191<br>
+            ✉️ Email: info@cocsit.org.in
+          </p>
+        </div>
+        <div class="card">
+          <h3>Send Message</h3>
+          <form onsubmit="event.preventDefault(); alert('Message sent!');">
+            <div class="form-group"><input type="text" class="form-input" placeholder="Your Name" required></div>
+            <div class="form-group"><input type="email" class="form-input" placeholder="Your Email" required></div>
+            <div class="form-group"><textarea class="form-input" placeholder="Message details" required style="min-height: 80px;"></textarea></div>
+            <button class="btn btn-primary" type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: LOGIN -->
+    <div id="view-login" class="view hidden">
+      <div class="card" style="max-width: 420px; margin: 0 auto;">
+        <h3 style="text-align: center; margin-bottom: 20px;">Sign In to Dashboard Portal</h3>
+        <div id="loginErrorMsg" style="color: var(--accent-rose); font-size: 0.85rem; margin-bottom: 15px; text-align: center;" class="hidden"></div>
+        
+        <form onsubmit="handleLoginSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <input type="text" id="loginUser" class="form-input" placeholder="e.g. admin or student_cs" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" id="loginPass" class="form-input" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+        </form>
+
+        <div style="margin-top: 25px; border-top: 1px solid var(--border-color); paddingTop: 15px; font-size: 0.8rem; color: var(--text-secondary);">
+          <div style="font-weight: 700; margin-bottom: 5px; color: var(--text-primary);">Test Logins:</div>
+          <p>• Admin: <code>admin</code> / <code>password123</code></p>
+          <p>• Faculty: <code>teacher_cs</code> / <code>password123</code></p>
+          <p>• Student: <code>student_cs</code> / <code>password123</code></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: DASHBOARD (ADMIN/HOD/TEACHER/STUDENT ROLE PORTALS) -->
+    <div id="view-dashboard" class="view hidden">
+      <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <div class="sidebar card" style="padding: 20px;">
+          <div style="text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color);">
+            <div id="dashAvatar" style="width: 50px; height: 50px; border-radius: 50%; background: var(--accent-indigo); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: 700;">U</div>
+            <h4 id="dashUserName">User</h4>
+            <span id="dashUserRole" class="badge badge-info" style="margin-top: 5px;">Student</span>
+          </div>
+
+          <div class="sidebar-item active" id="tabBtn-profile" onclick="switchDashTab('profile')">Profile Info</div>
+          
+          <!-- Student only tabs -->
+          <div class="sidebar-item hidden" id="tabBtn-attendance" onclick="switchDashTab('attendance')">My Attendance</div>
+          <div class="sidebar-item hidden" id="tabBtn-grades" onclick="switchDashTab('grades')">Term Grades</div>
+
+          <!-- Staff/Admin only tabs -->
+          <div class="sidebar-item hidden" id="tabBtn-mark" onclick="switchDashTab('mark')">Mark Attendance</div>
+          <div class="sidebar-item hidden" id="tabBtn-notice" onclick="switchDashTab('notice')">Manage Notices</div>
+          <div class="sidebar-item hidden" id="tabBtn-editor" onclick="switchDashTab('editor')">Website JSON Editor</div>
+        </div>
+
+        <!-- Panel -->
+        <div class="card" style="padding: 40px;" id="dashPanelContent">
+          
+          <!-- SUBTAB: PROFILE -->
+          <div id="dashSub-profile" class="dashSub">
+            <h2>Portal Profile Details</h2>
+            <div class="grid-2" style="margin-top: 25px;">
+              <div style="padding: 15px; background: rgba(0,0,0,0.01); border: 1px solid var(--border-color); border-radius: 10px;">
+                <span style="font-size: 0.75rem; color: var(--text-secondary);">Full Name</span>
+                <div id="profileNameVal" style="font-weight: 700;">Rahul Sharma</div>
+              </div>
+              <div style="padding: 15px; background: rgba(0,0,0,0.01); border: 1px solid var(--border-color); border-radius: 10px;">
+                <span style="font-size: 0.75rem; color: var(--text-secondary);">Official Email</span>
+                <div id="profileEmailVal" style="font-weight: 700;">student@cocsit.org.in</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUBTAB: ATTENDANCE (STUDENT ONLY) -->
+          <div id="dashSub-attendance" class="dashSub hidden">
+            <h2>Academic Attendance summary</h2>
+            <div class="grid-3" style="margin-top: 25px;" id="attendanceCardsContainer">
+              <!-- Dynamic -->
+            </div>
+          </div>
+
+          <!-- SUBTAB: GRADES (STUDENT ONLY) -->
+          <div id="dashSub-grades" class="dashSub hidden">
+            <h2>Term Report Card</h2>
+            <div class="table-container" style="margin-top: 20px;">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Subject</th>
+                    <th>Exam</th>
+                    <th>Marks Obtained</th>
+                    <th>Total Marks</th>
+                  </tr>
+                </thead>
+                <tbody id="studentGradesBody">
+                  <!-- Dynamic -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- SUBTAB: MARK ATTENDANCE (TEACHER/HOD/ADMIN) -->
+          <div id="dashSub-mark" class="dashSub hidden">
+            <h2>Mark Daily Lecture Attendance</h2>
+            <form onsubmit="submitMarkAttendance(event)" style="margin-top: 20px;">
+              <div class="grid-2">
+                <div class="form-group">
+                  <label class="form-label">Subject</label>
+                  <select class="form-input" id="markSubject">
+                    <option>Java Programming</option>
+                    <option>Software Engineering</option>
+                    <option>Database Systems</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Date</label>
+                  <input type="date" class="form-input" id="markDate" value="2026-07-21">
+                </div>
+              </div>
+              <h4>Student Attendance Sheet</h4>
+              <div id="teacherRollSheet" style="margin: 20px 0; max-height: 200px; overflow-y: auto;">
+                <!-- Dynamic -->
+              </div>
+              <button class="btn btn-primary" type="submit">Submit Attendance Sheet</button>
+            </form>
+          </div>
+
+          <!-- SUBTAB: MANAGE NOTICES (ADMIN/HOD) -->
+          <div id="dashSub-notice" class="dashSub hidden">
+            <h2>Post Academic or Placement notice</h2>
+            <form onsubmit="submitPostNotice(event)" style="margin-top: 20px; padding-bottom: 30px; border-bottom: 1px solid var(--border-color); margin-bottom: 30px;">
+              <div class="form-group">
+                <label class="form-label">Notice Title</label>
+                <input type="text" class="form-input" id="noticeTitle" placeholder="e.g. Summer Timetable published" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <select class="form-input" id="noticeCategory">
+                  <option value="general">General</option>
+                  <option value="academics">Academics</option>
+                  <option value="placement">Placement</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Content details</label>
+                <textarea class="form-input" id="noticeContent" placeholder="Describe announcement details..." required></textarea>
+              </div>
+              <button class="btn btn-primary" type="submit">Publish Notice</button>
+            </form>
+
+            <h3>Delete notices list</h3>
+            <div id="adminNoticeList" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+              <!-- Dynamic deletion panel -->
+            </div>
+          </div>
+
+          <!-- SUBTAB: JSON WEBSITE EDITOR (ADMIN ONLY) -->
+          <div id="dashSub-editor" class="dashSub hidden">
+            <h2>Website Master Content Config Editor</h2>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 20px;">Allows the administrator to edit all rules, scholarship text, hostel details, and structural descriptions on the fly.</p>
+            <form onsubmit="submitSaveJson(event)">
+              <div class="form-group">
+                <textarea id="rawJsonTextarea" class="form-input" style="min-height: 350px; font-family: monospace; font-size: 0.85rem; color: #10b981; background: #0b0f19; border: 1px solid #1e293b;"></textarea>
+              </div>
+              <button class="btn btn-primary" type="submit">Save Changes on Website</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- 4. WELCOME ALERTS POPUP MODAL -->
+  <div id="welcomePopup" class="modal-overlay">
+    <div class="modal-content" style="text-align: center;">
+      <span style="font-size: 3rem; margin-bottom: 15px; display: block;">🔔</span>
+      <h3 style="color: var(--accent-indigo); margin-bottom: 15px;">Admission Announcement 2026-27</h3>
+      <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 25px; line-height: 1.6;">
+        Online Registration forms for BCA, B.Sc Computer Science, B.Sc Biotech, BBA, and MCA/MBA programs are open under MAH-CET guidelines. Please complete forms before timelines.
+      </p>
+      <button class="btn btn-primary" onclick="closePopup()">Enter College Website</button>
+    </div>
+  </div>
+
+  <!-- 5. UNIVERSAL FOOTER -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-column">
+        <h3 style="margin-bottom: 15px; font-size: 1.2rem;">COCSIT Latur</h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">College of Computer Science and Information Technology (COCSIT), Latur, is a premier NAAC B+ Grade institute administering computer curriculum.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Academics</h4>
+        <ul class="footer-links">
+          <li><a href="#" onclick="navigateTo('academics')">Overview</a></li>
+          <li><a href="#" onclick="navigateTo('departments')">Departments</a></li>
+          <li><a href="#" onclick="navigateTo('courses')">Degrees</a></li>
+          <li><a href="#" onclick="navigateTo('governance')">CDC Governance</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Student</h4>
+        <ul class="footer-links">
+          <li><a href="#" onclick="navigateTo('studentcorner')">LMS Login</a></li>
+          <li><a href="#" onclick="navigateTo('examinations')">Examinations</a></li>
+          <li><a href="#" onclick="navigateTo('downloads')">Prospectus PDF</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Location</h4>
+        <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
+          Ambajogai Road, Latur - 413531,<br>Maharashtra, India.
+        </p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© 2026 COCSIT autonomous portal redesign review. All Rights Reserved.</p>
+      <div style="display: flex; gap: 20px; font-size: 0.8rem;">
+        <a href="#" onclick="navigateTo('home')">Privacy</a>
+        <a href="#" onclick="navigateTo('home')">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 6. DATA & CONTROLLER SCRIPTS -->
+  <script>
+    // Theme Toggling
+    let theme = 'light';
+    function toggleTheme() {
+      theme = theme === 'light' ? 'dark' : 'light';
+      if (theme === 'dark') {
+        document.body.classList.add('dark-theme');
+      } else {
+        document.body.classList.remove('dark-theme');
+      }
+    }
+
+    // Modal Close
+    function closePopup() {
+      document.getElementById('welcomePopup').classList.add('hidden');
+    }
+
+    // Navigation Switcher Routing
+    function navigateTo(pageId) {
+      document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
+      const activeView = document.getElementById('view-' + pageId);
+      if (activeView) activeView.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+      // Find matching navbar items and set active
+      
+      window.scrollTo(0, 0);
+    }
+
+    // Database Mock Schema Content
+    let database = {
+      notices: [
+        { id: 1, title: "MAH-CET B.Sc/BCA Online Admission Registration 2026-27", content: "State Common Entrance Test Cell has opened the online form submissions. Candidates must fill details before deadline.", date: "2026-03-21", category: "academics" },
+        { id: 2, title: "Tech Mahindra campus pool drive dates scheduled", content: "Placements drive schedule by Tech Mahindra for passing out batch. BCA and B.Sc streams eligible.", date: "2026-04-24", category: "placement" },
+        { id: 3, title: "College session academic calendar released", content: "Find the detailed prospectus guidelines in the downloads directory.", date: "2026-04-15", category: "academics" }
+      ],
+      courses: [
+        { name: "Bachelor of Computer Application", abbrev: "BCA", focus: "Software programming, Java, python, web design systems." },
+        { name: "B.Sc. Computer Science", abbrev: "B.Sc (CS)", focus: "Data structures, database management systems, and networks." },
+        { name: "B.Sc. Software Engineering", abbrev: "B.Sc (SE)", focus: "Software testing methodologies, quality assurance." }
+      ],
+      downloads: [
+        { title: "Academic Calendar 2025-26 PDF", category: "calendar" },
+        { title: "BCA FY Fees Structure Proposal", category: "fees" },
+        { title: "Fire Safety Certificate autonomous", category: "regulatory" }
+      ],
+      cdc: [
+        { name: "Dr. M. R. Patil", role: "Chairman (President of Royal Education Society)" },
+        { name: "Mr. L. M. Patil", role: "Member (Vice-President of Royal Education Society)" },
+        { name: "Dr. R. S. Awasthi", role: "Member Secretary (Principal)" }
+      ]
+    };
+
+    // User Roles Profiles Authentication
+    let currentUser = null;
+    const testAccounts = {
+      admin: { id: "admin_01", name: "Super Admin", role: "admin", email: "admin@cocsit.org.in" },
+      teacher_cs: { id: "teacher_01", name: "Prof. Rajesh Patil", role: "teacher", email: "rpatil@cocsit.org.in" },
+      student_cs: { id: "student_01", name: "Rahul Sharma", role: "student", email: "rahul.sharma@cocsit.org.in" }
+    };
+
+    // Render Notices Home
+    function renderNotices() {
+      const container = document.getElementById('homeNoticesContainer');
+      container.innerHTML = '';
+      database.notices.forEach(n => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style = 'display: flex; flex-direction: column; justify-content: space-between;';
+        card.innerHTML = `
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span class="badge ${n.category === 'placement' ? 'badge-warning' : 'badge-success'}">${n.category}</span>
+              <span style="font-size: 0.75rem; color: var(--text-secondary);">${n.date}</span>
+            </div>
+            <h4>${n.title}</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">${n.content}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Filter Notices
+    function filterNotices(cat) {
+      document.getElementById('btn-notice-all').className = cat === 'all' ? 'btn btn-primary' : 'btn btn-secondary';
+      document.getElementById('btn-notice-academics').className = cat === 'academics' ? 'btn btn-primary' : 'btn btn-secondary';
+      document.getElementById('btn-notice-placement').className = cat === 'placement' ? 'btn btn-primary' : 'btn btn-secondary';
+
+      const container = document.getElementById('homeNoticesContainer');
+      container.innerHTML = '';
+      database.notices.filter(n => cat === 'all' || n.category === cat).forEach(n => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span class="badge ${n.category === 'placement' ? 'badge-warning' : 'badge-success'}">${n.category}</span>
+            <span style="font-size: 0.75rem; color: var(--text-secondary);">${n.date}</span>
+          </div>
+          <h4>${n.title}</h4>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">${n.content}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Render Courses Page
+    function renderCourses() {
+      const container = document.getElementById('coursesGridContainer');
+      container.innerHTML = '';
+      database.courses.forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h3>${c.name} (${c.abbrev})</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 10px; margin-bottom: 15px;">${c.focus}</p>
+          <div style="font-size: 0.8rem; color: var(--text-secondary);">
+            <div>⏱️ Duration: 3 Years</div>
+            <div>👥 Intake capacity: 80 Seats</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Render CDC Council members
+    function renderCDC() {
+      const tbody = document.getElementById('cdcTableBody');
+      tbody.innerHTML = `
+        <tr><th>Member name</th><th>Designation / Board role</th></tr>
+      `;
+      database.cdc.forEach(m => {
+        tbody.innerHTML += `
+          <tr><td><strong>${m.name}</strong></td><td><span class="badge badge-info">${m.role}</span></td></tr>
+        `;
+      });
+    }
+
+    // Render Downloads Page list
+    function renderDownloads() {
+      const container = document.getElementById('downloadsContainer');
+      container.innerHTML = '';
+      database.downloads.forEach(d => {
+        container.innerHTML += `
+          <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="badge badge-info" style="margin-bottom: 10px;">${d.category}</span>
+              <h4>${d.title}</h4>
+            </div>
+            <a href="#" class="btn btn-primary" style="margin-top: 15px; font-size: 0.8rem; padding: 6px 14px;" onclick="event.preventDefault(); alert('Downloading PDF...');">📥 Download PDF</a>
+          </div>
+        `;
+      });
+    }
+
+    function filterDownloads() {
+      const val = document.getElementById('downloadSearchInput').value.toLowerCase();
+      const container = document.getElementById('downloadsContainer');
+      container.innerHTML = '';
+      database.downloads.filter(d => d.title.toLowerCase().includes(val)).forEach(d => {
+        container.innerHTML += `
+          <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="badge badge-info" style="margin-bottom: 10px;">${d.category}</span>
+              <h4>${d.title}</h4>
+            </div>
+            <a href="#" class="btn btn-primary" style="margin-top: 15px; font-size: 0.8rem; padding: 6px 14px;" onclick="event.preventDefault(); alert('Downloading PDF...');">📥 Download PDF</a>
+          </div>
+        `;
+      });
+    }
+
+    // Departments switcher HOD
+    function switchDept(dept, elem) {
+      document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+      elem.classList.add('active');
+
+      const content = document.getElementById('deptDetailContent');
+      if (dept === 'cs') {
+        content.innerHTML = `
+          <h3>Department of Computer Science</h3>
+          <p style="margin: 15px 0; color: var(--text-secondary);">Equips students with data structures, operating systems, and computer languages.</p>
+          <h4>HOD Profile: Dr. N. S. Zulpe</h4>
+        `;
+      } else if (dept === 'biotech') {
+        content.innerHTML = `
+          <h3>Department of Biotechnology</h3>
+          <p style="margin: 15px 0; color: var(--text-secondary);">Offers lab research capabilities in microbiology assays and plant molecular tissue cultures.</p>
+          <h4>HOD Profile: Dr. N. V. More</h4>
+        `;
+      } else {
+        content.innerHTML = `
+          <h3>Department of Management</h3>
+          <p style="margin: 15px 0; color: var(--text-secondary);">Provides degree courses in business administration and financial modeling tools.</p>
+          <h4>HOD Profile: Dr. R. S. Dombe</h4>
+        `;
+      }
+    }
+
+    // Facilities Tab render
+    function renderFacilities() {
+      const container = document.getElementById('facilitiesGrid');
+      container.innerHTML = `
+        <div class="card"><h3>Central library</h3><p style="color: var(--text-secondary); margin-top: 5px;">15,000+ textbook volumes.</p></div>
+        <div class="card"><h3>Biotech Research Lab</h3><p style="color: var(--text-secondary); margin-top: 5px;">Specialized diagnostics clean chambers.</p></div>
+        <div class="card"><h3>Girls' Residential Hostel</h3><p style="color: var(--text-secondary); margin-top: 5px;">Housing for 240 outstation students.</p></div>
+      `;
+    }
+
+    // Authentication Submissions
+    function handleLoginSubmit(event) {
+      event.preventDefault();
+      const user = document.getElementById('loginUser').value;
+      const pass = document.getElementById('loginPass').value;
+      const errBox = document.getElementById('loginErrorMsg');
+      errBox.classList.add('hidden');
+
+      if (testAccounts[user] && pass === 'password123') {
+        currentUser = testAccounts[user];
+        
+        // Update header UI
+        document.getElementById('portalNavBtn').classList.add('hidden');
+        document.getElementById('logoutNavBtn').classList.remove('hidden');
+
+        // Setup dashboard sidebar tabs visibility
+        document.getElementById('tabBtn-attendance').classList.add('hidden');
+        document.getElementById('tabBtn-grades').classList.add('hidden');
+        document.getElementById('tabBtn-mark').classList.add('hidden');
+        document.getElementById('tabBtn-notice').classList.add('hidden');
+        document.getElementById('tabBtn-editor').classList.add('hidden');
+
+        if (currentUser.role === 'student') {
+          document.getElementById('tabBtn-attendance').classList.remove('hidden');
+          document.getElementById('tabBtn-grades').classList.remove('hidden');
+          renderStudentDashboard();
+        } else if (currentUser.role === 'teacher') {
+          document.getElementById('tabBtn-mark').classList.remove('hidden');
+          renderTeacherDashboard();
+        } else if (currentUser.role === 'admin') {
+          document.getElementById('tabBtn-mark').classList.remove('hidden');
+          document.getElementById('tabBtn-notice').classList.remove('hidden');
+          document.getElementById('tabBtn-editor').classList.remove('hidden');
+          renderAdminDashboard();
+        }
+
+        // Fill dashboard headers
+        document.getElementById('dashAvatar').innerText = currentUser.name.charAt(0);
+        document.getElementById('dashUserName').innerText = currentUser.name;
+        document.getElementById('dashUserRole').innerText = currentUser.role.toUpperCase();
+
+        // Fill Profile subtab
+        document.getElementById('profileNameVal').innerText = currentUser.name;
+        document.getElementById('profileEmailVal').innerText = currentUser.email;
+
+        // Redirect
+        navigateTo('dashboard');
+        switchDashTab('profile');
+      } else {
+        errBox.innerText = 'Authentication failed. Please verify credentials.';
+        errBox.classList.remove('hidden');
+      }
+    }
+
+    function handleLogout() {
+      currentUser = null;
+      document.getElementById('portalNavBtn').classList.remove('hidden');
+      document.getElementById('logoutNavBtn').classList.add('hidden');
+      navigateTo('home');
+    }
+
+    // Switch Dashboard Subtabs
+    function switchDashTab(tabId) {
+      document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+      const activeBtn = document.getElementById('tabBtn-' + tabId);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      document.querySelectorAll('.dashSub').forEach(sub => sub.classList.add('hidden'));
+      document.getElementById('dashSub-' + tabId).classList.remove('hidden');
+    }
+
+    // Render Role Specific dashboards
+    function renderStudentDashboard() {
+      // Attendance summary
+      const attCont = document.getElementById('attendanceCardsContainer');
+      attCont.innerHTML = `
+        <div class="card" style="padding: 20px; text-align: center; border-top: 4px solid var(--accent-teal);">
+          <h4>Java programming</h4>
+          <h2 style="color: var(--accent-teal);">88%</h2>
+          <p style="font-size: 0.8rem; color: var(--text-secondary);">Lectures: 22/25</p>
+        </div>
+        <div class="card" style="padding: 20px; text-align: center; border-top: 4px solid var(--accent-teal);">
+          <h4>Software engineering</h4>
+          <h2 style="color: var(--accent-teal);">91%</h2>
+          <p style="font-size: 0.8rem; color: var(--text-secondary);">Lectures: 20/22</p>
+        </div>
+        <div class="card" style="padding: 20px; text-align: center; border-top: 4px solid var(--accent-rose);">
+          <h4>Database systems</h4>
+          <h2 style="color: var(--accent-rose);">68%</h2>
+          <p style="font-size: 0.8rem; color: var(--text-secondary);">Lectures: 17/25</p>
+        </div>
+      `;
+
+      // Grades summary
+      const gradesCont = document.getElementById('studentGradesBody');
+      gradesCont.innerHTML = `
+        <tr><td>Java programming</td><td>Internal Exam 1</td><td>22</td><td>25</td></tr>
+        <tr><td>Software engineering</td><td>Internal Exam 1</td><td>19</td><td>25</td></tr>
+        <tr><td>Database systems</td><td>Internal Exam 1</td><td>24</td><td>25</td></tr>
+      `;
+    }
+
+    function renderTeacherDashboard() {
+      const rollSheet = document.getElementById('teacherRollSheet');
+      rollSheet.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--border-color);">
+          <span>Rahul Sharma (ID: student_01)</span>
+          <select class="form-input" style="width: 120px; padding: 4px 8px;"><option>Present</option><option>Absent</option></select>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--border-color);">
+          <span>Priya Deshmukh (ID: student_02)</span>
+          <select class="form-input" style="width: 120px; padding: 4px 8px;"><option>Present</option><option>Absent</option></select>
+        </div>
+      `;
+    }
+
+    function renderAdminDashboard() {
+      renderTeacherDashboard(); // Admin can also mark attendance
+      renderAdminNoticesList(); // For deletion
+      
+      // Load raw json
+      document.getElementById('rawJsonTextarea').value = JSON.stringify(database, null, 2);
+    }
+
+    function renderAdminNoticesList() {
+      const list = document.getElementById('adminNoticeList');
+      list.innerHTML = '';
+      database.notices.forEach(n => {
+        list.innerHTML += `
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border: 1px solid var(--border-color); border-radius: 8px;">
+            <div>
+              <strong>${n.title}</strong>
+              <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 3px;">Category: ${n.category} | Date: ${n.date}</div>
+            </div>
+            <button class="btn btn-secondary" style="color: var(--accent-rose); border-color: rgba(225,29,72,0.1); padding: 5px 10px; font-size: 0.8rem;" onclick="adminDeleteNotice(${n.id})">Delete notice</button>
+          </div>
+        `;
+      });
+    }
+
+    // Submit notice creation
+    function submitPostNotice(event) {
+      event.preventDefault();
+      const title = document.getElementById('noticeTitle').value;
+      const category = document.getElementById('noticeCategory').value;
+      const content = document.getElementById('noticeContent').value;
+
+      const newId = database.notices.length + 1;
+      const date = new Date().toISOString().slice(0, 10);
+      database.notices.unshift({ id: newId, title, content, date, category });
+
+      alert('Announcement published successfully.');
+      document.getElementById('noticeTitle').value = '';
+      document.getElementById('noticeContent').value = '';
+
+      renderNotices();
+      renderAdminNoticesList();
+    }
+
+    // Submit notice deletion
+    function adminDeleteNotice(id) {
+      if (!confirm('Are you sure you want to delete this notice?')) return;
+      database.notices = database.notices.filter(n => n.id !== id);
+      renderNotices();
+      renderAdminNoticesList();
+    }
+
+    // Submit Mark attendance
+    function submitMarkAttendance(event) {
+      event.preventDefault();
+      alert('Attendance logs saved successfully.');
+    }
+
+    // Save JSON editor configurations
+    function submitSaveJson(event) {
+      event.preventDefault();
+      try {
+        const parsed = JSON.parse(document.getElementById('rawJsonTextarea').value);
+        database = parsed;
+        alert('Master settings updated successfully on the website!');
+        
+        // Re-render pages
+        renderNotices();
+        renderCourses();
+        renderCDC();
+        renderDownloads();
+        renderFacilities();
+      } catch (err) {
+        alert('Error: Invalid JSON schema format. Please verify commas or brackets.');
+      }
+    }
+
+    // Initial Startup
+    window.onload = function() {
+      switchDept('cs', document.querySelector('.sidebar-item'));
+      renderNotices();
+      renderCourses();
+      renderCDC();
+      renderDownloads();
+      renderFacilities();
+    }
+  </script>
+</body>
+</html>

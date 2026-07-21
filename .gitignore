@@ -1,0 +1,25 @@
+# Node modules
+node_modules/
+dist/
+build/
+.env
+.env.local
+
+# SQLite Database
+*.sqlite
+*.sqlite3
+database.sqlite
+
+# System & OS Files
+.DS_Store
+Thumbs.db
+.gemini/
+.agents/
+.system_generated/
+walkthrough.md
+task.md
+implementation_plan.md
+rebuild_proposal.md
+website_audit.md
+scratch/
+brain/

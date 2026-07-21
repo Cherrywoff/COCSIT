@@ -12,6 +12,10 @@ import NewsEditor from './pages/admin/NewsEditor';
 import SettingsEditor from './pages/admin/SettingsEditor';
 import MediaLibrary from './pages/admin/MediaLibrary';
 import PageEditor from './pages/admin/PageEditor';
+import Attendance from './pages/student/Attendance';
+import Results from './pages/student/Results';
+import Assignments from './pages/student/Assignments';
+import Fees from './pages/student/Fees';
 
 // Components
 import Navigation from './components/Navigation';
@@ -261,10 +265,10 @@ export default function App() {
           <Route element={<ProtectedRoute user={user} allowedRoles={['student']} />}>
             <Route path="/student" element={<StudentLayout user={user} handleLogout={handleLogout} />}>
               <Route path="dashboard" element={<Dashboard user={user} token={token} activeTab="profile" setActiveTab={() => {}} refreshNotices={refreshNotices} API_BASE={API_BASE} notices={notices} masterContent={masterContent} setMasterContent={setMasterContent} />} />
-              <Route path="attendance" element={<h2>Attendance (Coming Soon)</h2>} />
-              <Route path="assignments" element={<h2>Assignments (Coming Soon)</h2>} />
-              <Route path="results" element={<h2>Results (Coming Soon)</h2>} />
-              <Route path="fees" element={<h2>Fees (Coming Soon)</h2>} />
+              <Route path="attendance" element={<Attendance />} />
+              <Route path="assignments" element={<Assignments />} />
+              <Route path="results" element={<Results />} />
+              <Route path="fees" element={<Fees />} />
             </Route>
           </Route>
 

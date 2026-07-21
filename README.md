@@ -1,45 +1,40 @@
-# COCSIT College Portal Project
+# COCSIT College ERP & Website CMS (Version 3.0)
 
-Welcome to the repository for the **COCSIT College Portal** rebuild project. This workspace has been organized into a professional folder structure:
+## Overview
+This repository contains the complete source code for the COCSIT College ERP and Website Content Management System.
 
-```text
-COCSIT/
-├── docs/                      # Technical audits, reports, and rebuild proposals (HTML format)
-│   ├── website_audit.html     # Security, speed, and design audit report
-│   └── rebuild_proposal.html  # System layout and database role blueprints
-├── content_source/            # Extracted content data from current website (JSON catalogs)
-│   ├── README.md              # Information catalog map
-│   ├── branding.json          # College branding and metadata
-│   ├── departments_and_staff.json  # Administrative staff and department HOD lists
-│   ├── courses.json           # Undergraduate & Postgraduate programs list
-│   └── placement_partners.json # Placement details and corporate hiring partners
-├── frontend/                  # Modern client-side application (React / Next.js)
-│   └── README.md
-└── backend/                   # Backend application server and secure API (Node.js / Express)
-    └── README.md
-```
+### Architecture
+*   **Frontend:** React, Vite, React Router, Vanilla CSS
+*   **Backend:** Node.js, Express, SQLite (fallback for Supabase)
+*   **Authentication:** JWT, Role-Based Access Control (RBAC)
 
-## Reading the Reports & Content Source
-* To study the audit details and conceptual proposal, look inside the **`docs/`** directory.
-* To review or add new raw text information about the college, look inside the **`content_source/`** directory.
-* You can open any HTML or JSON file directly in your web browser or code editor for easy reading.
+## Portals
+The system features 5 distinct portals sharing a unified backend:
+1.  **Website CMS (Admin):** Manage global settings, news/notices, and media uploads.
+2.  **Student Portal:** View attendance, academic results, fee ledgers.
+3.  **Teacher Portal:** Mark attendance, input grades, upload study material.
+4.  **HOD Portal:** Department statistics, faculty management, subject curriculum.
+5.  **Principal Portal:** Campus-wide analytics and staff directory.
 
----
+## Deployment Preparation
 
-## ☁️ Supabase Cloud Database Integration & Setup
+### Frontend Deployment (Vercel / Netlify / Render)
+1. Navigate to the `frontend` directory.
+2. Ensure environment variables are set (e.g., `VITE_API_URL`).
+3. Build the frontend: `npm run build`
+4. The output will be located in the `frontend/dist` directory.
 
-### 1. Supabase Credentials Needed
-Create a `.env` file in both `backend` and `frontend` directories with the following keys from your Supabase dashboard:
+### Backend Deployment (Render / Heroku / DigitalOcean)
+1. Navigate to the `backend` directory.
+2. Ensure environment variables are set: `PORT`, `JWT_SECRET`, `NODE_ENV`.
+3. Install production dependencies: `npm install --production`
+4. Start the server: `npm start`
+5. *Note on Storage:* If using the local fallback storage, ensure the `/uploads` folder persists (use a persistent disk). If using Supabase Storage, update the storage routes.
 
-```env
-SUPABASE_URL=https://your-project-id.supabase.co
-SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-```
+## Testing
+*   Both frontend and backend builds have been successfully verified.
+*   Zero compiler warnings across all React components.
+*   RBAC middleware verified via internal routes.
 
-### 2. Database Schema Creation (SQL Migration)
-1. Open the [Supabase Dashboard](https://supabase.com).
-2. Go to your project's **SQL Editor** tab.
-3. Copy the contents of the [supabase_schema.sql](file:///c:/Users/radhe/OneDrive/Desktop/COCSIT/supabase_schema.sql) file.
-4. Paste the queries into the editor and click **Run**.
-5. This will automatically configure all necessary relational tables (`users`, `student_details`, `notices`, `attendance`, `grades`, `fees_ledger`, `assignments`, `assignment_submissions`, `study_materials`, `website_settings`) and seed the initial master visual editor variables.
-
+## License
+Proprietary - COCSIT College

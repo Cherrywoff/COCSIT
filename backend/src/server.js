@@ -10,14 +10,21 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Routes
 const authRouter = require('./routes/auth');
 const publicRouter = require('./routes/public');
-const portalRouter = require('./routes/portal');
+const studentRouter = require('./routes/student');
+const teacherRouter = require('./routes/teacher');
+const hodRouter = require('./routes/hod');
+const principalRouter = require('./routes/principal');
+const adminRouter = require('./routes/admin');
 
 app.use('/api/auth', authRouter);
 app.use('/api/public', publicRouter);
-app.use('/api/portal', portalRouter);
+app.use('/api/student', studentRouter);
+app.use('/api/teacher', teacherRouter);
+app.use('/api/hod', hodRouter);
+app.use('/api/principal', principalRouter);
+app.use('/api/admin', adminRouter);
 
 // Global Error Handler
 app.use((err, req, res, next) => {

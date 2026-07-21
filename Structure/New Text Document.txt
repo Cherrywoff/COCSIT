@@ -1,0 +1,19 @@
+| Feature          |  Student |      Teacher      |      HOD     |    Principal   | Website Admin |
+| ---------------- | :------: | :---------------: | :----------: | :------------: | :-----------: |
+| View Own Profile |     ✅    |         ✅         |       ✅      |        ✅       |       ✅       |
+| Edit Own Profile |     ✅    |         ✅         |       ✅      |        ✅       |       ✅       |
+| Change Password  |     ✅    |         ✅         |       ✅      |        ✅       |       ✅       |
+| View Notices     |     ✅    |         ✅         |       ✅      |        ✅       |       ✅       |
+| View Calendar    |     ✅    |         ✅         |       ✅      |        ✅       |       ✅       |
+| Attendance       |   View   |Edit(for his subject)|    Monitor   |    View All    |       ❌       |
+| Marks            |  View   |Edit(for his subject)|    Monitor   |    View All    |       ❌       |
+| Assignments      |  View   |Edit(for his subject)|    Approve   |    View All    |       ❌       |
+| Study Material   | Download |       Upload      |    Approve   |      View ALL     |       ❌       |
+| Timetable        |   View   |        View       |  Manage Dept |    View All    |       ❌       |
+| Student Records  | Own Only | Assigned Students |  Department  | Entire College |       ❌       |
+| Faculty Records  |     ❌    |        Own        |  Department  | Entire College |       ❌       |
+| Fees             | View Own |         ❌         |   View Dept  |    View All    |       ❌       |
+| Website Content  |     ❌    |         ❌         |       ❌      |        ❌       |       ✅       |
+| News & Gallery   |   View   |        View       |       view      |      View      |   Manage All  |
+| User Management  |     ❌    |         ❌         |       ❌      |        ❌       |       ✅       |
+
